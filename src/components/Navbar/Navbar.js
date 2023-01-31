@@ -20,6 +20,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -96,15 +99,55 @@ const Drawer = styled(MuiDrawer, {
 const MiniDrawer = (props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const isMenuOpen = Boolean(anchorEl);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
 
+
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+    sx={{ mt: '45px' }}
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Change Password</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logut</MenuItem>
+    </Menu>
+  );
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" style={{ background: "white" }}>
+      <AppBar position="fixed"  elevation= {1} style={{ background: "white" }}>
         <Toolbar>
           <IconButton
             color="black"
@@ -146,12 +189,15 @@ const MiniDrawer = (props) => {
               aria-label="account of current user"
               aria-haspopup="true"
               color="black"
+              aria-controls={menuId}
+              onClick={handleProfileMenuOpen}
             >
               <AccountCircle />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
+      {renderMenu}
       <Drawer
         variant="permanent"
         open={open}
@@ -179,7 +225,8 @@ const MiniDrawer = (props) => {
       </Box>
     </Box>
   );
-};
+}
+
 
 const mapStateToProps = (state) => ({
   List: state.Sidebar.sidebarList,
