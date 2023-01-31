@@ -1,44 +1,27 @@
-import moment from "moment";
 import { applyMiddleware, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
-import axiosInstance, { microServices } from "../network/apis";
-import Auth from "../utils/Auth";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import reducers from "./reducers";
 import { watchSagas } from "./sagas";
-import { dispatchToasterError, dispatchToasterSuccess } from "../utils/Shared";
-
-const REFRESH_TIME = 5;
 const saga = createSagaMiddleware();
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 
-const refreshMiddleware = () => (next) => async (action) => {
-  const expiryTime = Auth.getExpiryTime();
-  const refreshToken = Auth.getRefreshToken();
-  const timeDifferenceInMin = moment
-    .duration(moment(expiryTime).diff(moment()))
-    .asMinutes();
-  if (Auth.isAuth() && parseInt(timeDifferenceInMin) < REFRESH_TIME) {
-    const response = await axiosInstance(
-      "get",
-      `refresh-token?refresh_token=${refreshToken}`,
-      {
-        // server: microServices.GLOBAL_ADMIN_URL,
-        server: microServices.Test_URL,
-      }
-    );
-    Auth.refreshToken(response.payload);
-  }
-  next(action);
-};
-
-const createStoreWithMiddleware = applyMiddleware(refreshMiddleware, saga);
+const createStoreWithMiddleware = applyMiddleware(saga);
 const enhancer = composeEnhancers(createStoreWithMiddleware);
 
-const store = createStore(reducers, enhancer);
+const store = createStore(persistedReducer, enhancer);
+const persistor = persistStore(store);
 
 saga.run(watchSagas);
 
-export default store;
+export { store, persistor };

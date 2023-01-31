@@ -3,10 +3,10 @@ import React, { Suspense, useEffect } from "react";
 import { useLocation } from "react-router";
 import { Route, Routes as ReactRouterRoutes } from "react-router-dom";
 import Loader from "../components/Loader";
-import MiniDrawer from "../components/Navbar/Navbar";
 import Auth from "../utils/Auth";
 import { USER_TYPES } from "../utils/Enum";
 import * as LazyComponent from "../utils/LazyLoaded";
+import PrivateRoute from "../utils/PrivateRoutes";
 
 const Routes = () => {
   let userType = Auth.getRoles();
@@ -20,18 +20,24 @@ const Routes = () => {
     <Suspense fallback={<Loader />}>
       {/* <Header /> */}
       <ReactRouterRoutes>
-        <Route path="*" element={<LazyComponent.Login />} />
-        <Route path="/login" element={<LazyComponent.Login />} />
-        {isAuth ? (
-          <Route
-            path="/home"
-            element={
-              <MiniDrawer>
-                <LazyComponent.Home />
-              </MiniDrawer>
-            }
-          />
-        ) : null}
+        <Route path="*" element={<LazyComponent.BAD_REQUEST />} />
+        <Route path="/" element={<LazyComponent.Login />} />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <LazyComponent.Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/setting"
+          element={
+            <PrivateRoute>
+              <LazyComponent.Setting />
+            </PrivateRoute>
+          }
+        />
       </ReactRouterRoutes>
     </Suspense>
   );
