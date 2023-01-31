@@ -15,7 +15,7 @@ import HouseIcon from "@mui/icons-material/House";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function StudentDrawerList() {
+export default function StudentDrawerList(props) {
   const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {
@@ -27,96 +27,177 @@ export default function StudentDrawerList() {
   const handleNavigation = (value) => {
     // navigate(`/${value}`);
     console.log(value);
+    setSelectedIndex(value);
     console.log(pathname);
   };
+  const [selectedIndex, setSelectedIndex] = React.useState("home");
+  console.log(props.flag);
 
   return (
     <List
       sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
       component="nav"
       aria-labelledby="nested-list-subheader"
-      //   style={{ color: "white" }}
+      style={{
+        color: "white",
+        background: "black",
+        paddingLeft: 10,
+        paddingTop: 25,
+      }}
     >
       <ListItemButton
+        style={
+          selectedIndex === "home" ? { color: "#F2B33F" } : { color: "white" }
+        }
         onClick={() => {
           handleNavigation("home");
         }}
       >
         <ListItemIcon>
-          <PersonIcon />
+          <PersonIcon
+            style={
+              selectedIndex === "home"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
+          />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItemButton>
 
       <ListItemButton
+        style={
+          selectedIndex === "examForm"
+            ? { color: "#F2B33F" }
+            : { color: "white" }
+        }
         onClick={() => {
           handleNavigation("examForm");
         }}
       >
         <ListItemIcon>
-          <FileCopyIcon />
+          <FileCopyIcon
+            style={
+              selectedIndex === "examForm"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
+          />
         </ListItemIcon>
         <ListItemText primary="Exam Form" />
       </ListItemButton>
 
       <ListItemButton
+        style={
+          selectedIndex === "viewReport"
+            ? { color: "#F2B33F" }
+            : { color: "white" }
+        }
         onClick={() => {
           handleNavigation("viewReport");
         }}
       >
         <ListItemIcon>
-          <FileOpenIcon />
+          <FileOpenIcon
+            style={
+              selectedIndex === "viewReport"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
+          />
         </ListItemIcon>
         <ListItemText primary="View Report" />
       </ListItemButton>
 
       <ListItemButton
+        style={
+          selectedIndex === "attendance"
+            ? { color: "#F2B33F" }
+            : { color: "white" }
+        }
         onClick={() => {
           handleNavigation("attendance");
         }}
       >
         <ListItemIcon>
-          <CreateIcon />
+          <CreateIcon
+            style={
+              selectedIndex === "attendance"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
+          />
         </ListItemIcon>
         <ListItemText primary="Attendance" />
       </ListItemButton>
 
       <ListItemButton
+        style={
+          selectedIndex === "choiceFilling"
+            ? { color: "#F2B33F" }
+            : { color: "white" }
+        }
         onClick={() => {
           handleNavigation("choiceFilling");
         }}
       >
         <ListItemIcon>
-          <HouseIcon />
+          <HouseIcon
+            style={
+              selectedIndex === "choiceFilling"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
+          />
         </ListItemIcon>
         <ListItemText primary="Choice Filling" />
       </ListItemButton>
 
       <ListItemButton
+        style={
+          selectedIndex === "mst" ? { color: "#F2B33F" } : { color: "white" }
+        }
         onClick={() => {
           handleNavigation("mst");
         }}
       >
         <ListItemIcon>
-          <PersonIcon />
+          <PersonIcon
+            style={
+              selectedIndex === "mst"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
+          />
         </ListItemIcon>
         <ListItemText primary="MST" />
       </ListItemButton>
 
       <ListItemButton
+        style={
+          selectedIndex === "onlineExam"
+            ? { color: "#F2B33F" }
+            : { color: "white" }
+        }
         onClick={() => {
           handleNavigation("onlineExam");
         }}
       >
         <ListItemIcon>
-          <FileOpenIcon />
+          <FileOpenIcon
+            style={
+              selectedIndex === "onlineExam"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
+          />
         </ListItemIcon>
         <ListItemText primary="Online Exam" />
       </ListItemButton>
 
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
-          <FileCopyIcon />
+          <FileCopyIcon style={{ color: "white" }} />
         </ListItemIcon>
         <ListItemText primary="Feedback" />
         {open ? <ExpandLess /> : <ExpandMore />}
@@ -124,37 +205,70 @@ export default function StudentDrawerList() {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton
+            style={
+              selectedIndex === "nbaSurvey"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
             sx={{ pl: 4 }}
             onClick={() => {
               handleNavigation("nbaSurvey");
             }}
           >
             <ListItemIcon>
-              <AssignmentIcon />
+              <AssignmentIcon
+                style={
+                  selectedIndex === "nbaSurvey"
+                    ? { color: "#F2B33F" }
+                    : { color: "white" }
+                }
+              />
             </ListItemIcon>
             <ListItemText primary="NBA Survey" />
           </ListItemButton>
 
           <ListItemButton
+            style={
+              selectedIndex === "facilityFeedback"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
             sx={{ pl: 4 }}
             onClick={() => {
               handleNavigation("facilityFeedback");
             }}
           >
             <ListItemIcon>
-              <AssignmentIcon />
+              <AssignmentIcon
+                style={
+                  selectedIndex === "facilityFeedback"
+                    ? { color: "#F2B33F" }
+                    : { color: "white" }
+                }
+              />
             </ListItemIcon>
             <ListItemText primary="Facility Feedback" />
           </ListItemButton>
 
           <ListItemButton
+            style={
+              selectedIndex === "feedback"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
             sx={{ pl: 4 }}
             onClick={() => {
               handleNavigation("feedback");
             }}
           >
             <ListItemIcon>
-              <CheckBoxIcon />
+              <CheckBoxIcon
+                style={
+                  selectedIndex === "feedback"
+                    ? { color: "#F2B33F" }
+                    : { color: "white" }
+                }
+              />
             </ListItemIcon>
             <ListItemText primary="Feedback" />
           </ListItemButton>

@@ -43,9 +43,9 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: 0,
   [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: 0,
   },
 });
 
@@ -152,7 +152,15 @@ const MiniDrawer = (props) => {
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        variant="permanent"
+        open={open}
+        PaperProps={{
+          sx: {
+            backgroundColor: "black",
+          },
+        }}
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -163,7 +171,7 @@ const MiniDrawer = (props) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <StudentDrawerList />
+        <StudentDrawerList flag={open} />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
