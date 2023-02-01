@@ -20,14 +20,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import StudentDrawerList from "./student/student";
-
 const drawerWidth = 240;
-
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -36,7 +37,6 @@ const openedMixin = (theme) => ({
   }),
   overflowX: "hidden",
 });
-
 const closedMixin = (theme) => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -48,7 +48,6 @@ const closedMixin = (theme) => ({
     width: 0,
   },
 });
-
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -57,7 +56,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -75,7 +73,6 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -92,19 +89,58 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-
 const MiniDrawer = (props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const isMenuOpen = Boolean(anchorEl);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+    sx={{ mt: '45px' }}
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Change Password</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logut</MenuItem>
+    </Menu>
+  );
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" style={{ background: "white" }}>
+      <AppBar position="fixed"  elevation= {1} style={{ background: "white" }}>
         <Toolbar>
           <IconButton
             color="black"
@@ -146,12 +182,15 @@ const MiniDrawer = (props) => {
               aria-label="account of current user"
               aria-haspopup="true"
               color="black"
+              aria-controls={menuId}
+              onClick={handleProfileMenuOpen}
             >
               <AccountCircle />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
+      {renderMenu}
       <Drawer
         variant="permanent"
         open={open}
@@ -179,14 +218,13 @@ const MiniDrawer = (props) => {
       </Box>
     </Box>
   );
-};
+}
+
 
 const mapStateToProps = (state) => ({
   List: state.Sidebar.sidebarList,
 });
-
 // MiniDrawer.propTypes = {
 //   List: PropTypes.array,
 // };
-
 export default connect(mapStateToProps)(MiniDrawer);
