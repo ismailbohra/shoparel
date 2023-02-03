@@ -22,7 +22,7 @@ import { bindActionCreators } from "redux";
 import { userLoginReqEmail } from "../../../redux/users/UserAction";
 import Auth from "../../../utils/Auth";
 
-const UserLoginMail = (props) => {
+const StudentLogin = (props) => {
   const [key, setKey] = useState("home");
   const navigate = useNavigate();
 
@@ -32,6 +32,7 @@ const UserLoginMail = (props) => {
   });
   const loginUser = (values) => {
     console.log(values);
+    
     props.userLoginReqEmail(values, successCB);
   };
   const successCB = () => {
@@ -57,7 +58,8 @@ const UserLoginMail = (props) => {
         return (
           <Form>
             <Container>
-              <Row className="">
+              <div className="login_form_inner_continer">
+              <Row >
                 <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
                   <Input
                     error={touched.email && errors.email}
@@ -91,6 +93,7 @@ const UserLoginMail = (props) => {
                   />
                 </Col>
               </Row>
+              </div>
               <Row>
                 <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
                   <div className="d-flex flex-column align-items-center">
@@ -122,8 +125,8 @@ const mapDispatchToProps = (dispatch) => ({
   userLoginReqEmail: bindActionCreators(userLoginReqEmail, dispatch),
 });
 
-UserLoginMail.propTypes = {
+StudentLogin.propTypes = {
   userLoginReqEmail: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserLoginMail);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentLogin);

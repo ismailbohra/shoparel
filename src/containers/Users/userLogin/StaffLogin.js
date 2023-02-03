@@ -21,7 +21,7 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { userLoginReqEmail } from "../../../redux/users/UserAction";
 
-const UserLoginOTP = (props) => {
+const StaffLogin = (props) => {
   const [key, setKey] = useState("home");
 
   const [accountSetupForm, setAccountSetupForm] = useState({
@@ -49,7 +49,7 @@ const UserLoginOTP = (props) => {
       }) => {
         return (
           <Form>
-            <Container>
+            <Container >
               <Row>
                 <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
                   <Input
@@ -65,7 +65,24 @@ const UserLoginOTP = (props) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.userMobile}
-                    placeholder="Enter Mobile Number"
+                    placeholder="Enter Email"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
+                  <Input
+                    error={touched.password && errors.password}
+                    id={"password"}
+                    inputClass={
+                      touched.password && errors.password ? "is-invalid" : ""
+                    }
+                    inputType={INPUT_TYPES.password}
+                    name="password"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.password}
+                    placeholder="Enter Password"
                   />
                 </Col>
               </Row>
@@ -74,7 +91,7 @@ const UserLoginOTP = (props) => {
                   <div className="d-flex flex-column align-items-center">
                     <div>
                       <Button type="submit" className="butn mt-2 p-3 ps-5 pe-5">
-                        Generate OTP
+                        Login
                       </Button>
                     </div>
                     <div className="logintxt mt-2">
@@ -106,8 +123,8 @@ const mapDispatchToProps = (dispatch) => ({
   userRegisterReq: bindActionCreators(userLoginReqEmail, dispatch),
 });
 
-UserLoginOTP.propTypes = {
+StaffLogin.propTypes = {
   userRegisterReq: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserLoginOTP);
+export default connect(mapStateToProps, mapDispatchToProps)(StaffLogin);
