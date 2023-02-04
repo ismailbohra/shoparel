@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import "./UserLogin.scss";
 import {
@@ -15,28 +15,38 @@ import {
 import { Form, Formik } from "formik";
 import { INPUT_TYPES } from "../../../constants";
 import Input from "../../../components/Input";
-import { setUserOtpLoginValidation } from "../../../utils/validations";
+import { setUserLoginValidation } from "../../../utils/validations";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import { userLoginReqEmail } from "../../../redux/users/UserAction";
+import {
+  studentLoginReqEmail,
+  staffLoginReqEmail,
+} from "../../../redux/users/UserAction";
+import Auth from "../../../utils/Auth";
 
 const StaffLogin = (props) => {
   const [key, setKey] = useState("home");
+  const navigate = useNavigate();
 
   const [accountSetupForm, setAccountSetupForm] = useState({
-    userMobile: "",
+    email: "",
+    password: "",
   });
-  const loginOtpUser = (values) => {
-    console.log(values);
-    // props.userRegisterReq(values);
+  const loginUser = (values) => {
+    props.staffLoginReqEmail(values, successCB);
   };
+  const successCB = () => {
+    console.log("successCB");
+    navigate("/cms");
+  };
+  Auth.signOut();
   return (
     <Formik
       enableReinitialize
       initialValues={accountSetupForm}
-      onSubmit={loginOtpUser}
-      validationSchema={setUserOtpLoginValidation}
+      onSubmit={loginUser}
+      validationSchema={setUserLoginValidation}
     >
       {({
         values,
@@ -49,43 +59,43 @@ const StaffLogin = (props) => {
       }) => {
         return (
           <Form>
-            <Container >
-              <Row>
-                <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
-                  <Input
-                    error={touched.userMobile && errors.userMobile}
-                    id={"userMobile"}
-                    inputClass={
-                      touched.userMobile && errors.userMobile
-                        ? "is-invalid"
-                        : ""
-                    }
-                    inputType={INPUT_TYPES.number}
-                    name="userMobile"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.userMobile}
-                    placeholder="Enter Email"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
-                  <Input
-                    error={touched.password && errors.password}
-                    id={"password"}
-                    inputClass={
-                      touched.password && errors.password ? "is-invalid" : ""
-                    }
-                    inputType={INPUT_TYPES.password}
-                    name="password"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.password}
-                    placeholder="Enter Password"
-                  />
-                </Col>
-              </Row>
+            <Container>
+              <div className="login_form_inner_continer">
+                <Row>
+                  <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
+                    <Input
+                      error={touched.email && errors.email}
+                      id={"staffEmail"}
+                      inputClass={
+                        touched.email && errors.email ? "is-invalid" : ""
+                      }
+                      inputType={INPUT_TYPES.email}
+                      name="email"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.email}
+                      placeholder="Enter Email Id"
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
+                    <Input
+                      error={touched.password && errors.password}
+                      id={"staffPassword"}
+                      inputClass={
+                        touched.password && errors.password ? "is-invalid" : ""
+                      }
+                      inputType={INPUT_TYPES.password}
+                      name="password"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.password}
+                      placeholder="Enter Password"
+                    />
+                  </Col>
+                </Row>
+              </div>
               <Row>
                 <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
                   <div className="d-flex flex-column align-items-center">
@@ -99,12 +109,6 @@ const StaffLogin = (props) => {
                         Forget Password?
                       </Link>
                     </div>
-                    <div className="logintxt mt-2">
-                      Need an account?
-                      <Link to={"/register"} className="registernow">
-                        Register Now
-                      </Link>
-                    </div>
                   </div>
                 </Col>
               </Row>
@@ -115,16 +119,13 @@ const StaffLogin = (props) => {
     </Formik>
   );
 };
-const mapStateToProps = (state) => ({
-  // studentList: state.User.studentList,
-});
 
 const mapDispatchToProps = (dispatch) => ({
-  userRegisterReq: bindActionCreators(userLoginReqEmail, dispatch),
+  staffLoginReqEmail: bindActionCreators(staffLoginReqEmail, dispatch),
 });
 
 StaffLogin.propTypes = {
-  userRegisterReq: PropTypes.func,
+  staffLoginReqEmail: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StaffLogin);
+export default connect(null, mapDispatchToProps)(StaffLogin);

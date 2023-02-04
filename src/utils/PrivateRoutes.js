@@ -6,7 +6,7 @@ import MiniDrawer from "../components/Navbar/Navbar";
 
 const PrivateRoute = ({ children }) => {
   const auth = Auth.isAuth();
-  return auth ? <MiniDrawer>{children}</MiniDrawer> : <Navigate to="/login" />;
+  return auth ? children : <Navigate to="/login" />;
 };
 
 PrivateRoute.propTypes = {

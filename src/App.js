@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
 import Toaster from "./components/Toaster";
-import Routes from "./routes/Routes";
+import Routes from "./routes/Route";
 
 function App() {
   return (

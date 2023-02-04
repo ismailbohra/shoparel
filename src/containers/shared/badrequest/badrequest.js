@@ -1,7 +1,7 @@
 import React from "react";
 
-function badrequest() {
+function BadRequest() {
   return <div>page not exist</div>;
 }
 
-export default badrequest;
+export default BadRequest;

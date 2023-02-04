@@ -1,0 +1,10 @@
+export const LEAVE_APPLY_REQ = "LEAVE_APPLY";
+export const LEAVE_APPLY_RES = "LEAVE_GET";
+export const LEAVE_UPDATE_REQ = "LEAVE_UPDATE_REQ";
+export const LEAVE_UPDATE_RES = "LEAVE_UPDATE_RES";
+export const LEAVE_GET_REQ = "LEAVE_GET_REQ";
+export const LEAVE_GET_RES = "LEAVE_GET_RES";
+export const ALL_LEAVE_GET_REQ = "LEAVE_GET_REQ";
+export const ALL_LEAVE_GET_RES = "LEAVE_GET_RES";
+export const LEAVE_DELETE_REQ = "LEAVE_DELETE_REQ";
+export const LEAVE_DELETE_RES = "LEAVE_DELETE_RES";

@@ -20,15 +20,16 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-
-import { useLocation, useNavigate } from "react-router-dom";
-
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import AdminDrawerList from "./admin/admin";
 import StudentDrawerList from "./student/student";
-const drawerWidth = 240;
+import { Outlet, useNavigate } from "react-router-dom";
+import Auth from "../../utils/Auth";
+
+const drawerWidth = 260;
+
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -89,9 +90,10 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-const MiniDrawer = (props) => {
+
+const AppbarAndNAvabar = (props) => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -112,35 +114,130 @@ const MiniDrawer = (props) => {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
+  const navigte = useNavigate();
+  const handleMenuClick = (value) => {
+    switch (value) {
+      case "logout":
+        Auth.signOut();
+        navigte("/login");
+        break;
 
+      default:
+        break;
+    }
+  };
 
-  const menuId = 'primary-search-account-menu';
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
-    sx={{ mt: '45px' }}
+      sx={{ mt: "45px" }}
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Change Password</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logut</MenuItem>
+      <MenuItem
+        onClick={() => {
+          handleMenuClick("profile");
+        }}
+      >
+        Profile
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          handleMenuClick("changePassword");
+        }}
+      >
+        Change Password
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          handleMenuClick("logout");
+        }}
+      >
+        Logut
+      </MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 4 new mails"
+          color="inherit"
+          onClick={() => {
+            console.log("message");
+          }}
+        >
+          <Badge badgeContent={4} color="error">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          onClick={() => {
+            console.log("notification");
+          }}
+        >
+          <Badge badgeContent={17} color="error">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+          onClick={() => {
+            console.log("profile");
+          }}
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
     </Menu>
   );
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed"  elevation= {1} style={{ background: "white" }}>
+      <AppBar position="fixed" elevation={1} style={{ background: "white" }}>
         <Toolbar>
           <IconButton
             color="black"
@@ -191,6 +288,7 @@ const MiniDrawer = (props) => {
         </Toolbar>
       </AppBar>
       {renderMenu}
+      {renderMobileMenu}
       <Drawer
         variant="permanent"
         open={open}
@@ -210,21 +308,23 @@ const MiniDrawer = (props) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <StudentDrawerList flag={open} />
+        {props.User.userType === "STUDENT" ? <StudentDrawerList /> : null}
+        {props.User.userType === "STAFF" ? <AdminDrawerList /> : null}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {props.children}
+        <Outlet />
       </Box>
     </Box>
   );
-}
-
+};
 
 const mapStateToProps = (state) => ({
-  List: state.Sidebar.sidebarList,
+  User: state.User.userProfile,
 });
-// MiniDrawer.propTypes = {
+
+// AppbarAndNAvabar.propTypes = {
 //   List: PropTypes.array,
 // };
-export default connect(mapStateToProps)(MiniDrawer);
+
+export default connect(mapStateToProps)(AppbarAndNAvabar);

@@ -1,0 +1,2 @@
+export const FACULTY_GET_REQ = "FACULTY_GET_REQ";
+export const FACULTY_GET_RES = "FACULTY_GET_RES";

@@ -39,20 +39,38 @@ export function* addNewUserSaga(action) {
     // error handler
   }
 }
-export function* userEmaliLogin(action) {
-  console.log("userSaga", action);
+export function* studentEmaliLogin(action) {
+  console.log("student Saga", action);
   try {
-    const response = yield call(API.loginUserEmailApi, action.paylode);
-    yield console.log("login saga", response);
+    const response = yield call(API.loginStudentEmailApi, action.paylode);
+    yield console.log("login student saga", response);
     yield call(Auth.signIn, response?.data || {});
     if (action.successCallback) {
       yield call(action.successCallback);
     }
     // callfunction
     dispatchToasterSuccess(MSG.loginSuccess);
-    yield put(ACTIONS.userLoginRespEmail(response));
+    yield put(ACTIONS.studentLoginRespEmail(response));
     yield put(updatesidebar(response));
     // yield call(action.successcb);
+  } catch (err) {
+    dispatchToasterError(err?.response?.data?.message);
+    // error handler
+  }
+}
+
+//staff login
+export function* staffEmaliLogin(action) {
+  try {
+    const response = yield call(API.loginStaffEmailApi, action.paylode);
+    yield console.log("staff login saga", response);
+    yield call(Auth.signIn, response?.data || {});
+    if (action.successCallback) {
+      yield call(action.successCallback);
+    }
+    // callfunction
+    dispatchToasterSuccess(MSG.loginSuccess);
+    yield put(ACTIONS.staffLoginRespEmail(response));
   } catch (err) {
     dispatchToasterError(err?.response?.data?.message);
     // error handler
@@ -102,7 +120,8 @@ export function* changePasswordSaga(action) {
 export function* UserSagas() {
   yield all([
     takeLatest(TYPES.SET_NEW_USER_REQ, addNewUserSaga),
-    takeLatest(TYPES.USER_LOGIN_EMAIL_REQ, userEmaliLogin),
+    takeLatest(TYPES.STUDENT_LOGIN_EMAIL_REQ, studentEmaliLogin),
+    takeLatest(TYPES.STAFF_LOGIN_EMAIL_REQ, staffEmaliLogin),
     takeLatest(TYPES.CHANGE_PASSWORD, changePasswordSaga),
     // takeLatest(TYPES.GET_USER_LIST_REQ, getUserSaga),
     // takeLatest(TYPES.DELETE_USER_REQ, deleteUserSaga),

@@ -19,7 +19,10 @@ import { setUserLoginValidation } from "../../../utils/validations";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import { userLoginReqEmail } from "../../../redux/users/UserAction";
+import {
+  studentLoginReqEmail,
+  userLoginReqEmail,
+} from "../../../redux/users/UserAction";
 import Auth from "../../../utils/Auth";
 
 const StudentLogin = (props) => {
@@ -32,12 +35,11 @@ const StudentLogin = (props) => {
   });
   const loginUser = (values) => {
     console.log(values);
-    
     props.userLoginReqEmail(values, successCB);
   };
   const successCB = () => {
     console.log("successCB");
-    navigate("/home");
+    navigate("/cms");
   };
   return (
     <Formik
@@ -59,40 +61,40 @@ const StudentLogin = (props) => {
           <Form>
             <Container>
               <div className="login_form_inner_continer">
-              <Row >
-                <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
-                  <Input
-                    error={touched.email && errors.email}
-                    id={"email"}
-                    inputClass={
-                      touched.email && errors.email ? "is-invalid" : ""
-                    }
-                    inputType={INPUT_TYPES.email}
-                    name="email"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.email}
-                    placeholder="Enter Email Id"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
-                  <Input
-                    error={touched.password && errors.password}
-                    id={"password"}
-                    inputClass={
-                      touched.password && errors.password ? "is-invalid" : ""
-                    }
-                    inputType={INPUT_TYPES.password}
-                    name="password"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.password}
-                    placeholder="Enter Password"
-                  />
-                </Col>
-              </Row>
+                <Row>
+                  <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
+                    <Input
+                      error={touched.email && errors.email}
+                      id={"email"}
+                      inputClass={
+                        touched.email && errors.email ? "is-invalid" : ""
+                      }
+                      inputType={INPUT_TYPES.email}
+                      name="email"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.email}
+                      placeholder="Enter Email Id"
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
+                    <Input
+                      error={touched.password && errors.password}
+                      id={"password"}
+                      inputClass={
+                        touched.password && errors.password ? "is-invalid" : ""
+                      }
+                      inputType={INPUT_TYPES.password}
+                      name="password"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.password}
+                      placeholder="Enter Password"
+                    />
+                  </Col>
+                </Row>
               </div>
               <Row>
                 <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
@@ -117,16 +119,13 @@ const StudentLogin = (props) => {
     </Formik>
   );
 };
-const mapStateToProps = (state) => ({
-  // studentList: state.User.studentList,
-});
 
 const mapDispatchToProps = (dispatch) => ({
-  userLoginReqEmail: bindActionCreators(userLoginReqEmail, dispatch),
+  userLoginReqEmail: bindActionCreators(studentLoginReqEmail, dispatch),
 });
 
 StudentLogin.propTypes = {
   userLoginReqEmail: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentLogin);
+export default connect(null, mapDispatchToProps)(StudentLogin);

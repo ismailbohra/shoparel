@@ -16,7 +16,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function StudentDrawerList(props) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
@@ -25,13 +25,11 @@ export default function StudentDrawerList(props) {
   const navigate = useNavigate();
   const { pathname } = useLocation;
   const handleNavigation = (value) => {
-    // navigate(`/${value}`);
-    console.log(value);
+    navigate(value);
+    // console.log(value);
     setSelectedIndex(value);
-    console.log(pathname);
   };
-  const [selectedIndex, setSelectedIndex] = React.useState("home");
-  console.log(props.flag);
+  const [selectedIndex, setSelectedIndex] = React.useState("");
 
   return (
     <List
@@ -46,19 +44,15 @@ export default function StudentDrawerList(props) {
       }}
     >
       <ListItemButton
-        style={
-          selectedIndex === "home" ? { color: "#F2B33F" } : { color: "white" }
-        }
+        style={selectedIndex === "" ? { color: "#F2B33F" } : { color: "white" }}
         onClick={() => {
-          handleNavigation("home");
+          handleNavigation("");
         }}
       >
         <ListItemIcon>
           <PersonIcon
             style={
-              selectedIndex === "home"
-                ? { color: "#F2B33F" }
-                : { color: "white" }
+              selectedIndex === "" ? { color: "#F2B33F" } : { color: "white" }
             }
           />
         </ListItemIcon>
@@ -67,18 +61,18 @@ export default function StudentDrawerList(props) {
 
       <ListItemButton
         style={
-          selectedIndex === "examForm"
+          selectedIndex === "ExamForm"
             ? { color: "#F2B33F" }
             : { color: "white" }
         }
         onClick={() => {
-          handleNavigation("examForm");
+          handleNavigation("ExamForm");
         }}
       >
         <ListItemIcon>
           <FileCopyIcon
             style={
-              selectedIndex === "examForm"
+              selectedIndex === "ExamForm"
                 ? { color: "#F2B33F" }
                 : { color: "white" }
             }
@@ -111,18 +105,18 @@ export default function StudentDrawerList(props) {
 
       <ListItemButton
         style={
-          selectedIndex === "attendance"
+          selectedIndex === "viewAttendance"
             ? { color: "#F2B33F" }
             : { color: "white" }
         }
         onClick={() => {
-          handleNavigation("attendance");
+          handleNavigation("viewAttendance");
         }}
       >
         <ListItemIcon>
           <CreateIcon
             style={
-              selectedIndex === "attendance"
+              selectedIndex === "viewAttendance"
                 ? { color: "#F2B33F" }
                 : { color: "white" }
             }

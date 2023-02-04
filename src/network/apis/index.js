@@ -1,6 +1,7 @@
-import axios from 'axios';
-import config from '../../config';
-import { errorHandler, requestHandler, successHandler } from '../interceptors';
+import axios from "axios";
+import config from "../../config";
+import Auth from "../../utils/Auth";
+import { errorHandler, requestHandler, successHandler } from "../interceptors";
 
 const axiosClient = (baseUrl, config) =>
   axios.create({
@@ -10,10 +11,11 @@ const axiosClient = (baseUrl, config) =>
 
 const microServicesURLs = {
   TIKIT_TEST: `${config.apiGateway.TEST}`,
-  // GLOBAL_ADMIN_URL: `${config.waste_url.ADMIN}`,
+  LEAVE: `${config.apiGateway.LEAVE}`,
+  MASTER: `${config.apiGateway.MASTERS}`,
+  STAFF: `${config.apiGateway.STAFF}`,
+  STUDENT: `${config.apiGateway.STUDENT}`,
 };
-
-console.log('config', microServicesURLs);
 
 const clients = {};
 const microServices = {};
@@ -21,8 +23,9 @@ const microServices = {};
 for (const key in microServicesURLs) {
   const axiosInstance = axiosClient(microServicesURLs[key], {
     headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: "Bearer " + Auth.getToken.authToken,
     },
   });
   microServices[key] = key;
@@ -46,7 +49,7 @@ export default (method, uri, data = {}, configs = {}) => {
     server = microServices.Test_URL,
     headers = {},
     params = {},
-    responseType = 'json',
+    responseType = "json",
     handlerEnabled = true,
   } = configs;
 
@@ -66,7 +69,7 @@ export default (method, uri, data = {}, configs = {}) => {
 
   return clients[server][method](
     uri,
-    method === 'delete' ? axiosConfig : data,
+    method === "delete" ? axiosConfig : data,
     axiosConfig
   );
 };

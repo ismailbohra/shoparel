@@ -6,12 +6,23 @@ export const postUserApi = async (payload) => {
     successMessage: "Hello",
   });
 };
-export const loginUserEmailApi = async (payload) => {
-  return await axiosInstance("post", "/staff/login", payload, {
-    server: microServices.TIKIT_TEST,
+
+//student login
+export const loginStudentEmailApi = async (payload) => {
+  return await axiosInstance("post", "/login", payload, {
+    server: microServices.STUDENT,
     successMessage: "Hello",
   });
 };
+
+//staff login
+export const loginStaffEmailApi = async (payload) => {
+  return await axiosInstance("post", "/login", payload, {
+    server: microServices.STAFF,
+    successMessage: "Hello",
+  });
+};
+
 // update password
 export const changePassword = async (payload) => {
   return await axiosInstance("put", "/change_password", payload, {
