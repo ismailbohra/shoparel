@@ -19,26 +19,17 @@ const UserLogin = () => {
 
   return (
     <div className="full_container">
-      <Container fluid className="h-auto user-login">
-        <div lg={8} className="p-0 h-auto d-flex  flex-column">
-          <Container fluid>
-            <Row
-              className="justify-content-md-center"
-              style={{ justifyContent: "center" }}
-            >
-              <Col
-                sm={12}
-                xs={12}
-                className="form mt-lg-5  mb-2 mb-sm-3 mb-lg-4"
-              >
-                <div className="ips_logo">
-                  <img
-                    src={ips_logo}
-                    alt="ips_academy"
-                    style={{ width: "inherit", maxWidth: "500px" }}
-                  />
-                </div>
-              </Col>
+    <Container fluid className="h-auto user-login">
+      <div lg={8} className="p-0 h-auto d-flex  flex-column">
+        <Container fluid >
+          <Row className="justify-content-md-center" style={{justifyContent:"center"}}>
+            <Col sm={12} xs={12} className="form mt-lg-5  mb-2 mb-sm-3 mb-lg-4">
+              
+
+            <div  className="ips_logo" >
+            <img src={ips_logo} alt="ips_academy" style={{width:"inherit"  , maxWidth:"500px"}}  />
+            </div>
+            </Col>
               <Col
                 sm={9}
                 xs={12}
@@ -67,6 +58,8 @@ const UserLogin = () => {
         </div>
       </Container>
     </div>
+
+
   );
 };
 
