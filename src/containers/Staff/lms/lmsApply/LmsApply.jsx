@@ -79,6 +79,7 @@ const LmsApply = (props) => {
     StartDate: "",
     EndDate: "",
     NoOfDays: "",
+    reason: "",
   });
 
   const [facultyAssignment, setfacultyAssignment] = useState({
@@ -142,9 +143,9 @@ const LmsApply = (props) => {
       end_date: data.EndDate,
       start_date: data.StartDate,
       leave_type: data.LeaveType,
+      reason: data.reason,
       assignFaculty: [...assignFaculty, ...otherResponsibiliyFaculty],
     };
-    console.log(leave);
     leave.assignFaculty.forEach((element) => {
       delete element["facultyDepartment"];
       delete element["Department"];

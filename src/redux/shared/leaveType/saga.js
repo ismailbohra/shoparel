@@ -13,5 +13,5 @@ export function* getLeaveTypeSaga(action) {
 }
 
 export function* LeaveTypeSagas() {
-  yield all([takeLatest(TYPES.LEAVE_GET_REQ, getLeaveTypeSaga)]);
+  yield all([takeLatest(TYPES.LEAVE_TYPE_GET_REQ, getLeaveTypeSaga)]);
 }

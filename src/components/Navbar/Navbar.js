@@ -18,7 +18,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { connect } from "react-redux";
-import AdminDrawerList from "./admin/admin";
+import AdminDrawerList from "./lms/lms";
 import StudentDrawerList from "./student/student";
 import { Outlet, useNavigate } from "react-router-dom";
 import Auth from "../../utils/Auth";
@@ -112,6 +112,10 @@ const AppbarAndNAvabar = (props) => {
   const navigte = useNavigate();
   const handleMenuClick = (value) => {
     switch (value) {
+      case "logout":
+        Auth.signOut();
+        navigte("/login");
+        break;
       case "logout":
         Auth.signOut();
         navigte("/login");

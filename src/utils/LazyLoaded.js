@@ -6,10 +6,22 @@ export const Login = React.lazy(() =>
 export const Setting = React.lazy(() =>
   import("../containers/setting/setting")
 );
+
+//lms ui------------------------------------------------------------------------------------------------------//
 export const LeaveApply = React.lazy(() =>
   import("../containers/Staff/lms/lmsApply/LmsApply")
 );
+export const LmsReport = React.lazy(() =>
+  import("../containers/Staff/lms/LeaveChart/LmsReport")
+);
+export const LeaveChart = React.lazy(() =>
+  import("../containers/Staff/lms/LeaveChart/LmsLeaveChart")
+);
+export const FacultyAssignment = React.lazy(() =>
+  import("../containers/Staff/lms/FacultyAssignment/LmsFacultyAssignment")
+);
 
+//appbar ui---------------------------------------------------------------------------------------------------//
 export const AppBar = React.lazy(() => import("../components/Navbar/Navbar"));
 
 //student ui--------------------------------------------------------------------------------------------------//

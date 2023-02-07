@@ -1,4 +1,4 @@
-import { LEAVE_GET_RES } from "./Type";
+import * as types from "./Type";
 
 const INITIAL_STATE = {
   LeaveTypeList: [],
@@ -12,7 +12,7 @@ const setUser = (action) => {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LEAVE_GET_RES:
+    case types.LEAVE_TYPE_GET_RES:
       return setUser(action);
     default:
       return state;

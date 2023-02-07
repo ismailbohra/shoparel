@@ -9,6 +9,18 @@ export const StaffRoutes = [
     path: "leaveApply",
     component: LazyComponent.LeaveApply,
   },
+  {
+    path: "lmsReport",
+    component: LazyComponent.LmsReport,
+  },
+  {
+    path: "leaveChart",
+    component: LazyComponent.LeaveChart,
+  },
+  {
+    path: "facultyAssignment",
+    component: LazyComponent.FacultyAssignment,
+  },
   // {
   //   exact: false,
   //   path: "containers",

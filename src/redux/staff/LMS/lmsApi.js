@@ -7,23 +7,19 @@ export const LeaveApplyApi = async (payload) => {
   });
 };
 export const LeaveGetApi = async (userData) => {
-  return await axiosInstance("get", "/leave", userData, {
+  const url = userData?.staffId
+    ? `/leave?staffId=${userData.staffId}`
+    : `/leave`;
+  return await axiosInstance("get", url, userData, {
     server: microServices.LEAVE,
     successMessage: "leave get",
   });
 };
 
-export const deleteLeaveApi = async (id) => {
-  console.log("deleteLeaveApi", id);
-  return await axiosInstance("delete", `/leave/?applyId=${id}`, id, {
+export const LmsReportGetApi = async (userData) => {
+  const url = userData?.staffId ? `?staffId=${userData.staffId}` : `/`;
+  return await axiosInstance("get", url, userData, {
     server: microServices.LEAVE,
-    successMessage: "Hello",
+    successMessage: "lms get",
   });
 };
-
-// export const updateLeaveApi = async (userData) => {
-//   return await axiosInstance("put", "/leave", userData, {
-//     server: microServices.TIKIT_TEST,
-//     successMessage: "Hello",
-//   });
-// };

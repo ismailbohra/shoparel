@@ -9,19 +9,48 @@ import {
 } from "../../../utils/Shared";
 
 export function* leaveApplySaga(action) {
-  console.log("leave Apply saga");
   try {
-    const response = yield call(API.LeaveApplyApi, action.paylode);
+    yield call(API.LeaveApplyApi, action.paylode);
     if (action.successCallback) {
       yield call(action.successCallback);
     }
     dispatchToasterSuccess(MSG.applyLeaveSuccess);
-    yield put(ACTIONS.leaveApplyRes(response));
   } catch (err) {
     dispatchToasterError(err?.response?.data?.message || MSG.applyLeaveFaild);
   }
 }
 
+export function* leaveGetSaga(action) {
+  try {
+    const response = yield call(API.LeaveGetApi, action.paylode);
+    if (action.successCallback) {
+      yield call(action.successCallback);
+    }
+    yield console.log(response);
+    yield put(ACTIONS.leaveGetRes(response));
+  } catch (err) {
+    dispatchToasterError(err?.response?.data?.message);
+  }
+}
+
+export function* lmsReportSaga(action) {
+  try {
+    const response = yield call(API.LmsReportGetApi, action.payload);
+    if (action.successCallback) {
+      yield call(action.successCallback);
+    }
+    yield put(ACTIONS.lmsReportGetRes(response));
+  } catch (err) {
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    );
+  }
+}
+
 export function* lmsSagas() {
-  yield all([takeLatest(TYPES.LEAVE_APPLY_REQ, leaveApplySaga)]);
+  yield all([
+    takeLatest(TYPES.LEAVE_APPLY_REQ, leaveApplySaga),
+    takeLatest(TYPES.LMS_RREPORT_GET_REQ, lmsReportSaga),
+    takeLatest(TYPES.LEAVE_GET_REQ, leaveGetSaga),
+  ]);
 }

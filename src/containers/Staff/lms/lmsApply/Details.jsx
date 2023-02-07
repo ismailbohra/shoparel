@@ -76,6 +76,22 @@ function Details(props) {
             />
           </div>
         </div>
+        <br />
+        <div className="row">
+          <div className="col">
+            <label className="pull-left mb-2 ml-5">Reason</label>
+            <input
+              className="form-control"
+              type={"text"}
+              id="reason"
+              label="reason"
+              name="reason"
+              onChange={props.inputEvent}
+              value={props.data.reason}
+              placeholder="specify the reson of your leave application"
+            />
+          </div>
+        </div>
       </div>
     </>
   );
