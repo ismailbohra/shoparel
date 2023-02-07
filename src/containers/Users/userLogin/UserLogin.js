@@ -10,13 +10,45 @@ import {
   Tabs,
   Tab,
 } from "react-bootstrap";
-import StudentLogin from "./StudentLogin";
+
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
+import { userRegisterReq } from "../../../redux/users/UserAction";
+import UserLoginMail from "./StudentLogin";
 import StaffLogin from "./StaffLogin";
 import ips_logo from "../../../assets/images/logoies.png";
+import StudentLogin from "./StudentLogin";
 
-const UserLogin = () => {
+const UserLogin = (props) => {
+  // const ref = useRef({});
+
+  // const [ active_tab , set_active_tab]= useState("student")
+
+  // const change_active_tab= active =>{
+  //   set_active_tab(active);
+  // }
+
+  // useEffect( ()=>{
+  //   if (active_tab == "student"){
+
+  //     ref.current.student.classList.add("active");
+
+  //     // active_tab=="staff";
+  //   }
+
+  // } ,[active_tab]);
+
   const [key, setKey] = useState("home");
 
+  const [accountSetupForm, setAccountSetupForm] = useState({
+    userEmail: "",
+    userPassword: "",
+  });
+  const registerUser = (values) => {
+    // console.log(values);
+    props.userRegisterReq(values);
+  };
   return (
     <div className="full_container">
       <Container fluid className="h-auto user-login">
@@ -52,12 +84,12 @@ const UserLogin = () => {
                 >
                   <Tab eventKey="home" title="Student">
                     <Col lg={12}>
-                      <StudentLogin />
+                      <UserLoginMail />
                     </Col>
                   </Tab>
                   <Tab eventKey="profile" title="Staff">
                     <Col lg={12}>
-                      <StaffLogin />
+                      <StudentLogin />
                     </Col>
                   </Tab>
                 </Tabs>
@@ -70,4 +102,60 @@ const UserLogin = () => {
   );
 };
 
-export default UserLogin;
+const LabelInput = (props) => {
+  return (
+    <div className="inps">
+      <label htmlFor={props.id}>{props.label}</label>
+      <input type={props.type} name={props.name} id={props.id} />
+    </div>
+  );
+};
+
+const SubmitButton = (props) => {
+  return (
+    <button type="submit" name={props.name}>
+      {props.label}
+    </button>
+  );
+};
+
+const TabsPill = (props) => {
+  return (
+    <>
+      <label
+        htmlFor={props.id}
+        ref={(e) => (props.ref.current.student = e)}
+        onClick={(e) => {
+          // change_active_tab(props.value);
+          console.log(props.ref);
+          props.ref.current.student.style.color = "#22367f";
+          props.ref.current.staff.style.color = "white";
+        }}
+        className={props.className}
+      >
+        Student
+      </label>
+      <input
+        type="radio"
+        name="login"
+        id={props.id}
+        value={props.value}
+        hidden
+      />
+    </>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  // studentList: state.User.studentList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  userRegisterReq: bindActionCreators(userRegisterReq, dispatch),
+});
+
+UserLogin.propTypes = {
+  userRegisterReq: PropTypes.func,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserLogin);

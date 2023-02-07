@@ -1,0 +1,30 @@
+div.ChoiceFilling {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+
+div.choice_form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+div.choice_table {
+  display: block;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  gap: 10px;
+  height: 400px;
+  min-width: 250px;
+  max-width: 800px;
+  align-self: center;
+  width: 100%;
+}
+label.bold {
+  font-weight: 600;
+}
