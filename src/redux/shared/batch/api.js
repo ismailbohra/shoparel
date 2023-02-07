@@ -1,11 +1,11 @@
 import axiosInstance, { microServices } from "../../../network/apis";
 
-export const getFacultyApi = async (payload) => {
+export const getBatchApi = async (payload) => {
   const url = payload?.dept
-    ? `/staff?department=${payload.dept}`
-    : "/staff?department=0";
+    ? `academics/batch?departmentId=${payload.dept}`
+    : "academics/batch?departmentId=0";
   return await axiosInstance("get", url, payload, {
-    server: microServices.STAFF,
+    server: microServices.TIKIT_TEST,
     successMessage: "get batch",
   });
 };

@@ -46,7 +46,7 @@ export default (method, uri, data = {}, configs = {}) => {
   const {
     successMessage = null,
     // server = microServices.GLOBAL_ADMIN_URL,
-    server = microServices.Test_URL,
+    server = microServices.STAFF,
     headers = {},
     params = {},
     responseType = "json",

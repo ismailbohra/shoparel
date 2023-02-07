@@ -1,0 +1,2 @@
+export const TIME_SLOT_GET_REQ = "TIME_SLOT_GET_REQ";
+export const TIME_SLOT_GET_RES = "TIME_SLOT_GET_RES";

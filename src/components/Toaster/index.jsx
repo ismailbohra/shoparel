@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Toast, ToastContainer } from "react-bootstrap";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { hideToasterAction } from "../../redux/Toaster/ToasterAction";
 import "./Toaster.scss";
+import Snackbar from "@mui/material/Snackbar";
+import { SnackbarContent } from "@mui/material";
 
 const Toaster = ({ toaster, hideToaster }) => {
   const { message, type, isOpen } = toaster;
@@ -15,17 +16,23 @@ const Toaster = ({ toaster, hideToaster }) => {
     hideToaster();
   };
   return (
-    <ToastContainer position="top-end">
-      <Toast
-        onClose={() => handleClose()}
-        show={isOpen}
-        delay={3000}
-        autohide
-        bg={type === "error" ? "danger" : "success"}
+    <>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isOpen}
+        onClose={handleClose}
+        message={message}
+        autoHideDuration={2500}
+        key={"vertical" + "horizontal"}
       >
-        <Toast.Body>{message}</Toast.Body>
-      </Toast>
-    </ToastContainer>
+        <SnackbarContent
+          style={{
+            backgroundColor: type === "error" ? "#dc3545" : "#198754",
+          }}
+          message={message}
+        />
+      </Snackbar>
+    </>
   );
 };
 

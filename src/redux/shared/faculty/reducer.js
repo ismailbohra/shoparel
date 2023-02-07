@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 const setData = (action) => {
   return {
-    facultyList: action.payload,
+    facultyList: [...action.payload.results],
   };
 };
 

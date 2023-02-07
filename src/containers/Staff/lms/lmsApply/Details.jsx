@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getLeaveTypeReq } from "../../../../redux/shared/leaveType/action";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
+import { useSelector } from "react-redux";
 
 function Details(props) {
+  const LeaveList = useSelector((state) => state.LeaveType.LeaveTypeList);
+  useEffect(() => {
+    props.leaveTypeGetReq();
+  }, []);
   return (
     <>
       <div className="container my-5">
@@ -16,12 +25,13 @@ function Details(props) {
               onChange={props.inputEvent}
             >
               <option>select type of Leave</option>
-              <option value={"cl"}>cl</option>
-              <option value={"dl"}>dl</option>
-              <option value={"el"}>el</option>
-              <option value={"ol"}>ol</option>
-              <option value={"lwp"}>lwp</option>
-              <option value={"sl"}>sl</option>
+              {LeaveList.map((element, index) => {
+                return (
+                  <option key={index} value={element.leave_type}>
+                    {element.leave_type}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="col">
@@ -71,4 +81,12 @@ function Details(props) {
   );
 }
 
-export default Details;
+const mapDispatchToProps = (dispatch) => ({
+  leaveTypeGetReq: bindActionCreators(getLeaveTypeReq, dispatch),
+});
+
+Details.propTypes = {
+  leaveTypeGetReq: PropTypes.func,
+};
+
+export default connect(null, mapDispatchToProps)(Details);

@@ -4,7 +4,6 @@ import * as API from "./api";
 import { call, put, takeLatest, all } from "redux-saga/effects";
 
 export function* getDepartmentSaga(action) {
-  yield console.log("getDepartmentSaga", action.payload || {});
   try {
     const response = yield call(API.getDepartmentApi);
     yield put(ACTIONS.getDepartmentRes(response?.data));

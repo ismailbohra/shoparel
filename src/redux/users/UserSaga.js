@@ -8,7 +8,6 @@ import {
   dispatchToasterError,
   dispatchToasterSuccess,
 } from "../../utils/Shared";
-import { updatesidebar } from "../shared/sidenavbar/Action";
 
 // export function* getUserSaga(action) {
 //   // yield console.log('userSaga', action);
@@ -51,10 +50,13 @@ export function* studentEmaliLogin(action) {
     // callfunction
     dispatchToasterSuccess(MSG.loginSuccess);
     yield put(ACTIONS.studentLoginRespEmail(response));
-    yield put(updatesidebar(response));
     // yield call(action.successcb);
   } catch (err) {
-    dispatchToasterError(err?.response?.data?.message);
+    if (err?.response?.data?.message) {
+      dispatchToasterError(err?.response?.data?.message);
+    } else {
+      dispatchToasterError(MSG.internalServerError);
+    }
     // error handler
   }
 }
@@ -72,8 +74,11 @@ export function* staffEmaliLogin(action) {
     dispatchToasterSuccess(MSG.loginSuccess);
     yield put(ACTIONS.staffLoginRespEmail(response));
   } catch (err) {
-    dispatchToasterError(err?.response?.data?.message);
-    // error handler
+    if (err?.response?.data?.message) {
+      dispatchToasterError(err?.response?.data?.message);
+    } else {
+      dispatchToasterError(MSG.internalServerError);
+    }
   }
 }
 

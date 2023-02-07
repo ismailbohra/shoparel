@@ -17,7 +17,7 @@ export const loginStudentEmailApi = async (payload) => {
 
 //staff login
 export const loginStaffEmailApi = async (payload) => {
-  return await axiosInstance("post", "/login", payload, {
+  return await axiosInstance("post", "/staff/login", payload, {
     server: microServices.STAFF,
     successMessage: "Hello",
   });

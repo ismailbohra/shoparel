@@ -1,2 +1,0 @@
-export const UPDATE_SIDE_BAR = "UPDATE_SIDE_BAR";
-export const NAVIGATE_SIDE_BAR = "NAVIGATE_SIDE_BAR";

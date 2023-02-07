@@ -1,4 +1,4 @@
-import * as types from './ToasterTypes';
+import * as types from "./ToasterTypes";
 
 export const showToasterAction = (message, toasterType) => {
   return {

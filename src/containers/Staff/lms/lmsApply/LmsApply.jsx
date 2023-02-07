@@ -9,6 +9,14 @@ import { getDepartmentReq } from "../../../../redux/shared/department/action";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
+import { getTimeSlotReq } from "../../../../redux/shared/timeSlot/action";
+import { useSelector } from "react-redux";
+import { getLectureTypeReq } from "../../../../redux/shared/lectureType/action";
+import {
+  dispatchToasterError,
+  dispatchToasterSuccess,
+} from "../../../../utils/Shared";
+import { leaveApplyReq } from "../../../../redux/staff/LMS/lmsAction";
 function getSteps() {
   return ["Details", "Faculty Assignment", "Other Responsibilties"];
 }
@@ -17,23 +25,16 @@ function getStepContent(
   step,
   inputEvent,
   data,
-  facultyAssignment,
-  handleFacultyAdd,
-  handleClassAdd,
   inputEventfacultyAssignment,
-  facultyArray,
-  inputEventClassAssign,
-  classArray,
-  AssignClass,
-  handleFacultyRemove,
-  handleClassRemove,
+  facultyAssignment,
+  assignFaculty,
+  handlefacultyAssignmentAdd,
+  handlefacultyAssignmentDelete,
   otherResponsibilities,
   handleOtherResponsibilityFacultyAdd,
   inputEventOtherResponsibility,
   otherResponsibiliyFaculty,
-  handleClassRemoveotherResponsibilities,
-  Department,
-  setDepartment
+  handleClassRemoveotherResponsibilities
 ) {
   switch (step) {
     case 0:
@@ -43,18 +44,10 @@ function getStepContent(
       return (
         <FacultyAssign
           inputEvent={inputEventfacultyAssignment}
-          data={data}
           facultyAssignment={facultyAssignment}
-          handleClassAdd={handleClassAdd}
-          handleFacultyAdd={handleFacultyAdd}
-          facultyArray={facultyArray}
-          inputEventClassAssign={inputEventClassAssign}
-          classArray={classArray}
-          AssignClass={AssignClass}
-          handleFacultyRemove={handleFacultyRemove}
-          handleClassRemove={handleClassRemove}
-          Department={Department}
-          setDepartment={setDepartment}
+          assignFaculty={assignFaculty}
+          handlefacultyAssignmentAdd={handlefacultyAssignmentAdd}
+          handlefacultyAssignmentDelete={handlefacultyAssignmentDelete}
         />
       );
     case 2:
@@ -69,7 +62,6 @@ function getStepContent(
           inputEventOtherResponsibility={inputEventOtherResponsibility}
           otherResponsibiliyFaculty={otherResponsibiliyFaculty}
           otherResponsibilities={otherResponsibilities}
-          Department={Department}
         />
       );
     default:
@@ -78,14 +70,51 @@ function getStepContent(
 }
 
 const LmsApply = (props) => {
+  const User = useSelector((state) => state.User.userProfile);
+
   const [activeStep, setActiveStep] = useState(0);
-  const [Department, setDepartment] = useState([]);
   const steps = getSteps();
+  const [data, setdata] = useState({
+    LeaveType: "",
+    StartDate: "",
+    EndDate: "",
+    NoOfDays: "",
+  });
+
   const [facultyAssignment, setfacultyAssignment] = useState({
-    Department: "",
+    facultyDepartment: "",
     assign_faculty_id: "",
     faculty_date: "",
+    assigned_class_dept: "",
+    assigned_section: "",
+    lecture_type: "",
+    start_time: "",
+    end_time: "",
   });
+  const [assignFaculty, setfacultyArray] = useState([]);
+
+  useEffect(() => {
+    if (
+      facultyAssignment.lecture_type != "" &&
+      facultyAssignment.start_time != ""
+    ) {
+      const lecture = props.lectureList.find(
+        (elem) => elem.lecture_type == facultyAssignment.lecture_type
+      );
+      const value = props.timeSlotList.find(
+        (elem) =>
+          parseInt(elem.timeslot_id) ==
+          parseInt(facultyAssignment.start_time) + lecture.weight - 1
+      );
+      setfacultyAssignment((prev) => ({
+        ...prev,
+        end_time: value?.end_time
+          ? value.end_time
+          : "select time as per lecture type",
+      }));
+    }
+  }, [facultyAssignment.start_time, facultyAssignment.lecture_type]);
+
   const [otherResponsibilities, setotherResponsibilities] = useState({
     Department: "",
     assign_faculty_id: "",
@@ -95,56 +124,32 @@ const LmsApply = (props) => {
   const [otherResponsibiliyFaculty, setOtherResponsibiliyFaculty] = useState(
     []
   );
-  const [facultyArray, setfacultyArray] = useState([]);
-  const [classArray, setClassArray] = useState([]);
-  const [AssignClass, setAssignClass] = useState({
-    assign_faculty_id: "",
-    assigned_class_dept: "",
-    assigned_section: "",
-    lecture_type: "",
-    start_time: "",
-    end_time: "",
-  });
-  const [data, setdata] = useState({
-    LeaveType: "",
-    StartDate: "",
-    EndDate: "",
-    NoOfDays: "",
-  });
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      const body = createApiResponse();
-      console.log(body);
-      alert("appliedsuccesfull");
+      const data = createApiReqPayload();
+      dispatchToasterSuccess("Applied Successful");
     } else {
       setActiveStep(activeStep + 1);
     }
   };
 
-  function createApiResponse() {
-    let assignFaculty = [];
-    const facultydate = (element) => {
-      const data = facultyArray.find(
-        (elem) => elem.master_id == element.Department
-      );
-      return data.faculty_date;
-    };
-    assignFaculty = classArray.map((element) => {
-      return {
-        ...element,
-        faculty_date: facultydate(element),
-      };
-    });
-    return {
-      staffId: JSON.parse(localStorage.getItem("staffId")),
-      departmetn: JSON.parse(localStorage.getItem("department")),
+  function createApiReqPayload() {
+    const leave = {
+      department: User.data.department,
+      staffId: User.data.staffId,
       days: data.NoOfDays,
       end_date: data.EndDate,
       start_date: data.StartDate,
       leave_type: data.LeaveType,
       assignFaculty: [...assignFaculty, ...otherResponsibiliyFaculty],
     };
+    console.log(leave);
+    leave.assignFaculty.forEach((element) => {
+      delete element["facultyDepartment"];
+      delete element["Department"];
+    });
+    props.leaveApplyReq(leave, successCB);
   }
 
   const handleBack = () => {
@@ -154,11 +159,6 @@ const LmsApply = (props) => {
     var result = new Date(date);
     result.setDate(result.getDate() + parseInt(days) - 1);
     return result.toISOString().split("T")[0];
-  }
-  function handleFacultyAdd() {
-    setfacultyArray((prev) => {
-      return [...prev, facultyAssignment];
-    });
   }
   function handleOtherResponsibilityFacultyAdd() {
     setOtherResponsibiliyFaculty((prev) => {
@@ -171,27 +171,6 @@ const LmsApply = (props) => {
     );
   }
 
-  function inputEventClassAssign(event) {
-    const { name, value } = event.target;
-    setAssignClass((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-  function inputEventOtherResponsibility(event) {
-    const { name, value } = event.target;
-    setotherResponsibilities((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-  function handleFacultyRemove(value) {
-    setfacultyArray(facultyArray.filter((element) => element !== value));
-  }
-  function handleClassRemove(value) {
-    setClassArray(classArray.filter((element) => element !== value));
-  }
-
   function inputEventfacultyAssignment(event) {
     const { name, value } = event.target;
     setfacultyAssignment((prev) => ({
@@ -199,11 +178,21 @@ const LmsApply = (props) => {
       [name]: value,
     }));
   }
-  function handleClassAdd() {
-    setClassArray((prev) => {
-      return [...prev, AssignClass];
+  function handlefacultyAssignmentAdd() {
+    setfacultyArray((prev) => {
+      return [...prev, facultyAssignment];
     });
-    console.log(classArray);
+  }
+  function handlefacultyAssignmentDelete(value) {
+    setfacultyArray(assignFaculty.filter((element) => element !== value));
+  }
+
+  function inputEventOtherResponsibility(event) {
+    const { name, value } = event.target;
+    setotherResponsibilities((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }
   function inputEvent(event) {
     const { name, value } = event.target;
@@ -214,7 +203,6 @@ const LmsApply = (props) => {
   }
   useEffect(() => {
     if (data.StartDate != "" && data.NoOfDays != "") {
-      const value = addDays(data.StartDate, data.NoOfDays);
       setdata((prev) => ({
         ...prev,
         EndDate: addDays(data.StartDate, data.NoOfDays),
@@ -222,12 +210,12 @@ const LmsApply = (props) => {
     }
   }, [data.NoOfDays, data.StartDate]);
 
-  function successCB() {
-    console.log("department fetched successfully");
-  }
+  function successCB() {}
 
   useEffect(() => {
     props.departmentGetReq({}, successCB);
+    props.timeSlotGetReq();
+    props.lecturGetReq();
   }, []);
 
   return (
@@ -260,27 +248,25 @@ const LmsApply = (props) => {
                 activeStep,
                 inputEvent,
                 data,
-                facultyAssignment,
-                handleFacultyAdd,
-                handleClassAdd,
                 inputEventfacultyAssignment,
-                facultyArray,
-                inputEventClassAssign,
-                classArray,
-                AssignClass,
-                handleFacultyRemove,
-                handleClassRemove,
+                facultyAssignment,
+                assignFaculty,
+                handlefacultyAssignmentAdd,
+                handlefacultyAssignmentDelete,
                 otherResponsibilities,
                 handleOtherResponsibilityFacultyAdd,
                 inputEventOtherResponsibility,
                 otherResponsibiliyFaculty,
-                handleClassRemoveotherResponsibilities,
-                Department,
-                setDepartment
+                handleClassRemoveotherResponsibilities
               )}
-              <div className="row justify-content-between mt-4">
+              <div className="row justify-content-end mt-4">
                 <div className="col-4">
-                  <Button disabled={activeStep === 0} onClick={handleBack}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                  >
                     back
                   </Button>
                 </div>
@@ -305,15 +291,19 @@ const LmsApply = (props) => {
 // export default LmsApply;
 const mapStateToProps = (state) => ({
   departmentList: state.Department.departmentList,
+  timeSlotList: state.TimeSlot.TimeSlotList,
+  lectureList: state.LectureType.lectureList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   departmentGetReq: bindActionCreators(getDepartmentReq, dispatch),
+  timeSlotGetReq: bindActionCreators(getTimeSlotReq, dispatch),
+  lecturGetReq: bindActionCreators(getLectureTypeReq, dispatch),
+  leaveApplyReq: bindActionCreators(leaveApplyReq, dispatch),
 });
 
 LmsApply.propTypes = {
   departmentGetReq: PropTypes.func,
-  // departmentList: PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LmsApply);

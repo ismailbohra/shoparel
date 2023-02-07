@@ -1,33 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/Delete";
+import { connect } from "react-redux";
+import { getFacultyReq } from "../../../../redux/shared/faculty/action";
+import { bindActionCreators } from "redux";
+import { useSelector } from "react-redux";
 
 function OtherResponsibility(props) {
-  const [assign_faculty_id, setassign_faculty_id] = useState([]);
+  const assign_faculty_id = useSelector((state) => state.Faculty.facultyList);
+
+  function successCB() {}
 
   useEffect(() => {
-    fetch(
-      `http://localhost:5000/v1/staff?department=${props.otherResponsibilities.Department}`,
-      {
-        method: "GET",
-        headers: new Headers({
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.status !== "ERROR") {
-          setassign_faculty_id(res.data.results);
-        } else {
-          alert(res.message);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const department = { dept: props.otherResponsibilities.Department };
+    props.facultyGetReq(department, successCB);
   }, [props.otherResponsibilities.Department]);
   return (
     <>
@@ -52,7 +38,7 @@ function OtherResponsibility(props) {
                   <option value="" disabled>
                     select department
                   </option>
-                  {props.Department.map((element, index) => {
+                  {props.departmentList.map((element, index) => {
                     return (
                       <option key={index} value={`${element.master_id}`}>
                         {element.name}
@@ -70,8 +56,8 @@ function OtherResponsibility(props) {
                   value={props.otherResponsibilities.assign_faculty_id}
                   onChange={props.inputEventOtherResponsibility}
                 >
-                  <option value="" disabled hidden>
-                    select assign_faculty_id
+                  <option value="" disabled>
+                    select faculty
                   </option>
                   {assign_faculty_id.length > 0 ? (
                     <>
@@ -114,13 +100,15 @@ function OtherResponsibility(props) {
             </div>
             <div className="row justify-content-end">
               <div className="col-4  mt-4 pt-2">
-                <Button
-                  onClick={props.handleOtherResponsibilityFacultyAdd}
-                  variant="contained"
-                  color="secondary"
-                >
-                  Add Faculty
-                </Button>
+                <div className="text-end">
+                  <Button
+                    onClick={props.handleOtherResponsibilityFacultyAdd}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    Add Faculty
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -141,10 +129,10 @@ function OtherResponsibility(props) {
                       <tr key={index}>
                         <th scope="row">
                           {(() => {
-                            const data = props.Department.find(
+                            const data = props.departmentList.find(
                               (elem) => elem.master_id == element.Department
                             );
-                            return data.dept_code;
+                            return data?.dept_code;
                           })()}
                         </th>
                         <td>
@@ -153,7 +141,7 @@ function OtherResponsibility(props) {
                               (faculty) =>
                                 faculty.staffId == element.assign_faculty_id
                             );
-                            return data.firstName;
+                            return data?.firstName;
                           })()}
                         </td>
                         <td>{element.faculty_date}</td>
@@ -186,4 +174,16 @@ function OtherResponsibility(props) {
   );
 }
 
-export default OtherResponsibility;
+const mapStateToProps = (state) => ({
+  departmentList: state.Department.departmentList,
+  facultyList: state.Faculty.facultyList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  facultyGetReq: bindActionCreators(getFacultyReq, dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OtherResponsibility);

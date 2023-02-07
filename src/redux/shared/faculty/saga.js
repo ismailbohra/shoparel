@@ -5,7 +5,7 @@ import { call, put, takeLatest, all } from "redux-saga/effects";
 
 export function* getFacultySaga(action) {
   try {
-    const response = yield call(API.getFacultyApi);
+    const response = yield call(API.getFacultyApi, action.payload);
     yield put(ACTIONS.getFacultyRes(response?.data));
     yield call(action.successCB);
   } catch (err) {

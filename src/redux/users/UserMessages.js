@@ -17,3 +17,4 @@ export const acceptInviteFailed = "Failed to accept invite";
 export const acceptInviteSuccess = "Invite accepted succesfully!";
 export const changePasswordSuccess = "Password changed succesfully!";
 export const changePasswordFailed = "Failed! Can not change password";
+export const internalServerError = "Internal Server Error";

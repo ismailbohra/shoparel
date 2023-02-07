@@ -10,45 +10,17 @@ import {
   Tabs,
   Tab,
 } from "react-bootstrap";
-
+import StudentLogin from "./StudentLogin";
+import StaffLogin from "./StaffLogin";
+import ips_logo from "../../../assets/images/logoies.png";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { userRegisterReq } from "../../../redux/users/UserAction";
-import UserLoginMail from "./StudentLogin";
-import StaffLogin from "./StaffLogin";
-import ips_logo from "../../../assets/images/logoies.png";
-import StudentLogin from "./StudentLogin";
 
-const UserLogin = (props) => {
-  // const ref = useRef({});
-
-  // const [ active_tab , set_active_tab]= useState("student")
-
-  // const change_active_tab= active =>{
-  //   set_active_tab(active);
-  // }
-
-  // useEffect( ()=>{
-  //   if (active_tab == "student"){
-
-  //     ref.current.student.classList.add("active");
-
-  //     // active_tab=="staff";
-  //   }
-
-  // } ,[active_tab]);
-
+const UserLogin = () => {
   const [key, setKey] = useState("home");
 
-  const [accountSetupForm, setAccountSetupForm] = useState({
-    userEmail: "",
-    userPassword: "",
-  });
-  const registerUser = (values) => {
-    // console.log(values);
-    props.userRegisterReq(values);
-  };
   return (
     <div className="full_container">
       <Container fluid className="h-auto user-login">
@@ -84,12 +56,12 @@ const UserLogin = (props) => {
                 >
                   <Tab eventKey="home" title="Student">
                     <Col lg={12}>
-                      <UserLoginMail />
+                      <StudentLogin />
                     </Col>
                   </Tab>
                   <Tab eventKey="profile" title="Staff">
                     <Col lg={12}>
-                      <StudentLogin />
+                      <StaffLogin />
                     </Col>
                   </Tab>
                 </Tabs>
