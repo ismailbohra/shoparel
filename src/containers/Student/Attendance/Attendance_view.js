@@ -6,39 +6,51 @@ import { connect } from "react-redux";
 
 export const Attendance_view = (props) => {
   return (
-    <div style={{ display: "block", width: 700, padding: 30 }}>
-      <h4>Attendance Pannel</h4>
-      <Form>
-        <Form.Group>
-          <Form.Label style={{ marginTop: "2%", padding: "0px" }}>
-            From
-          </Form.Label>
-          <Form.Control type="Date" placeholder="Enter date" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label style={{ marginTop: "2%", padding: "0px" }}>
-            To
-          </Form.Label>
-          <Form.Control type="Date" placeholder="Enter Date" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label style={{ marginTop: "2%", padding: "0px" }}>
-            Action
-          </Form.Label>
-          <Form.Select>
-            {" "}
-            <option>Excel</option> placeholder="excel"{" "}
-          </Form.Select>
-        </Form.Group>
-        <Button
-          variant="secondary"
-          size="sm"
-          style={{ marginTop: "2%", padding: "10px" }}
-        >
-          Submit
-        </Button>
-      </Form>
-    </div>
+  <div class="card" >
+  <h4 class="card-header">Attendance Pannel</h4>
+  <div class="card-body">
+  <div className="col-12 col-md-3 col-sm-3">
+                <label className="pull-left mb-2 ml-5"  style={{ marginTop: "2%", padding: "0px" }}>From-</label>
+                <input
+                  className="form-control"
+                  id="from"
+                  label="from"
+                  name="from"
+                  type={"date"}
+                  placeholder="mm/dd/yyyy"
+                />
+              </div>
+
+              <div className="col-12 col-md-3 col-sm-3">
+                <label className="pull-left mb-2 ml-5"  style={{ marginTop: "2%", padding: "0px" }}>To-</label>
+                <input
+                  className="form-control"
+                  id="to"
+                  label="to"
+                  name="to"
+                  type={"date"}
+                  placeholder="mm/dd/yyyy"
+                />
+              </div>
+              <div className="col-12 col-md-3 col-sm-3">
+                <label className="pull-left mb-2 ml-2"  style={{ marginTop: "2%", padding: "0px" }}>Action-</label>
+                <select
+                  className="form-select"
+                  id="Action"
+                  name="Action"
+                  placeholder="Action"
+
+                >
+                  <option >
+                    Excel
+                  </option>
+                
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary"  style={{ marginTop: "2%", padding: "10px" }}>Submit</button>
+  </div>
+</div>
+    
   );
 };
 
