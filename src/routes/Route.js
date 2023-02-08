@@ -9,7 +9,7 @@ import { USER_TYPES } from "../utils/Enum";
 import PrivateRoute from "../utils/PrivateRoutes";
 import UserLogin from "../containers/Users/userLogin/UserLogin";
 import AppbarAndNAvabar from "../components/Navbar/Navbar";
-import BadRequest from "../containers/shared/BadRequest/BadRequest";
+import BadRequest from "../containers/shared/BadRequests/BadRequest";
 // import ProtectedRoute from '../utils/ProtectedRoute';
 
 const Routes = () => {
