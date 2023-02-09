@@ -10,12 +10,11 @@ import FileOpenIcon from "@mui/icons-material/FileOpen";
 import PersonIcon from "@mui/icons-material/Person";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import CreateIcon from "@mui/icons-material/Create";
-import HouseIcon from "@mui/icons-material/House";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+import TodayIcon from "@mui/icons-material/Today";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ModeEdit } from "@mui/icons-material";
 
-export default function LmsDrawerList() {
+export default function SubjectCoordiantorDrawerList() {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -25,8 +24,9 @@ export default function LmsDrawerList() {
   const navigate = useNavigate();
   const { pathname } = useLocation;
   const handleNavigation = (value) => {
-    navigate(value);
+    // navigate(value);
     setSelectedIndex(value);
+    console.log(value);
   };
   const [selectedIndex, setSelectedIndex] = React.useState("home");
 
@@ -46,104 +46,79 @@ export default function LmsDrawerList() {
         <ListItemIcon>
           <FileCopyIcon style={{ color: "white" }} />
         </ListItemIcon>
-        <ListItemText primary="lms" />
+        <ListItemText primary="Academics" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton
             style={
-              selectedIndex === "leaveApply"
+              selectedIndex === "Attendance"
                 ? { color: "#F2B33F" }
                 : { color: "white" }
             }
             sx={{ pl: 4 }}
             onClick={() => {
-              handleNavigation("leaveApply");
+              handleNavigation("Attendance");
             }}
           >
             <ListItemIcon>
-              <AssignmentIcon
+              <ModeEdit
                 style={
-                  selectedIndex === "leaveApply"
+                  selectedIndex === "Attendance"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
               />
             </ListItemIcon>
-            <ListItemText primary="Leave Apply" />
+            <ListItemText primary="Attendance" />
           </ListItemButton>
 
           <ListItemButton
             style={
-              selectedIndex === "leaveChart"
+              selectedIndex === "Events"
                 ? { color: "#F2B33F" }
                 : { color: "white" }
             }
             sx={{ pl: 4 }}
             onClick={() => {
-              handleNavigation("leaveChart");
+              handleNavigation("Events");
             }}
           >
             <ListItemIcon>
-              <AssignmentIcon
+              <TodayIcon
                 style={
-                  selectedIndex === "leaveChart"
+                  selectedIndex === "Events"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
               />
             </ListItemIcon>
-            <ListItemText primary="Leave Chart" />
-          </ListItemButton>
-
-          <ListItemButton
-            style={
-              selectedIndex === "lmsReport"
-                ? { color: "#F2B33F" }
-                : { color: "white" }
-            }
-            sx={{ pl: 4 }}
-            onClick={() => {
-              handleNavigation("lmsReport");
-            }}
-          >
-            <ListItemIcon>
-              <AssignmentIcon
-                style={
-                  selectedIndex === "lmsReport"
-                    ? { color: "#F2B33F" }
-                    : { color: "white" }
-                }
-              />
-            </ListItemIcon>
-            <ListItemText primary="Leave Report" />
-          </ListItemButton>
-
-          <ListItemButton
-            style={
-              selectedIndex === "facultyAssignment"
-                ? { color: "#F2B33F" }
-                : { color: "white" }
-            }
-            sx={{ pl: 4 }}
-            onClick={() => {
-              handleNavigation("facultyAssignment");
-            }}
-          >
-            <ListItemIcon>
-              <CheckBoxIcon
-                style={
-                  selectedIndex === "facultyAssignment"
-                    ? { color: "#F2B33F" }
-                    : { color: "white" }
-                }
-              />
-            </ListItemIcon>
-            <ListItemText primary="Faculty Assignment" />
+            <ListItemText primary="Events" />
           </ListItemButton>
         </List>
       </Collapse>
+      <ListItemButton
+        style={
+          selectedIndex === "OnlineExam"
+            ? { color: "#F2B33F" }
+            : { color: "white" }
+        }
+        onClick={() => {
+          handleNavigation("OnlineExam");
+        }}
+      >
+        <ListItemIcon>
+          <ModeEdit
+            style={
+              selectedIndex === "OnlineExam"
+                ? { color: "#F2B33F" }
+                : { color: "white" }
+            }
+          />
+        </ListItemIcon>
+        <ListItemText primary="Online Exam" />
+      </ListItemButton>
     </List>
   );
 }

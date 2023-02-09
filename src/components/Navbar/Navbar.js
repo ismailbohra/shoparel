@@ -18,12 +18,16 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { connect } from "react-redux";
-import AdminDrawerList from "./lms/lms";
+import LmsDrawerList from "./lms/lms";
 import StudentDrawerList from "./student/student";
 import { Outlet, useNavigate } from "react-router-dom";
 import Auth from "../../utils/Auth";
+import AdminDrawerList from "./admin/Admin";
+import HodDrawerList from "./HOD/Hod";
+import SubjectCoordiantorDrawerList from "./Subject Coordinator/subjectCo";
+import YearCoordiantorDrawerList from "./YearCordinator/yearCordinator";
 
-const drawerWidth = 260;
+const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -308,7 +312,72 @@ const AppbarAndNAvabar = (props) => {
         </DrawerHeader>
         <Divider />
         {props.User.userType === "STUDENT" ? <StudentDrawerList /> : null}
-        {props.User.userType === "STAFF" ? <AdminDrawerList /> : null}
+        {props.User.userType === "STAFF" ? <LmsDrawerList /> : null}
+        {props.User.userType === "STAFF" ? (
+          <>
+            {" "}
+            <Divider
+              textAlign="left"
+              style={{
+                color: "#F2B33F",
+                marginLeft: -20,
+                marginTop: 10,
+                marginBottom: 10,
+              }}
+            >
+              Admin
+            </Divider>{" "}
+            <AdminDrawerList />{" "}
+          </>
+        ) : null}
+        {props.User.userType === "STAFF" ? (
+          <>
+            {" "}
+            <Divider
+              textAlign="left"
+              style={{
+                color: "#F2B33F",
+                marginLeft: -20,
+                marginTop: 10,
+              }}
+            >
+              HOD
+            </Divider>
+            <HodDrawerList />{" "}
+          </>
+        ) : null}
+        {props.User.userType === "STAFF" ? (
+          <>
+            {" "}
+            <Divider
+              textAlign="left"
+              style={{
+                color: "#F2B33F",
+                marginLeft: -10,
+                marginTop: 10,
+              }}
+            >
+              Subject Co-ordinator
+            </Divider>
+            <SubjectCoordiantorDrawerList />{" "}
+          </>
+        ) : null}
+        {props.User.userType === "STAFF" ? (
+          <>
+            {" "}
+            <Divider
+              textAlign="left"
+              style={{
+                color: "#F2B33F",
+                marginLeft: -10,
+                marginTop: 10,
+              }}
+            >
+              Year Co-ordinator
+            </Divider>
+            <YearCoordiantorDrawerList />{" "}
+          </>
+        ) : null}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
