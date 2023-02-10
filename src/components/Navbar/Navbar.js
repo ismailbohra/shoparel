@@ -120,9 +120,8 @@ const AppbarAndNAvabar = (props) => {
         Auth.signOut();
         navigte("/login");
         break;
-      case "logout":
-        Auth.signOut();
-        navigte("/login");
+      case "changePassword":
+        navigte("changePassword");
         break;
 
       default:

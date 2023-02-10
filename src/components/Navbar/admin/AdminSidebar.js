@@ -31,8 +31,13 @@ export const AdminSidebar = [
   },
   {
     path: "addCourse",
-    name: "Add Category",
+    name: "Add Course",
     icon: "OpenBookIcon",
+  },
+  {
+    path: "addCategory",
+    name: "Add Category",
+    icon: "FolderCopyIcon",
   },
   {
     path: "addElectiveCode",
@@ -50,8 +55,18 @@ export const AdminSidebar = [
     icon: "FolderCopyIcon",
   },
   {
-    path: "createSession",
-    name: "Create Session",
-    icon: "file",
+    path: "addAtktResult",
+    name: "Add ATKT Result",
+    icon: "Bookmark",
+  },
+  {
+    path: "addFinalResult",
+    name: "Add Final Result",
+    icon: "FolderCopyIcon",
+  },
+  {
+    path: "eligibleAtktStudent",
+    name: "Eligible ATKT Student",
+    icon: "PersonIcon",
   },
 ];

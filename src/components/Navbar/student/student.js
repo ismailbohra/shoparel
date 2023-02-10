@@ -25,7 +25,7 @@ export default function StudentDrawerList(props) {
   const navigate = useNavigate();
   const { pathname } = useLocation;
   const handleNavigation = (value) => {
-    navigate(value);
+    navigate(`student/${value}`);
     // console.log(value);
     setSelectedIndex(value);
   };

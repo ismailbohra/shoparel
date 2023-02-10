@@ -10,7 +10,7 @@ import { Icon } from "../../icons/Icons";
 export default function AdminDrawerList() {
   const navigate = useNavigate();
   const handleNavigation = (value) => {
-    navigate(value);
+    navigate(`admin/${value}`);
     setSelectedIndex(value);
   };
   const [selectedIndex, setSelectedIndex] = React.useState("home");
