@@ -29,9 +29,8 @@ export default function YearCoordiantorDrawerList() {
   const navigate = useNavigate();
   const { pathname } = useLocation;
   const handleNavigation = (value) => {
-    // navigate(value);
+    navigate(`yearCoordinator/${value}`);
     setSelectedIndex(value);
-    console.log(value);
   };
   const [selectedIndex, setSelectedIndex] = React.useState("home");
 

@@ -15,7 +15,13 @@ import { Icon } from "../../icons/Icons";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import InsertInvitationIcon from "@mui/icons-material/InsertInvitation";
 import DirectionsTransitIcon from "@mui/icons-material/DirectionsTransit";
-import { Examination, Feedback, Obe, RailwayConcession } from "./HodSidebar";
+import {
+  Examination,
+  Feedback,
+  LmsHodApproval,
+  Obe,
+  RailwayConcession,
+} from "./HodSidebar";
 
 export default function HodDrawerList() {
   const [openAcademics, setOpenAcademics] = React.useState(false);
@@ -26,6 +32,8 @@ export default function HodDrawerList() {
   const [openBatch, setOpenBatch] = React.useState(false);
   const [openRailwayConcession, setOpenRailwayConcession] =
     React.useState(false);
+
+  const [openLms, setOpenLms] = React.useState(false);
 
   const handleAcademicsClick = () => {
     setOpenAcademics(!openAcademics);
@@ -48,13 +56,16 @@ export default function HodDrawerList() {
   const handleRailwayConcessionClick = () => {
     setOpenRailwayConcession(!openRailwayConcession);
   };
+  const handleLmsClick = () => {
+    setOpenLms(!openLms);
+  };
 
   const navigate = useNavigate();
   const { pathname } = useLocation;
   const handleNavigation = (value) => {
-    // navigate(value);
+    navigate(`hod/${value}`);
     setSelectedIndex(value);
-    console.log(value);
+    // console.log(value);
   };
   const [selectedIndex, setSelectedIndex] = React.useState("home");
 
@@ -114,19 +125,19 @@ export default function HodDrawerList() {
               {/* scheme options */}
               <ListItemButton
                 style={
-                  selectedIndex === "AddSubject"
+                  selectedIndex === "Academics_Shceme_AddSubject"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
                 sx={{ pl: 4 }}
                 onClick={() => {
-                  handleNavigation("AddSubject");
+                  handleNavigation("Academics_Shceme_AddSubject");
                 }}
               >
                 <ListItemIcon>
                   <Assignment
                     style={
-                      selectedIndex === "AddSubject"
+                      selectedIndex === "Academics_Shceme_AddSubject"
                         ? { color: "#F2B33F" }
                         : { color: "white" }
                     }
@@ -137,19 +148,19 @@ export default function HodDrawerList() {
 
               <ListItemButton
                 style={
-                  selectedIndex === "AddSubjectCredit"
+                  selectedIndex === "Academics_Shceme_AddSubjectCredit"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
                 sx={{ pl: 4 }}
                 onClick={() => {
-                  handleNavigation("AddSubjectCredit");
+                  handleNavigation("Academics_Shceme_AddSubjectCredit");
                 }}
               >
                 <ListItemIcon>
                   <Assignment
                     style={
-                      selectedIndex === "AddSubjectCredit"
+                      selectedIndex === "Academics_Shceme_AddSubjectCredit"
                         ? { color: "#F2B33F" }
                         : { color: "white" }
                     }
@@ -180,19 +191,19 @@ export default function HodDrawerList() {
               {/* Batch options */}
               <ListItemButton
                 style={
-                  selectedIndex === "AssignSemester"
+                  selectedIndex === "Academics_Batch_AssignSemester"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
                 sx={{ pl: 4 }}
                 onClick={() => {
-                  handleNavigation("AssignSemester");
+                  handleNavigation("Academics_Batch_AssignSemester");
                 }}
               >
                 <ListItemIcon>
                   <Assignment
                     style={
-                      selectedIndex === "AssignSemester"
+                      selectedIndex === "Academics_Batch_AssignSemester"
                         ? { color: "#F2B33F" }
                         : { color: "white" }
                     }
@@ -203,19 +214,19 @@ export default function HodDrawerList() {
 
               <ListItemButton
                 style={
-                  selectedIndex === "CreateBatch"
+                  selectedIndex === "Academics_Batch_CreateBatch"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
                 sx={{ pl: 4 }}
                 onClick={() => {
-                  handleNavigation("CreateBatch");
+                  handleNavigation("Academics_Batch_CreateBatch");
                 }}
               >
                 <ListItemIcon>
                   <Assignment
                     style={
-                      selectedIndex === "CreateBatch"
+                      selectedIndex === "Academics_Batch_CreateBatch"
                         ? { color: "#F2B33F" }
                         : { color: "white" }
                     }
@@ -225,19 +236,19 @@ export default function HodDrawerList() {
               </ListItemButton>
               <ListItemButton
                 style={
-                  selectedIndex === "ChoiceFillingReport"
+                  selectedIndex === "Academics_Batch_ChoiceFillingReport"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
                 sx={{ pl: 4 }}
                 onClick={() => {
-                  handleNavigation("ChoiceFillingReport");
+                  handleNavigation("Academics_Batch_ChoiceFillingReport");
                 }}
               >
                 <ListItemIcon>
                   <Assignment
                     style={
-                      selectedIndex === "ChoiceFillingReport"
+                      selectedIndex === "Academics_Batch_ChoiceFillingReport"
                         ? { color: "#F2B33F" }
                         : { color: "white" }
                     }
@@ -248,19 +259,19 @@ export default function HodDrawerList() {
 
               <ListItemButton
                 style={
-                  selectedIndex === "AssingStudent"
+                  selectedIndex === "Academics_Batch_AssignStudent"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
                 sx={{ pl: 4 }}
                 onClick={() => {
-                  handleNavigation("AssingStudent");
+                  handleNavigation("Academics_Batch_AssignStudent");
                 }}
               >
                 <ListItemIcon>
                   <Assignment
                     style={
-                      selectedIndex === "AssingStudent"
+                      selectedIndex === "Academics_Batch_AssignStudent"
                         ? { color: "#F2B33F" }
                         : { color: "white" }
                     }
@@ -271,19 +282,19 @@ export default function HodDrawerList() {
 
               <ListItemButton
                 style={
-                  selectedIndex === "AssingYearCoordinator"
+                  selectedIndex === "Academics_Batch_AssignYearCoordinator"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
                 sx={{ pl: 4 }}
                 onClick={() => {
-                  handleNavigation("AssingYearCoordinator");
+                  handleNavigation("Academics_Batch_AssignYearCoordinator");
                 }}
               >
                 <ListItemIcon>
                   <Assignment
                     style={
-                      selectedIndex === "AssingYearCoordinator"
+                      selectedIndex === "Academics_Batch_AssignYearCoordinator"
                         ? { color: "#F2B33F" }
                         : { color: "white" }
                     }
@@ -464,6 +475,51 @@ export default function HodDrawerList() {
       <Collapse in={openRailwayConcession} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {RailwayConcession.map((element, index) => {
+            return (
+              <ListItemButton
+                key={index}
+                style={
+                  selectedIndex === element.path
+                    ? { color: "#F2B33F" }
+                    : { color: "white" }
+                }
+                sx={{ pl: 4 }}
+                onClick={() => {
+                  handleNavigation(element.path);
+                }}
+              >
+                <ListItemIcon>
+                  <Icon
+                    icon={element?.icon}
+                    style={
+                      selectedIndex === element.path
+                        ? { color: "#F2B33F" }
+                        : { color: "white" }
+                    }
+                  />
+                </ListItemIcon>
+                <ListItemText primary={element.name} />
+              </ListItemButton>
+            );
+          })}
+        </List>
+      </Collapse>
+
+      <ListItemButton onClick={handleLmsClick}>
+        <ListItemIcon>
+          <DirectionsTransitIcon
+            style={openLms == true ? { color: "#F2B33F" } : { color: "white" }}
+          />
+        </ListItemIcon>
+        <ListItemText
+          primary="Railway Concession"
+          style={openLms == true ? { color: "#F2B33F" } : { color: "white" }}
+        />
+        {openLms ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={openLms} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {LmsHodApproval.map((element, index) => {
             return (
               <ListItemButton
                 key={index}

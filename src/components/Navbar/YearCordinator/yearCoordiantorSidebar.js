@@ -28,22 +28,22 @@ export const yearCoordinator = [
 
 export const yearCoordinatorFeedback = [
   {
-    path: "CourseEndSurvey",
+    path: "Feedback_CourseEndSurvey",
     name: "Course EndS urvey",
     icon: "HomeIcon",
   },
   {
-    path: "FacilityFeedback",
+    path: "Feedback_FacilityFeedback",
     name: "Facility Feedback",
     icon: "PersonIcon",
   },
   {
-    path: "FacultyFeedback",
+    path: "Feedback_FacultyFeedback",
     name: "Faculty Feedback",
     icon: "BookIcon",
   },
   {
-    path: "StudentExitFeedback",
+    path: "Feedback_StudentExitFeedback",
     name: "Student Exit Feedback",
     icon: "BookIcon",
   },

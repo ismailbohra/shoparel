@@ -3,7 +3,14 @@ import React, { Suspense, useEffect } from "react";
 import { useLocation } from "react-router";
 import { Route, Routes as ReactRouterRoutes } from "react-router-dom";
 import Loader from "../components/Loader";
-import { adminRoutes, StaffRoutes, studentRoutes } from "./roles";
+import {
+  adminRoutes,
+  hodRoutes,
+  StaffRoutes,
+  studentRoutes,
+  subjectCoordinatorRoutes,
+  yearCoordiantorRoutes,
+} from "./roles";
 import Auth from "../utils/Auth";
 import { USER_TYPES } from "../utils/Enum";
 import PrivateRoute from "../utils/PrivateRoutes";
@@ -95,6 +102,99 @@ const Routes = () => {
                 <Route
                   key={route.path}
                   path={`admin/${route.path}`}
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <PrivateRoute>{<route.component />}</PrivateRoute>
+                    </Suspense>
+                  }
+                >
+                  {route.children?.length
+                    ? route.children.map((childRoute) => {
+                        return (
+                          <Route
+                            index={childRoute.index}
+                            key={childRoute.path}
+                            path={`${childRoute.path}`}
+                            element={
+                              <Suspense fallback={<Loader />}>
+                                <PrivateRoute>
+                                  {<childRoute.component />}
+                                </PrivateRoute>
+                              </Suspense>
+                            }
+                          />
+                        );
+                      })
+                    : null}
+                </Route>
+              ))}
+            {userType === USER_TYPES.STAFF &&
+              hodRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={`hod/${route.path}`}
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <PrivateRoute>{<route.component />}</PrivateRoute>
+                    </Suspense>
+                  }
+                >
+                  {route.children?.length
+                    ? route.children.map((childRoute) => {
+                        return (
+                          <Route
+                            index={childRoute.index}
+                            key={childRoute.path}
+                            path={`${childRoute.path}`}
+                            element={
+                              <Suspense fallback={<Loader />}>
+                                <PrivateRoute>
+                                  {<childRoute.component />}
+                                </PrivateRoute>
+                              </Suspense>
+                            }
+                          />
+                        );
+                      })
+                    : null}
+                </Route>
+              ))}
+            {userType === USER_TYPES.STAFF &&
+              subjectCoordinatorRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={`subjectCoordinator/${route.path}`}
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <PrivateRoute>{<route.component />}</PrivateRoute>
+                    </Suspense>
+                  }
+                >
+                  {route.children?.length
+                    ? route.children.map((childRoute) => {
+                        return (
+                          <Route
+                            index={childRoute.index}
+                            key={childRoute.path}
+                            path={`${childRoute.path}`}
+                            element={
+                              <Suspense fallback={<Loader />}>
+                                <PrivateRoute>
+                                  {<childRoute.component />}
+                                </PrivateRoute>
+                              </Suspense>
+                            }
+                          />
+                        );
+                      })
+                    : null}
+                </Route>
+              ))}
+            {userType === USER_TYPES.STAFF &&
+              yearCoordiantorRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={`yearCoordinator/${route.path}`}
                   element={
                     <Suspense fallback={<Loader />}>
                       <PrivateRoute>{<route.component />}</PrivateRoute>

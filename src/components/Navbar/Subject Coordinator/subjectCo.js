@@ -24,9 +24,8 @@ export default function SubjectCoordiantorDrawerList() {
   const navigate = useNavigate();
   const { pathname } = useLocation;
   const handleNavigation = (value) => {
-    // navigate(value);
+    navigate(`subjectCoordinator/${value}`);
     setSelectedIndex(value);
-    console.log(value);
   };
   const [selectedIndex, setSelectedIndex] = React.useState("home");
 
@@ -53,19 +52,19 @@ export default function SubjectCoordiantorDrawerList() {
         <List component="div" disablePadding>
           <ListItemButton
             style={
-              selectedIndex === "Attendance"
+              selectedIndex === "Academics_Attendance"
                 ? { color: "#F2B33F" }
                 : { color: "white" }
             }
             sx={{ pl: 4 }}
             onClick={() => {
-              handleNavigation("Attendance");
+              handleNavigation("Academics_Attendance");
             }}
           >
             <ListItemIcon>
               <ModeEdit
                 style={
-                  selectedIndex === "Attendance"
+                  selectedIndex === "Academics_Attendance"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
@@ -76,19 +75,19 @@ export default function SubjectCoordiantorDrawerList() {
 
           <ListItemButton
             style={
-              selectedIndex === "Events"
+              selectedIndex === "Academics_Events"
                 ? { color: "#F2B33F" }
                 : { color: "white" }
             }
             sx={{ pl: 4 }}
             onClick={() => {
-              handleNavigation("Events");
+              handleNavigation("Academics_Events");
             }}
           >
             <ListItemIcon>
               <TodayIcon
                 style={
-                  selectedIndex === "Events"
+                  selectedIndex === "Academics_Events"
                     ? { color: "#F2B33F" }
                     : { color: "white" }
                 }
@@ -100,18 +99,18 @@ export default function SubjectCoordiantorDrawerList() {
       </Collapse>
       <ListItemButton
         style={
-          selectedIndex === "OnlineExam"
+          selectedIndex === "SubjectCoordinator_onlineExam"
             ? { color: "#F2B33F" }
             : { color: "white" }
         }
         onClick={() => {
-          handleNavigation("OnlineExam");
+          handleNavigation("SubjectCoordinator_onlineExam");
         }}
       >
         <ListItemIcon>
           <ModeEdit
             style={
-              selectedIndex === "OnlineExam"
+              selectedIndex === "SubjectCoordinator_onlineExam"
                 ? { color: "#F2B33F" }
                 : { color: "white" }
             }

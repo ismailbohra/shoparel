@@ -123,3 +123,125 @@ export const addFinalResult = React.lazy(() =>
 export const eligibleAtktStudent = React.lazy(() =>
   import("../containers/Staff/admin/EligibleAtktStudent/Home")
 );
+
+//hod ui---------------------------------------------------------------------------------------------//
+
+export const Academics_Shceme_AddSubject = React.lazy(() =>
+  import("../containers/Staff/Hod/Academics/Scheme/AddSubjects/Home")
+);
+export const Academics_Shceme_AddSubjectCredit = React.lazy(() =>
+  import("../containers/Staff/Hod/Academics/Scheme/AddSubjectCredit/Home")
+);
+export const Academics_Batch_AssignSemester = React.lazy(() =>
+  import("../containers/Staff/Hod/Academics/Batch/AssignSemester/Home")
+);
+export const Academics_Batch_CreateBatch = React.lazy(() =>
+  import("../containers/Staff/Hod/Academics/Batch/CreateBatch/Home")
+);
+export const Academics_Batch_ChoiceFillingReport = React.lazy(() =>
+  import("../containers/Staff/Hod/Academics/Batch/ChoiceFillingReport/Home")
+);
+export const Academics_Batch_AssignStudent = React.lazy(() =>
+  import("../containers/Staff/Hod/Academics/Batch/AssignStudent/Home")
+);
+export const Academics_Batch_AssignYearCoordinator = React.lazy(() =>
+  import("../containers/Staff/Hod/Academics/Batch/AssignYearCoordinator/Home")
+);
+export const Obe_COPO_Attainement = React.lazy(() =>
+  import("../containers/Staff/Hod/OBE/CoPoAttainement/Home")
+);
+export const Obe_CO = React.lazy(() =>
+  import("../containers/Staff/Hod/OBE/CO/Home")
+);
+export const Obe_Create_COPO_Matrix = React.lazy(() =>
+  import("../containers/Staff/Hod/OBE/CreateCoPoMatrix/Home")
+);
+export const Obe_Create_COPSO_Matrix = React.lazy(() =>
+  import("../containers/Staff/Hod/OBE/CreateCoPsoMatrix/Home")
+);
+export const Obe_NBA = React.lazy(() =>
+  import("../containers/Staff/Hod/OBE/NBA/Home")
+);
+export const Examintation_LockSessional = React.lazy(() =>
+  import("../containers/Staff/Hod/Examination/LockSessional/Home")
+);
+export const Examintation_ExamForm = React.lazy(() =>
+  import("../containers/Staff/Hod/Examination/ExamForm/Home")
+);
+export const Examintation_ResultCalculation = React.lazy(() =>
+  import("../containers/Staff/Hod/Examination/ResultCalculation/Home")
+);
+export const Examintation_ViewReslult = React.lazy(() =>
+  import("../containers/Staff/Hod/Examination/ViewResult/Home")
+);
+export const Examintation_DownloadResult = React.lazy(() =>
+  import("../containers/Staff/Hod/Examination/DownloadResult/Home")
+);
+export const Examintation_Detained = React.lazy(() =>
+  import("../containers/Staff/Hod/Examination/Dtained/Home")
+);
+export const Feedback_Pendings = React.lazy(() =>
+  import("../containers/Staff/Hod/Feedback/Pendings/Home")
+);
+export const Feedback_ConfigureAttendance = React.lazy(() =>
+  import("../containers/Staff/Hod/Feedback/ConfigureAttendance/Home")
+);
+export const Feedback_History = React.lazy(() =>
+  import("../containers/Staff/Hod/Feedback/History/Home")
+);
+export const RailwayConcession_Pending = React.lazy(() =>
+  import("../containers/Staff/Hod/RailwayConcession/Pending/Home")
+);
+export const RailwayConcession_PreviousRecord = React.lazy(() =>
+  import("../containers/Staff/Hod/RailwayConcession/PreviousRecords/Home")
+);
+export const Lms_ViewPending = React.lazy(() =>
+  import("../containers/Staff/Hod/RailwayConcession/Pending/Home")
+);
+export const Lms_StaffLeaveChart = React.lazy(() =>
+  import("../containers/Staff/Hod/RailwayConcession/PreviousRecords/Home")
+);
+
+//Subject Coordinator ui------------------------------------------------------------------------------//
+
+export const Academics_Attendance = React.lazy(() =>
+  import("../containers/Staff/SubjectCoordinator/Academics/Attendance/Home")
+);
+export const Academics_Events = React.lazy(() =>
+  import("../containers/Staff/SubjectCoordinator/Academics/Events/Home")
+);
+export const SubjectCoordinator_onlineExam = React.lazy(() =>
+  import("../containers/Staff/SubjectCoordinator/OnlineExam/Home")
+);
+
+//Year Coordinator-----------------------------------------------------------------------------------//
+
+export const MasterStudentLogin = React.lazy(() =>
+  import("../containers/Staff/YearCoordinator/MasterStudentLogin/Home")
+);
+export const MyStudents = React.lazy(() =>
+  import("../containers/Staff/YearCoordinator/MyStudents/Home")
+);
+export const ChoiceFillingView = React.lazy(() =>
+  import("../containers/Staff/YearCoordinator/ChoiceFillingView/Home")
+);
+export const Attendance = React.lazy(() =>
+  import("../containers/Staff/YearCoordinator/Attendance/Home")
+);
+export const StudentId = React.lazy(() =>
+  import("../containers/Staff/YearCoordinator/StudentId/Home")
+);
+export const Feedback_CourseEndSurvey = React.lazy(() =>
+  import("../containers/Staff/YearCoordinator/Feedbacks/CourseEndSurvey/Home")
+);
+export const Feedback_FacilityFeedback = React.lazy(() =>
+  import("../containers/Staff/YearCoordinator/Feedbacks/FacilityFeedback/Home")
+);
+export const Feedback_FacultyFeedback = React.lazy(() =>
+  import("../containers/Staff/YearCoordinator/Feedbacks/FacultyFeedback/Home")
+);
+export const Feedback_StudentExitFeedback = React.lazy(() =>
+  import(
+    "../containers/Staff/YearCoordinator/Feedbacks/StudentExitFeedback/Home"
+  )
+);

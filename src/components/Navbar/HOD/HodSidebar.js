@@ -1,26 +1,26 @@
 export const Obe = [
   {
-    path: "HodCoPoAttainment",
+    path: "Obe_COPO_Attainement",
     name: "CO-PO Attainment",
     icon: "HomeIcon",
   },
   {
-    path: "HodCO",
+    path: "Obe_CO",
     name: "CO",
     icon: "PersonIcon",
   },
   {
-    path: "HodCreateCoPoMatrix",
+    path: "Obe_Create_COPO_Matrix",
     name: "Create CO-PO Matrix",
     icon: "BookIcon",
   },
   {
-    path: "HodCreateCoPsoMatrix",
+    path: "Obe_Create_COPSO_Matrix",
     name: "Create CO-PSO Matrix",
     icon: "BookIcon",
   },
   {
-    path: "HodNBA",
+    path: "Obe_NBA",
     name: "NBA",
     icon: "PersonAddIcon",
   },
@@ -28,58 +28,63 @@ export const Obe = [
 
 export const Examination = [
   {
-    path: "HodLockSessional",
+    path: "Examintation_LockSessional",
     name: "Lock Sessional",
     icon: "HomeIcon",
   },
   {
-    path: "HodExamForm",
+    path: "Examintation_ExamForm",
     name: "ExamForm",
     icon: "PersonIcon",
   },
   {
-    path: "HodResultCalculation",
+    path: "Examintation_ResultCalculation",
     name: "Result Calculation",
     icon: "BookIcon",
   },
   {
-    path: "HodViewResult",
+    path: "Examintation_ViewReslult",
     name: "View Result",
     icon: "BookIcon",
   },
   {
-    path: "HodDownloadResult",
+    path: "Examintation_DownloadResult",
     name: "Download Result",
     icon: "PersonAddIcon",
+  },
+  {
+    path: "Examintation_Detained",
+    name: "Detained",
+    icon: "Bookmark",
   },
 ];
 
 export const Feedback = [
   {
-    path: "HodFeedBackPendings",
-    name: "Lock Sessional",
+    path: "Feedback_Pendings",
+    name: "Pendings",
     icon: "HomeIcon",
   },
   {
-    path: "HodConfigureAttendance",
-    name: "ExamForm",
+    path: "Feedback_ConfigureAttendance",
+    name: "Configure Attendance",
     icon: "PersonIcon",
   },
   {
-    path: "HodHistory",
-    name: "Result Calculation",
+    path: "Feedback_History",
+    name: "History",
     icon: "BookIcon",
   },
 ];
 
 export const RailwayConcession = [
   {
-    path: "HodRailwayPendings",
+    path: "RailwayConcession_Pending",
     name: "Pendings",
     icon: "HomeIcon",
   },
   {
-    path: "HodRailwayPreviousRecord",
+    path: "RailwayConcession_PreviousRecord",
     name: "Previous Record",
     icon: "PersonIcon",
   },
@@ -87,17 +92,12 @@ export const RailwayConcession = [
 
 export const LmsHodApproval = [
   {
-    path: "HodLmsViewPendings",
+    path: "Lms_ViewPending",
     name: "View Pendings",
     icon: "HomeIcon",
   },
   {
-    path: "HodLmsSearch",
-    name: "Search",
-    icon: "HomeIcon",
-  },
-  {
-    path: "HodStaffLeaveChart",
+    path: "Lms_StaffLeaveChart",
     name: "Staff Leave Chart",
     icon: "PersonIcon",
   },
