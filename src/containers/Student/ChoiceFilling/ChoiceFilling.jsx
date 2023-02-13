@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { DataGrid } from "@mui/x-data-grid";
-import { Checkbox, FormControl, styled } from "@mui/material";
+import {  FormControl, styled } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -139,6 +139,7 @@ const ChoiceFilling = () => {
                 rows={rows}
                 components={{
                   NoRowsOverlay: CustomNoRowsOverlay,
+                  // Footer:()=>null
                 }}
                 onSelectionModelChange={(new_model) => {
                   set_selected_rows(new_model);

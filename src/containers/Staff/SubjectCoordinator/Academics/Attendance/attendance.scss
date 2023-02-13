@@ -1,0 +1,22 @@
+@use '../../../../Student/NbaSurvey/nbaSurvey.scss';
+@use '../../../../Student/ChoiceFilling/ChoiceFilling.scss';
+
+div.attendance_pannel{
+    @extend %flex-column-container;
+}
+
+div.table_wrapper{
+    @extend %table-container;
+    height: 500px;
+    max-width: 1332px;
+}
+
+div.button_group{
+    @extend %flex-column-container;
+    height: 70px;
+    flex-wrap: wrap;
+    flex-basis: 2;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
+}

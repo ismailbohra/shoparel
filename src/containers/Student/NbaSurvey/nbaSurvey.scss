@@ -1,13 +1,23 @@
-div.nba_survey{
+%flex-column-container{
     display: flex;
     flex-direction: column;
     width: 100%;
     gap : 20px;
     height: 500px;
+    flex-wrap: nowrap;
+}
+
+
+div.nba_survey{
+    @extend %flex-column-container;
 }
 .bold{
     font-weight: 600;
 }
-.cell{
+
+%cell_border{
     border: 1px solid grey;
+}
+.cell{
+    @extend %cell_border;
 }

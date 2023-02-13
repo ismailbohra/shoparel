@@ -90,9 +90,9 @@ function NBASurvey() {
     <DataGrid 
       columns={columns}
       rows={rows}
-      rowsPerPageOptions={[10]}
       components={{
         NoRowsOverlay: CustomNoRowsOverlay,
+        // Footer:()=>null
       }}
       sx = {{maxWidth: "862px" ,
              boxShadow:"0px 0px 10px grey",  
