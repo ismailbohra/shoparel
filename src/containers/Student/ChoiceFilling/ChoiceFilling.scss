@@ -19,12 +19,15 @@ div.choice_table {
   flex-wrap: nowrap;
   flex-direction: column;
   gap: 10px;
-  height: 400px;
+  height: 380px;
   min-width: 250px;
-  max-width: 800px;
+  max-width: 812px;
   align-self: center;
   width: 100%;
 }
-label.bold {
+label.bold , span.bold{
   font-weight: 600;
+}
+.cell{
+  border: 1px solid grey;
 }

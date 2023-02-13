@@ -22,21 +22,21 @@ const ChoiceFilling = () => {
   const [selected_rows, set_selected_rows] = useState([]);
 
   const columns = [
-    { field: "id", headerName: "S.No", width: 50, sortable: true },
+    { field: "id", renderHeader:()=><span className="bold"> S.No</span>, width: 50, align:"center" , sortable: true , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
     {
       field: "subject_code",
-      headerName: "University Subject Code",
-      width: 200,
-    },
-    { field: "subject_name", headerName: "Subject Name", width: 150 },
-    { field: "type", headerName: "Type", width: 50 },
-    { field: "credit", headerName: "Credit", width: 60 },
+      renderHeader:()=><span className="bold"> University Subject Code</span>,
+      width: 200 , headerAlign:"center"
+    , cellClassName : "cell" , headerClassName : "cell"},
+    { field: "subject_name", renderHeader:()=><span className="bold"> Subject Name</span>, width: 200 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+    { field: "type", renderHeader:()=><span className="bold"> Type</span>, align:"center", width: 50  , headerAlign:"center", cellClassName : "cell" , headerClassName : "cell"},
+    { field: "credit", renderHeader:()=><span className="bold"> Credit</span>, align:"center" , width: 60 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
     {
       field: "select_batch",
-      headerName: "Select Batch",
+      renderHeader:()=><span className="bold"> Select Batch</span>,
       width: 200,
-      renderCell: BatchcSelect,
-    },
+      renderCell: BatchcSelect, headerAlign:"center"
+    , cellClassName : "cell" , headerClassName : "cell"},
   ];
 
   const change_batch = (id, batch) => {
@@ -144,6 +144,7 @@ const ChoiceFilling = () => {
                   set_selected_rows(new_model);
                   console.log(new_model);
                 }}
+                sx={{boxShadow:"0 0 10px grey"}}
               />
             </div>
 
@@ -217,7 +218,8 @@ const StyledGridOverlay = styled("div")(({ theme }) => ({
   },
 }));
 
-function CustomNoRowsOverlay() {
+export function CustomNoRowsOverlay() {
+
   return (
     <StyledGridOverlay>
       <svg

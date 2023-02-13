@@ -1,0 +1,13 @@
+div.nba_survey{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap : 20px;
+    height: 500px;
+}
+.bold{
+    font-weight: 600;
+}
+.cell{
+    border: 1px solid grey;
+}
