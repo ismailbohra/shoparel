@@ -23,13 +23,19 @@ export const loginStaffEmailApi = async (payload) => {
   });
 };
 
-// update password
-export const changePassword = async (payload) => {
-  return await axiosInstance("put", "/change_password", payload, {
+// update password student
+export const changeStudentPassword = async (payload) => {
+  return await axiosInstance("put", "student/changePassword", payload, {
     server: microServices.TIKIT_TEST,
   });
 };
 
+// update password staff
+export const changeStaffPassword = async (payload) => {
+  return await axiosInstance("put", "staff/changePassword", payload, {
+    server: microServices.TIKIT_TEST,
+  });
+};
 // export const getUserApi = async (config) => {
 //   return await axios
 //     .get('https://jsonplaceholder.typicode.com/users')

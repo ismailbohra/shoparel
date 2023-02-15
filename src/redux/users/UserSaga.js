@@ -85,9 +85,13 @@ export function* staffEmaliLogin(action) {
 //CHANGE PASSWORD
 export function* changePasswordSaga(action) {
   console.log("saga", action);
+  const userData = JSON.parse( localStorage.getItem('userData'))
+  const userType = userData.userType
+  console.log(userType)
   try {
     // debugger
-    yield call(API.changePassword, action.payload);
+    if (userType === "STUDENT"){yield call(API.changeStudentPassword, action.payload)}
+    else{ yield call(API.changeStaffPassword, action.payload)};
     dispatchToasterSuccess(MSG.changePasswordSuccess);
     yield call(action.successCallback);
   } catch (err) {

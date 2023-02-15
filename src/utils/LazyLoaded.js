@@ -7,7 +7,7 @@ export const Setting = React.lazy(() =>
   import("../containers/setting/setting")
 );
 export const ChangePassword = React.lazy(() =>
-  import("../containers/shared/ChangePassword/ChangePassword")
+  import("../containers/Users/userSettings/ChangePassword/index")
 );
 
 //lms ui------------------------------------------------------------------------------------------------------//

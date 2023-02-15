@@ -100,7 +100,7 @@ const StaffLogin = (props) => {
                 <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-3">
                   <div className="d-flex flex-column align-items-center">
                     <div>
-                      <Button type="submit" className="butn mt-2 p-3 ps-5 pe-5">
+                      <Button type="submit" className="butn mt-2 p-3 ps-5 pe-5 login_button">
                         Login
                       </Button>
                     </div>

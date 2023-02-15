@@ -1,16 +1,18 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { INPUT_TYPES } from "../../../../components/constants";
+import {  Card, Col, Container, Row } from "react-bootstrap";
+import { INPUT_TYPES } from "../../../../constants";
 import Input from "../../../../components/Input";
-import MySettings from "../../../../components/MySettings";
-import NavigationBar from "../../../../components/NavBar/NavigationBar";
-import Sidebar from "../../../../components/SideBar/SideBar";
+import Loader from "../../../../components/Loader";
+import NavigationBar from "../../../../components/Navbar/Navbar";
 import { ChangPasswordValidation } from "../../../../utils/validations";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changePassword } from "../../../../store/shared/users/UserAction";
+import { changePassword } from "../../../../redux/users/UserAction";
+import { useNavigate } from "react-router-dom";
+import './ChangePassword.scss'
+import { Button } from "@mui/material";
 
 export const ChangPassword = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,40 +23,51 @@ export const ChangPassword = (props) => {
     confirmPassword: "",
   });
 
+  const navigate = useNavigate();
+
   const handleSuccess = () => {
     console.log("Handle Success");
+    return navigate("/cms");
   };
   const ChangPassword = (values) => {
-    props.changePassword(values, handleSuccess);
-    // console.log(values);
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const userType = userData.userType;
+    const staffId = userData.staffId;
+    const studentId = userData.studentId;
+    
+    // console.log(studentId);
+    (userType === "STUDENT")
+      ? props.changePassword(
+          {
+            id: studentId,
+            oldPassword: values.oldPassword,
+            newPassword: values.newPassword,
+          },
+          () => undefined,
+          handleSuccess
+        )
+      : props.changePassword(
+          {
+            id: staffId,
+            oldPassword: values.oldPassword,
+            newPassword: values.newPassword,
+          },
+          () => undefined,
+          handleSuccess
+        );
   };
   return (
     <>
-      <Container fluid className="changepasswordcontainer">
-        <Row>
-          <Col
-            xs={12}
-            lg={2}
-            className="p-0 h-100vh sidebar-bg-primary position-fixed-n"
-            id="sidebar-wrapper"
-          >
-            <Sidebar />
-          </Col>
-          <Col
-            xs={12}
-            lg={10}
-            className="p-0 createindustryform"
-            id="page-content-wrapper"
-          >
-            <NavigationBar />
-            <div className="toptitle mb-lg-3">
-              <h1>Change Password</h1>
+    <Card>
+        
+          
+          <Card.Header>
+            <div>
+              <h3 style={{ color: "red" }}>Change Password</h3>
             </div>
+          </Card.Header>
             <Container>
               <Row className="">
-                <Col lg={3} className="">
-                  <MySettings />
-                </Col>
                 <Col lg={9} xs={12} className="">
                   <div className="form mt-lg-0 ms-lg-3 p-3">
                     <div className="mt-lg-1 mt-1">
@@ -75,7 +88,7 @@ export const ChangPassword = (props) => {
                         }) => {
                           return (
                             <Form>
-                              <Row>
+                              <div className="form_change_pass">
                                 <Col
                                   sm={6}
                                   xs={12}
@@ -157,9 +170,9 @@ export const ChangPassword = (props) => {
                                   xs={12}
                                   className="mb-2 mb-sm-3 mb-lg-4"
                                 >
-                                  <Button type="submit">Update Password</Button>
+                                  <Button variant="contained" type="submit" >Update Password</Button>
                                 </Col>
-                              </Row>
+                              </div>
                             </Form>
                           );
                         }}
@@ -169,9 +182,7 @@ export const ChangPassword = (props) => {
                 </Col>
               </Row>
             </Container>
-          </Col>
-        </Row>
-      </Container>
+      </Card>
     </>
   );
 };
