@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/Delete";
 import { connect } from "react-redux";
-import { getFacultyReq } from "../../../../redux/shared/faculty/action";
+import {
+  getAllFacultyReq,
+  getFacultyReq,
+} from "../../../../redux/shared/faculty/action";
 import { bindActionCreators } from "redux";
 import { useSelector } from "react-redux";
 import { getBatchReq } from "../../../../redux/shared/batch/action";
@@ -75,15 +78,13 @@ function FacultyAssign(props) {
                   value={props.facultyAssignment.assign_faculty_id}
                   onChange={props.inputEvent}
                 >
-                  <option value="" disabled>
-                    select faculty
-                  </option>
+                  <option value="">select faculty</option>
                   {assign_faculty_id.length > 0 ? (
                     <>
                       {assign_faculty_id.map((element, index) => {
                         return (
                           <option key={index} value={`${element.staffId}`}>
-                            {element.firstName}
+                            {element?.firstName}
                           </option>
                         );
                       })}
@@ -242,6 +243,7 @@ function FacultyAssign(props) {
                   </thead>
                   <tbody>
                     {props.assignFaculty.map((element, index) => {
+                      console.log(element);
                       return (
                         <>
                           <tr key={index}>
@@ -252,34 +254,12 @@ function FacultyAssign(props) {
                                     elem.master_id ==
                                     element.assigned_class_dept
                                 );
-                                return data.dept_code;
+                                return data?.dept_code;
                               })()}
                             </th>
                             <td>{element.faculty_date}</td>
-                            <td>
-                              {(() => {
-                                let data;
-                                if (assign_faculty_id.length > 0) {
-                                  data = assign_faculty_id.find(
-                                    (faculty) =>
-                                      faculty.staffId ==
-                                      element.assign_faculty_id
-                                  );
-                                  return data.firstName;
-                                } else {
-                                  return <></>;
-                                }
-                              })()}
-                            </td>
-                            <td>
-                              {(() => {
-                                const data = props.departmentList.find(
-                                  (elem) =>
-                                    elem.master_id == element.facultyDepartment
-                                );
-                                return data.dept_code;
-                              })()}
-                            </td>
+                            <td>{element.assign_facultyname}</td>
+                            <td>{element.facultyDepartmentname}</td>
                             <td>
                               {(() => {
                                 if (BatchList.length > 0) {

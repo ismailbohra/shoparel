@@ -95,7 +95,9 @@ function LmsReport(props) {
           </tbody>
         </table>
       ) : (
-        <></>
+        <>
+          <h3>LMS Entry Pending</h3>
+        </>
       )}
     </div>
   );

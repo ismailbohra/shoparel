@@ -14,3 +14,16 @@ export const getBatchRes = (values) => {
     payload: values,
   };
 };
+
+export const getAllBatchReq = () => {
+  return {
+    type: types.ALL_BATCH_GET_REQ,
+  };
+};
+
+export const getAllBatchRes = (values) => {
+  return {
+    type: types.ALL_BATCH_GET_RES,
+    payload: values,
+  };
+};

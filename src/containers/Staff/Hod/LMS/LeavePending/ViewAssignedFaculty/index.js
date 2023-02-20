@@ -7,48 +7,40 @@ import { useSelector } from "react-redux";
 import {
   FacultyAssignmentApprovalReq,
   FacultyAssignmentGetReq,
-} from "../../../../redux/staff/LMS/lmsAction";
+} from "../../../../../../redux/staff/LMS/lmsAction";
 import {
   getAllFacultyReq,
   getFacultyReq,
-} from "../../../../redux/shared/faculty/action";
+} from "../../../../../../redux/shared/faculty/action";
 import {
   getAllBatchReq,
   getBatchReq,
-} from "../../../../redux/shared/batch/action";
-import { getDepartmentReq } from "../../../../redux/shared/department/action";
-import { getTimeSlotReq } from "../../../../redux/shared/timeSlot/action";
+} from "../../../../../../redux/shared/batch/action";
+import { getDepartmentReq } from "../../../../../../redux/shared/department/action";
+import { getTimeSlotReq } from "../../../../../../redux/shared/timeSlot/action";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function LmsFacultyAssignment(props) {
+function ViewFacultyAssignment(props) {
   const facultyAssignmentData = useSelector(
     (state) => state.LMS.FacultyAssignmentList
   );
-  const User = useSelector((state) => state.User.userProfile);
   const timeSlot = useSelector((state) => state.TimeSlot.TimeSlotList);
   const departmentList = useSelector(
     (state) => state.Department.departmentList
   );
   const facultyList = useSelector((state) => state.Faculty.allFacultyList);
   const BatchList = useSelector((state) => state.Batch.batchList);
-  const apidata = {
-    staffId: User.data.staffId,
-  };
   const successCB = () => {};
-  const handleAcceptClick = (value) => {
-    const obj = {
-      _id: value.id,
-      status: "APPROVED",
-    };
-    props.facultyApproveReq(obj);
+  const color = {
+    PENDING: "secondary",
+    REJECTED: "error",
+    APPROVED: "success",
   };
-  const handleRejectClick = (value) => {
-    const obj = {
-      _id: value.id,
-      status: "REJECTED",
-    };
-    props.facultyApproveReq(obj);
+  const { state } = useLocation();
+  const { id } = state;
+  const apidata = {
+    applyId: id,
   };
-
   React.useEffect(() => {
     props.FacultyAssignmentGetReq(apidata);
     props.FacultyList();
@@ -59,7 +51,7 @@ function LmsFacultyAssignment(props) {
   return (
     <>
       <div className="card">
-        <div className="card-header">Course Assignment</div>
+        <div className="card-header text-danger">Course Assignment</div>
         <div className="card-body">
           <table className="table table-bordered text-center align-middle table-hover bg-light">
             <thead>
@@ -72,18 +64,14 @@ function LmsFacultyAssignment(props) {
                 <th scope="col">Lecture Type</th>
                 <th scope="col">StartTime</th>
                 <th scope="col">EndTime</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {facultyAssignmentData?.length > 0
                 ? facultyAssignmentData.map((element, index) => {
-                    if (
-                      !element.other_responsibility &&
-                      element.status == "PENDING"
-                    ) {
+                    if (!element.other_responsibility) {
                       return (
-                        <tr key={element.applyId}>
+                        <tr key={element.id}>
                           <th scope="row">{index + 1}</th>
                           <td>{element?.faculty_date}</td>
                           <td>
@@ -92,7 +80,7 @@ function LmsFacultyAssignment(props) {
                               if (facultyList.length > 0) {
                                 data = facultyList.find(
                                   (faculty) =>
-                                    faculty.staffId == element.staffId
+                                    faculty.staffId == element.assign_faculty_id
                                 );
                                 return `${data?.firstName} ${data?.lastName}`;
                               } else {
@@ -140,32 +128,6 @@ function LmsFacultyAssignment(props) {
                             })()}
                           </td>
                           <td>{element?.end_time}</td>
-                          <td>
-                            <div className="container text-start">
-                              <Button
-                                variant="contained"
-                                color="success"
-                                size="small"
-                                style={{ margin: 5 }}
-                                onClick={() => {
-                                  handleAcceptClick(element);
-                                }}
-                              >
-                                Accept
-                              </Button>
-                              <Button
-                                variant="contained"
-                                color="error"
-                                size="small"
-                                style={{ margin: 5 }}
-                                onClick={() => {
-                                  handleRejectClick(element);
-                                }}
-                              >
-                                Reject
-                              </Button>
-                            </div>
-                          </td>
                         </tr>
                       );
                     }
@@ -176,7 +138,7 @@ function LmsFacultyAssignment(props) {
         </div>
       </div>
       <div className="card mt-5">
-        <div className="card-header">Other Responsibility</div>
+        <div className="card-header text-danger">Other Responsibility</div>
         <div className="card-body">
           <table className="table table-bordered text-center align-middle table-hover bg-light">
             <thead>
@@ -185,16 +147,12 @@ function LmsFacultyAssignment(props) {
                 <th scope="col">Date</th>
                 <th scope="col">Faculty</th>
                 <th scope="col">Responsibility</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {facultyAssignmentData?.length > 0
                 ? facultyAssignmentData.map((element, index) => {
-                    if (
-                      element.other_responsibility &&
-                      element.status == "PENDING"
-                    ) {
+                    if (element.other_responsibility) {
                       return (
                         <tr key={element.applyId}>
                           <th scope="row">{index + 1}</th>
@@ -214,32 +172,6 @@ function LmsFacultyAssignment(props) {
                             })()}
                           </td>
                           <td>{element?.other_responsibility}</td>
-                          <td>
-                            <div className="container text-start">
-                              <Button
-                                variant="contained"
-                                color="success"
-                                size="small"
-                                style={{ margin: 5 }}
-                                onClick={() => {
-                                  handleAcceptClick(element);
-                                }}
-                              >
-                                Accept
-                              </Button>
-                              <Button
-                                variant="contained"
-                                color="error"
-                                size="small"
-                                style={{ margin: 5 }}
-                                onClick={() => {
-                                  handleRejectClick(element);
-                                }}
-                              >
-                                Reject
-                              </Button>
-                            </div>
-                          </td>
                         </tr>
                       );
                     }
@@ -264,11 +196,11 @@ const mapDispatchToProps = (dispatch) => ({
   facultyApproveReq: bindActionCreators(FacultyAssignmentApprovalReq, dispatch),
 });
 
-LmsFacultyAssignment.propTypes = {
+ViewFacultyAssignment.propTypes = {
   FacultyAssignmentGetReq: PropTypes.func,
   FacultyList: PropTypes.func,
   BatchList: PropTypes.func,
   facultyApproveReq: PropTypes.func,
 };
 
-export default connect(null, mapDispatchToProps)(LmsFacultyAssignment);
+export default connect(null, mapDispatchToProps)(ViewFacultyAssignment);

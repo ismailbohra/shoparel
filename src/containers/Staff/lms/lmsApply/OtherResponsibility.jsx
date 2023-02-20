@@ -15,6 +15,7 @@ function OtherResponsibility(props) {
     const department = { dept: props.otherResponsibilities.Department };
     props.facultyGetReq(department, successCB);
   }, [props.otherResponsibilities.Department]);
+
   return (
     <>
       <div className="container mt-5">
@@ -35,9 +36,7 @@ function OtherResponsibility(props) {
                   placeholder=""
                   onChange={props.inputEventOtherResponsibility}
                 >
-                  <option value="" disabled>
-                    select department
-                  </option>
+                  <option value="">select department</option>
                   {props.departmentList.map((element, index) => {
                     return (
                       <option key={index} value={`${element.master_id}`}>
@@ -56,9 +55,7 @@ function OtherResponsibility(props) {
                   value={props.otherResponsibilities.assign_faculty_id}
                   onChange={props.inputEventOtherResponsibility}
                 >
-                  <option value="" disabled>
-                    select faculty
-                  </option>
+                  <option value="">select faculty</option>
                   {assign_faculty_id.length > 0 ? (
                     <>
                       {assign_faculty_id.map((element, index) => {
@@ -113,7 +110,7 @@ function OtherResponsibility(props) {
             </div>
 
             {props.otherResponsibiliyFaculty.length > 0 ? (
-              <table className="table bg-light table-hover mt-3">
+              <table className="table bg-light table-hover mt-3 text-center table-bordered">
                 <thead>
                   <tr>
                     <th scope="col">dept</th>
@@ -127,23 +124,8 @@ function OtherResponsibility(props) {
                   {props.otherResponsibiliyFaculty.map((element, index) => {
                     return (
                       <tr key={index}>
-                        <th scope="row">
-                          {(() => {
-                            const data = props.departmentList.find(
-                              (elem) => elem.master_id == element.Department
-                            );
-                            return data?.dept_code;
-                          })()}
-                        </th>
-                        <td>
-                          {(() => {
-                            const data = assign_faculty_id.find(
-                              (faculty) =>
-                                faculty.staffId == element.assign_faculty_id
-                            );
-                            return data?.firstName;
-                          })()}
-                        </td>
+                        <th scope="row">{element.facultyDepartmentname}</th>
+                        <td>{element.assign_facultyname}</td>
                         <td>{element.faculty_date}</td>
                         <td>{element.other_responsibility}</td>
                         <td>

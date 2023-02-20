@@ -5,6 +5,8 @@ import { bindActionCreators } from "redux";
 import { useSelector } from "react-redux";
 import { leaveGetReq } from "../../../../redux/staff/LMS/lmsAction";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 function LmsLeaveChart(props) {
   const leaveList = useSelector((state) => state.LMS.LeaveList);
@@ -20,6 +22,10 @@ function LmsLeaveChart(props) {
     PENDING: "secondary",
     REJECTED: "error",
     APPROVED: "success",
+  };
+  const navigate = useNavigate();
+  const handleFacultyStatusClick = (element) => {
+    navigate("ViewFacultyAssignment", { state: { id: element.applyId } });
   };
 
   return (
@@ -64,15 +70,21 @@ function LmsLeaveChart(props) {
                     <td>{element.reason}</td>
                     <td>
                       <Button
-                        variant="outlined"
+                        variant="contained"
+                        size="small"
                         color={color[element.faculty_approval]}
+                        onClick={() => {
+                          handleFacultyStatusClick(element);
+                        }}
                       >
+                        <RemoveRedEyeIcon /> &nbsp;
                         {element.faculty_approval}
                       </Button>
                     </td>
                     <td>
                       <Button
-                        variant="outlined"
+                        variant="contained"
+                        size="small"
                         color={color[element.hod_approval]}
                       >
                         {element.hod_approval}
@@ -80,7 +92,8 @@ function LmsLeaveChart(props) {
                     </td>
                     <td>
                       <Button
-                        variant="outlined"
+                        variant="contained"
+                        size="small"
                         color={color[element.principal_approval]}
                       >
                         {element.principal_approval}
@@ -92,7 +105,9 @@ function LmsLeaveChart(props) {
             </tbody>
           </table>
         ) : (
-          <></>
+          <>
+            <h3>No leave Applied</h3>
+          </>
         )}
       </div>
     </>

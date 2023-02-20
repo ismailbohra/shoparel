@@ -17,6 +17,7 @@ import {
   dispatchToasterSuccess,
 } from "../../../../utils/Shared";
 import { leaveApplyReq } from "../../../../redux/staff/LMS/lmsAction";
+import { getAllFacultyReq } from "../../../../redux/shared/faculty/action";
 function getSteps() {
   return ["Details", "Faculty Assignment", "Other Responsibilties"];
 }
@@ -71,6 +72,7 @@ function getStepContent(
 
 const LmsApply = (props) => {
   const User = useSelector((state) => state.User.userProfile);
+  const allFacultyList = useSelector((state) => state.Faculty.allFacultyList);
 
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
@@ -85,6 +87,8 @@ const LmsApply = (props) => {
   const [facultyAssignment, setfacultyAssignment] = useState({
     facultyDepartment: "",
     assign_faculty_id: "",
+    assign_facultyname: "",
+    facultyDepartmentname: "",
     faculty_date: "",
     assigned_class_dept: "",
     assigned_section: "",
@@ -121,6 +125,8 @@ const LmsApply = (props) => {
     assign_faculty_id: "",
     faculty_date: "",
     other_responsibility: "",
+    assign_facultyname: "",
+    facultyDepartmentname: "",
   });
   const [otherResponsibiliyFaculty, setOtherResponsibiliyFaculty] = useState(
     []
@@ -144,12 +150,21 @@ const LmsApply = (props) => {
       start_date: data.StartDate,
       leave_type: data.LeaveType,
       reason: data.reason,
-      assignFaculty: [...assignFaculty, ...otherResponsibiliyFaculty],
     };
-    leave.assignFaculty.forEach((element) => {
-      delete element["facultyDepartment"];
-      delete element["Department"];
+    let array = [];
+    assignFaculty.forEach((element) => {
+      const data = {
+        assign_faculty_id: element.assign_faculty_id,
+        faculty_date: element.faculty_date,
+        assigned_class_dept: element.assigned_class_dept,
+        assigned_section: element.assigned_section,
+        lecture_type: element.lecture_type,
+        start_time: element.start_time,
+        end_time: element.end_time,
+      };
+      array.push(data);
     });
+    leave.assignFaculty = array;
     props.leaveApplyReq(leave, successCB);
   }
 
@@ -174,6 +189,22 @@ const LmsApply = (props) => {
 
   function inputEventfacultyAssignment(event) {
     const { name, value } = event.target;
+    if (name === "assign_faculty_id") {
+      const data = allFacultyList.find((faculty) => faculty.staffId === value);
+
+      setfacultyAssignment((prev) => ({
+        ...prev,
+        assign_facultyname: data.firstName,
+      }));
+    }
+    if (name === "facultyDepartment") {
+      const data = props.departmentList.find((elem) => elem.master_id == value);
+
+      setfacultyAssignment((prev) => ({
+        ...prev,
+        facultyDepartmentname: data.dept_code,
+      }));
+    }
     setfacultyAssignment((prev) => ({
       ...prev,
       [name]: value,
@@ -184,12 +215,29 @@ const LmsApply = (props) => {
       return [...prev, facultyAssignment];
     });
   }
+
   function handlefacultyAssignmentDelete(value) {
     setfacultyArray(assignFaculty.filter((element) => element !== value));
   }
 
   function inputEventOtherResponsibility(event) {
     const { name, value } = event.target;
+    if (name === "assign_faculty_id") {
+      const data = allFacultyList.find((faculty) => faculty.staffId === value);
+
+      setotherResponsibilities((prev) => ({
+        ...prev,
+        assign_facultyname: data.firstName,
+      }));
+    }
+    if (name === "Department") {
+      const data = props.departmentList.find((elem) => elem.master_id == value);
+
+      setotherResponsibilities((prev) => ({
+        ...prev,
+        facultyDepartmentname: data.dept_code,
+      }));
+    }
     setotherResponsibilities((prev) => ({
       ...prev,
       [name]: value,
@@ -217,11 +265,14 @@ const LmsApply = (props) => {
     props.departmentGetReq({}, successCB);
     props.timeSlotGetReq();
     props.lecturGetReq();
+    props.allfacultyGetReq();
   }, []);
 
   return (
     <div className="container w-100">
-      <h1 className="text-center ml-4">leave apply</h1>
+      <h1 className="text-center" style={{ color: "#22367f" }}>
+        Leave Apply
+      </h1>
       <br />
       <br />
       <div className="overflow-auto">
@@ -260,25 +311,38 @@ const LmsApply = (props) => {
                 otherResponsibiliyFaculty,
                 handleClassRemoveotherResponsibilities
               )}
-              <div className="row justify-content-end mt-4">
-                <div className="col-4">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                  >
-                    back
-                  </Button>
-                </div>
-                <div className="col-4">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                  >
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
+              <div className="container mt-4">
+                <div class="row justify-content-between">
+                  <div class="col-4">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                    >
+                      back
+                    </Button>
+                  </div>
+                  <div class="col-4">
+                    <div className="container">
+                      <div class="row justify-content-end">
+                        <div class="col-4">
+                          {" "}
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            onClick={handleNext}
+                          >
+                            {activeStep === steps.length - 1
+                              ? "Finish"
+                              : "Next"}
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </form>
@@ -288,8 +352,6 @@ const LmsApply = (props) => {
     </div>
   );
 };
-
-// export default LmsApply;
 const mapStateToProps = (state) => ({
   departmentList: state.Department.departmentList,
   timeSlotList: state.TimeSlot.TimeSlotList,
@@ -297,6 +359,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  allfacultyGetReq: bindActionCreators(getAllFacultyReq, dispatch),
   departmentGetReq: bindActionCreators(getDepartmentReq, dispatch),
   timeSlotGetReq: bindActionCreators(getTimeSlotReq, dispatch),
   lecturGetReq: bindActionCreators(getLectureTypeReq, dispatch),

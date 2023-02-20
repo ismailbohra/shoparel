@@ -15,13 +15,19 @@ export const LeaveApply = React.lazy(() =>
   import("../containers/Staff/lms/lmsApply/LmsApply")
 );
 export const LmsReport = React.lazy(() =>
-  import("../containers/Staff/lms/LeaveChart/LmsReport")
+  import("../containers/Staff/lms/LmsReport/LmsReport")
 );
 export const LeaveChart = React.lazy(() =>
   import("../containers/Staff/lms/LeaveChart/LmsLeaveChart")
 );
 export const FacultyAssignment = React.lazy(() =>
   import("../containers/Staff/lms/FacultyAssignment/LmsFacultyAssignment")
+);
+export const UpdateFacultyAssignment = React.lazy(() =>
+  import("../containers/Staff/lms/LeaveChart/UpdateFacultyAssignment")
+);
+export const ViewFacultyAssignment = React.lazy(() =>
+  import("../containers/Staff/lms/LeaveChart/ViewFacultyAssignment")
 );
 
 //appbar ui---------------------------------------------------------------------------------------------------//
@@ -196,10 +202,16 @@ export const RailwayConcession_PreviousRecord = React.lazy(() =>
   import("../containers/Staff/Hod/RailwayConcession/PreviousRecords/Home")
 );
 export const Lms_ViewPending = React.lazy(() =>
-  import("../containers/Staff/Hod/RailwayConcession/Pending/Home")
+  import("../containers/Staff/Hod/LMS/LeavePending/Home")
+);
+export const Lms_ViewPending_facultyAssgined = React.lazy(() =>
+  import("../containers/Staff/Hod/LMS/LeavePending/ViewAssignedFaculty")
 );
 export const Lms_StaffLeaveChart = React.lazy(() =>
-  import("../containers/Staff/Hod/RailwayConcession/PreviousRecords/Home")
+  import("../containers/Staff/Hod/LMS/StaffLeaveChart/Home")
+);
+export const Lms_StaffLeaveChart_facultyAssgined = React.lazy(() =>
+  import("../containers/Staff/Hod/LMS/StaffLeaveChart/ViewAssignedFaculty")
 );
 
 //Subject Coordinator ui------------------------------------------------------------------------------//

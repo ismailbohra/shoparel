@@ -9,3 +9,15 @@ export const getFacultyApi = async (payload) => {
     successMessage: "get batch",
   });
 };
+
+export const getAllFacultyApi = async () => {
+  return await axiosInstance(
+    "get",
+    "/staff",
+    {},
+    {
+      server: microServices.STAFF,
+      successMessage: "get all staff",
+    }
+  );
+};

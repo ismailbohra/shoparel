@@ -45,3 +45,67 @@ export const leaveGetRes = (value) => {
     payload: value,
   };
 };
+
+export const leaveGetHodApprovalReq = (values) => {
+  return {
+    type: types.LEAVE_GET_HODAPPROVAL_REQ,
+    payload: values,
+  };
+};
+
+export const leaveGetHodApprovalRes = (value) => {
+  return {
+    type: types.LEAVE_GET_HODAPPROVAL_RES,
+    payload: value,
+  };
+};
+
+export const FacultyAssignmentGetReq = (values, successCallback) => {
+  return {
+    type: types.FACULTY_ASSIGNMENT_GET_REQ,
+    payload: values,
+    successCallback,
+  };
+};
+
+export const FacultyAssignmentGetRes = (values, successCallback) => {
+  return {
+    type: types.FACULTY_ASSIGNMENT_GET_RES,
+    payload: values,
+  };
+};
+
+export const FacultyAssignmentApprovalReq = (values) => {
+  return {
+    type: types.FACULTY_ASSIGNMENT_APPROVE_REQ,
+    payload: values,
+  };
+};
+
+export const FacultyAssignmentApprovalRes = (values) => {
+  return {
+    type: types.FACULTY_ASSIGNMENT_APPROVE_RES,
+    payload: values,
+  };
+};
+
+export const FacultyAssignmentUpdateReq = (values) => {
+  return {
+    type: types.FACULTY_ASSIGNMENT_UPDATE_REQ,
+    payload: values,
+  };
+};
+
+export const hodApproveReq = (values) => {
+  return {
+    type: types.LEAVE_UPDATE_HODAPPROVAL_REQ,
+    payload: values,
+  };
+};
+
+export const hodApproveRes = (values) => {
+  return {
+    type: types.LEAVE_UPDATE_HODAPPROVAL_RES,
+    payload: values,
+  };
+};

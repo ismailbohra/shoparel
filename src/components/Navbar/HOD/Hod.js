@@ -10,7 +10,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
 import ListIcon from "@mui/icons-material/List";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Assignment } from "@mui/icons-material";
+import { Assignment, ContactPage } from "@mui/icons-material";
 import { Icon } from "../../icons/Icons";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import InsertInvitationIcon from "@mui/icons-material/InsertInvitation";
@@ -507,12 +507,12 @@ export default function HodDrawerList() {
 
       <ListItemButton onClick={handleLmsClick}>
         <ListItemIcon>
-          <DirectionsTransitIcon
+          <ContactPage
             style={openLms == true ? { color: "#F2B33F" } : { color: "white" }}
           />
         </ListItemIcon>
         <ListItemText
-          primary="Railway Concession"
+          primary="LMS"
           style={openLms == true ? { color: "#F2B33F" } : { color: "white" }}
         />
         {openLms ? <ExpandLess /> : <ExpandMore />}

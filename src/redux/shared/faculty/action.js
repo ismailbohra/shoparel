@@ -14,3 +14,16 @@ export const getFacultyRes = (values) => {
     payload: values,
   };
 };
+
+export const getAllFacultyReq = () => {
+  return {
+    type: types.ALL_FACULTY_GET_REQ,
+  };
+};
+
+export const getAllFacultyRes = (values) => {
+  return {
+    type: types.ALL_FACULTY_GET_RES,
+    payload: values,
+  };
+};

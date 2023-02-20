@@ -98,10 +98,39 @@ export const hodRoutes = [
   },
   {
     path: "Lms_ViewPending",
-    component: LazyComponent.Lms_ViewPending,
+    component: LazyComponent.Outlet,
+    children: [
+      {
+        index: true,
+        path: "",
+        component: LazyComponent.Lms_ViewPending,
+      },
+      {
+        index: false,
+        path: "UpdateFacultyAssignment",
+        component: LazyComponent.UpdateFacultyAssignment,
+      },
+      {
+        index: false,
+        path: "viewAssignedFaculty",
+        component: LazyComponent.Lms_ViewPending_facultyAssgined,
+      },
+    ],
   },
   {
     path: "Lms_StaffLeaveChart",
-    component: LazyComponent.Lms_StaffLeaveChart,
+    component: LazyComponent.Outlet,
+    children: [
+      {
+        index: true,
+        path: "",
+        component: LazyComponent.Lms_StaffLeaveChart,
+      },
+      {
+        index: false,
+        path: "viewAssignedFaculty",
+        component: LazyComponent.Lms_StaffLeaveChart_facultyAssgined,
+      },
+    ],
   },
 ];

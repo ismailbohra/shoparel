@@ -1,4 +1,4 @@
-import { BATCH_GET_RES } from "./Type";
+import { ALL_BATCH_GET_RES, BATCH_GET_RES } from "./Type";
 
 const INITIAL_STATE = {
   batchList: [],
@@ -13,6 +13,8 @@ const setUser = (action) => {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case BATCH_GET_RES:
+      return setUser(action);
+    case ALL_BATCH_GET_RES:
       return setUser(action);
     default:
       return state;

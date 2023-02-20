@@ -22,13 +22,26 @@ export function* leaveApplySaga(action) {
 
 export function* leaveGetSaga(action) {
   try {
-    const response = yield call(API.LeaveGetApi, action.paylode);
+    const response = yield call(API.LeaveGetApi, action.payload);
     if (action.successCallback) {
       yield call(action.successCallback);
     }
     yield console.log(response);
     yield put(ACTIONS.leaveGetRes(response));
   } catch (err) {
+    dispatchToasterError(err?.response?.data?.message);
+  }
+}
+
+export function* leaveGetHodApprovalSaga(action) {
+  try {
+    const response = yield call(API.LeaveGetHodApprovalApi, action.payload);
+    if (action.successCallback) {
+      yield call(action.successCallback);
+    }
+    yield put(ACTIONS.leaveGetHodApprovalRes(response));
+  } catch (err) {
+    console.log(err);
     dispatchToasterError(err?.response?.data?.message);
   }
 }
@@ -47,10 +60,91 @@ export function* lmsReportSaga(action) {
   }
 }
 
+export function* facultyAssignmentSaga(action) {
+  try {
+    const response = yield call(API.FacultyAssignmentGetApi, action.payload);
+    if (action.successCallback) {
+      yield call(action.successCallback);
+    }
+    yield put(ACTIONS.FacultyAssignmentGetRes(response));
+  } catch (err) {
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    );
+  }
+}
+
+export function* facultyAssignmentApproveSaga(action) {
+  try {
+    const response = yield call(
+      API.FacultyAssignmentApproveApi,
+      action.payload
+    );
+    if (action.successCallback) {
+      yield call(action.successCallback);
+    }
+    if (action.payload.status == "APPROVED") {
+      dispatchToasterSuccess(MSG.approved);
+    }
+    if (action.payload.status == "REJECTED") {
+      dispatchToasterError(MSG.reject);
+    }
+    yield put(ACTIONS.FacultyAssignmentApprovalRes(action.payload));
+  } catch (err) {
+    console.log(err);
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    );
+  }
+}
+
+export function* hodApproveSaga(action) {
+  try {
+    const response = yield call(API.LeaveUpdateHodApprovalApi, action.payload);
+    if (action.successCallback) {
+      yield call(action.successCallback);
+    }
+    if (action.payload.hod_approval == "APPROVED") {
+      dispatchToasterSuccess(MSG.approved);
+    }
+    if (action.payload.hod_approval == "REJECTED") {
+      dispatchToasterError(MSG.reject);
+    }
+    yield put(ACTIONS.hodApproveRes(action.payload));
+  } catch (err) {
+    console.log(err);
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    );
+  }
+}
+
+export function* facultyAssignmentUpdateSaga(action) {
+  try {
+    yield call(API.FacultyAssignmentUpdateApi, action.payload);
+    yield dispatchToasterSuccess(MSG.facultyUpdated);
+  } catch (err) {
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    );
+  }
+}
+
 export function* lmsSagas() {
   yield all([
     takeLatest(TYPES.LEAVE_APPLY_REQ, leaveApplySaga),
     takeLatest(TYPES.LMS_RREPORT_GET_REQ, lmsReportSaga),
     takeLatest(TYPES.LEAVE_GET_REQ, leaveGetSaga),
+    takeLatest(TYPES.FACULTY_ASSIGNMENT_GET_REQ, facultyAssignmentSaga),
+    takeLatest(TYPES.LEAVE_GET_HODAPPROVAL_REQ, leaveGetHodApprovalSaga),
+    takeLatest(TYPES.LEAVE_UPDATE_HODAPPROVAL_REQ, hodApproveSaga),
+    takeLatest(
+      TYPES.FACULTY_ASSIGNMENT_UPDATE_REQ,
+      facultyAssignmentUpdateSaga
+    ),
+    takeLatest(
+      TYPES.FACULTY_ASSIGNMENT_APPROVE_REQ,
+      facultyAssignmentApproveSaga
+    ),
   ]);
 }

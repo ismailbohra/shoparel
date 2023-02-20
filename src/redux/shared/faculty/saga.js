@@ -12,7 +12,16 @@ export function* getFacultySaga(action) {
     console.log(err);
   }
 }
+export function* getAllFacultySaga(action) {
+  try {
+    const response = yield call(API.getAllFacultyApi);
+    yield put(ACTIONS.getAllFacultyRes(response?.data));
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 export function* FacultySagas() {
   yield all([takeLatest(TYPES.FACULTY_GET_REQ, getFacultySaga)]);
+  yield all([takeLatest(TYPES.ALL_FACULTY_GET_REQ, getAllFacultySaga)]);
 }

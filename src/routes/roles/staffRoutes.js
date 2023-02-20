@@ -15,7 +15,24 @@ export const StaffRoutes = [
   },
   {
     path: "leaveChart",
-    component: LazyComponent.LeaveChart,
+    component: LazyComponent.Outlet,
+    children: [
+      {
+        index: true,
+        path: "",
+        component: LazyComponent.LeaveChart,
+      },
+      {
+        index: false,
+        path: "UpdateFacultyAssignment",
+        component: LazyComponent.UpdateFacultyAssignment,
+      },
+      {
+        index: false,
+        path: "ViewFacultyAssignment",
+        component: LazyComponent.ViewFacultyAssignment,
+      },
+    ],
   },
   {
     path: "facultyAssignment",

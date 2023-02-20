@@ -18,37 +18,33 @@ import {
 } from "../../../../redux/shared/batch/action";
 import { getDepartmentReq } from "../../../../redux/shared/department/action";
 import { getTimeSlotReq } from "../../../../redux/shared/timeSlot/action";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function LmsFacultyAssignment(props) {
+function ViewFacultyAssignment(props) {
   const facultyAssignmentData = useSelector(
     (state) => state.LMS.FacultyAssignmentList
   );
-  const User = useSelector((state) => state.User.userProfile);
   const timeSlot = useSelector((state) => state.TimeSlot.TimeSlotList);
   const departmentList = useSelector(
     (state) => state.Department.departmentList
   );
   const facultyList = useSelector((state) => state.Faculty.allFacultyList);
   const BatchList = useSelector((state) => state.Batch.batchList);
-  const apidata = {
-    staffId: User.data.staffId,
-  };
   const successCB = () => {};
-  const handleAcceptClick = (value) => {
-    const obj = {
-      _id: value.id,
-      status: "APPROVED",
-    };
-    props.facultyApproveReq(obj);
+  const navigate = useNavigate();
+  const handleUpdateClick = (value) => {
+    navigate("../UpdateFacultyAssignment", { state: { element: value } });
   };
-  const handleRejectClick = (value) => {
-    const obj = {
-      _id: value.id,
-      status: "REJECTED",
-    };
-    props.facultyApproveReq(obj);
+  const color = {
+    PENDING: "secondary",
+    REJECTED: "error",
+    APPROVED: "success",
   };
-
+  const { state } = useLocation();
+  const { id } = state;
+  const apidata = {
+    applyId: id,
+  };
   React.useEffect(() => {
     props.FacultyAssignmentGetReq(apidata);
     props.FacultyList();
@@ -72,16 +68,14 @@ function LmsFacultyAssignment(props) {
                 <th scope="col">Lecture Type</th>
                 <th scope="col">StartTime</th>
                 <th scope="col">EndTime</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {facultyAssignmentData?.length > 0
                 ? facultyAssignmentData.map((element, index) => {
-                    if (
-                      !element.other_responsibility &&
-                      element.status == "PENDING"
-                    ) {
+                    if (!element.other_responsibility) {
                       return (
                         <tr key={element.applyId}>
                           <th scope="row">{index + 1}</th>
@@ -141,30 +135,29 @@ function LmsFacultyAssignment(props) {
                           </td>
                           <td>{element?.end_time}</td>
                           <td>
-                            <div className="container text-start">
+                            <Button
+                              variant="contained"
+                              size="small"
+                              style={{ margin: 5 }}
+                              color={color[element.status]}
+                            >
+                              {element.status}
+                            </Button>
+                          </td>
+                          <td>
+                            {element.status != "APPROVED" ? (
                               <Button
-                                variant="contained"
-                                color="success"
-                                size="small"
                                 style={{ margin: 5 }}
+                                variant="contained"
+                                size="small"
+                                color="primary"
                                 onClick={() => {
-                                  handleAcceptClick(element);
+                                  handleUpdateClick(element);
                                 }}
                               >
-                                Accept
+                                Update
                               </Button>
-                              <Button
-                                variant="contained"
-                                color="error"
-                                size="small"
-                                style={{ margin: 5 }}
-                                onClick={() => {
-                                  handleRejectClick(element);
-                                }}
-                              >
-                                Reject
-                              </Button>
-                            </div>
+                            ) : null}
                           </td>
                         </tr>
                       );
@@ -185,16 +178,14 @@ function LmsFacultyAssignment(props) {
                 <th scope="col">Date</th>
                 <th scope="col">Faculty</th>
                 <th scope="col">Responsibility</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {facultyAssignmentData?.length > 0
                 ? facultyAssignmentData.map((element, index) => {
-                    if (
-                      element.other_responsibility &&
-                      element.status == "PENDING"
-                    ) {
+                    if (element.other_responsibility) {
                       return (
                         <tr key={element.applyId}>
                           <th scope="row">{index + 1}</th>
@@ -215,30 +206,29 @@ function LmsFacultyAssignment(props) {
                           </td>
                           <td>{element?.other_responsibility}</td>
                           <td>
-                            <div className="container text-start">
+                            <Button
+                              variant="contained"
+                              size="small"
+                              style={{ margin: 5 }}
+                              color={color[element.status]}
+                            >
+                              {element.status}
+                            </Button>
+                          </td>
+                          <td>
+                            {element.status != "APPROVED" ? (
                               <Button
-                                variant="contained"
-                                color="success"
-                                size="small"
                                 style={{ margin: 5 }}
+                                variant="contained"
+                                size="small"
+                                color="primary"
                                 onClick={() => {
-                                  handleAcceptClick(element);
+                                  handleUpdateClick(element);
                                 }}
                               >
-                                Accept
+                                Update
                               </Button>
-                              <Button
-                                variant="contained"
-                                color="error"
-                                size="small"
-                                style={{ margin: 5 }}
-                                onClick={() => {
-                                  handleRejectClick(element);
-                                }}
-                              >
-                                Reject
-                              </Button>
-                            </div>
+                            ) : null}
                           </td>
                         </tr>
                       );
@@ -264,11 +254,11 @@ const mapDispatchToProps = (dispatch) => ({
   facultyApproveReq: bindActionCreators(FacultyAssignmentApprovalReq, dispatch),
 });
 
-LmsFacultyAssignment.propTypes = {
+ViewFacultyAssignment.propTypes = {
   FacultyAssignmentGetReq: PropTypes.func,
   FacultyList: PropTypes.func,
   BatchList: PropTypes.func,
   facultyApproveReq: PropTypes.func,
 };
 
-export default connect(null, mapDispatchToProps)(LmsFacultyAssignment);
+export default connect(null, mapDispatchToProps)(ViewFacultyAssignment);

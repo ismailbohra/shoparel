@@ -9,3 +9,15 @@ export const getBatchApi = async (payload) => {
     successMessage: "get batch",
   });
 };
+
+export const getAllBatchApi = async () => {
+  return await axiosInstance(
+    "get",
+    "academics/batch",
+    {},
+    {
+      server: microServices.TIKIT_TEST,
+      successMessage: "get batch",
+    }
+  );
+};
