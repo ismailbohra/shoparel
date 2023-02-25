@@ -16,16 +16,16 @@ function NBASurvey() {
 
   const columns = [
     {field : "id" , renderHeader :()=><span className="bold"> S.No </span> , width:120 ,
-     type:"number", align:"center" , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+     type:"number", align:"center" , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
 
     {field : "batch_id" , renderHeader :()=><span className="bold"> Batch Id </span> , width:120 ,
-     align:"center" , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+     align:"center" , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
      
     {field : "subject_name" , renderHeader :()=><span className="bold"> Subject Name </span> , width:500 ,
-     headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+     headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
 
     {field : "status" , renderHeader :()=><span className="bold"> Status </span> , width:120 ,
-     renderCell : sumbiter , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+     renderCell : sumbiter , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
   ]
 
   const [rows , set_rows] = useState([
@@ -88,6 +88,7 @@ function NBASurvey() {
 
     }}>
     <DataGrid 
+    disableSelectionOnClick
       columns={columns}
       rows={rows}
       components={{
@@ -95,7 +96,10 @@ function NBASurvey() {
         // Footer:()=>null
       }}
       sx = {{maxWidth: "862px" ,
-             boxShadow:"0px 0px 10px grey",  
+      '& .hideRightSeparator > .MuiDataGrid-columnSeparator': {
+        display: 'none',
+      },
+            
     }}
     />
     </Box>

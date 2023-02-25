@@ -22,21 +22,21 @@ const ChoiceFilling = () => {
   const [selected_rows, set_selected_rows] = useState([]);
 
   const columns = [
-    { field: "id", renderHeader:()=><span className="bold"> S.No</span>, width: 50, align:"center" , sortable: true , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+    { field: "id", renderHeader:()=><span className="bold"> S.No</span>, width: 50, align:"center" , sortable: true , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
     {
       field: "subject_code",
       renderHeader:()=><span className="bold"> University Subject Code</span>,
       width: 200 , headerAlign:"center"
-    , cellClassName : "cell" , headerClassName : "cell"},
-    { field: "subject_name", renderHeader:()=><span className="bold"> Subject Name</span>, width: 200 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
-    { field: "type", renderHeader:()=><span className="bold"> Type</span>, align:"center", width: 50  , headerAlign:"center", cellClassName : "cell" , headerClassName : "cell"},
-    { field: "credit", renderHeader:()=><span className="bold"> Credit</span>, align:"center" , width: 60 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+    , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+    { field: "subject_name", renderHeader:()=><span className="bold"> Subject Name</span>, width: 200 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+    { field: "type", renderHeader:()=><span className="bold"> Type</span>, align:"center", width: 50  , headerAlign:"center", cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+    { field: "credit", renderHeader:()=><span className="bold"> Credit</span>, align:"center" , width: 60 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
     {
       field: "select_batch",
       renderHeader:()=><span className="bold"> Select Batch</span>,
       width: 200,
       renderCell: BatchcSelect, headerAlign:"center"
-    , cellClassName : "cell" , headerClassName : "cell"},
+    , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
   ];
 
   const change_batch = (id, batch) => {
@@ -133,6 +133,7 @@ const ChoiceFilling = () => {
             <label style={{ color: "red" }}>Core Subjects:</label>
             <div className="choice_table">
               <DataGrid
+              disableSelectionOnClick
                 checkboxSelection
                 columns={columns}
                 pageSize={5}
@@ -145,13 +146,20 @@ const ChoiceFilling = () => {
                   set_selected_rows(new_model);
                   console.log(new_model);
                 }}
-                sx={{boxShadow:"0 0 10px grey"}}
+
+                sx = {{
+                  '& .hideRightSeparator > .MuiDataGrid-columnSeparator': {
+                    display: 'none',
+                  },
+                }}
+                
               />
             </div>
 
             <Button
               variant="contained"
-              sx={{ backgroundColor: "#3a5998", alignSelf: "center" }}
+              sx={{ backgroundColor: "#3a5998", alignSelf: "center" ,
+            }}
             >
               Submit
             </Button>
@@ -183,6 +191,7 @@ function BatchcSelect(props) {
           id="batch_select"
           value={batch}
           onChange={handleChange}
+          sx = {{ backgroundColor : "white"}}
         >
           {props.row.batches.map((item, index) => (
             <MenuItem key={index} value={item}>

@@ -6,23 +6,30 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { DataGrid } from "@mui/x-data-grid";
 import { CustomNoRowsOverlay } from "../../../../Student/ChoiceFilling/ChoiceFilling";
 import { Button} from "@mui/material";
+import { NavigationType, useNavigate } from "react-router-dom";
 
 function Home() {
 
   const columns = [
-    { field: "id", renderHeader:()=><span className="bold"> S.No</span>, width: 80 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell" , align : "center"},
+    { field: "id", renderHeader:()=><span className="bold"> S.No</span>, width: 80 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator" , align : "center"},
 
-    { field: "batch", renderHeader:()=><span className="bold"> Batch</span>, width: 100 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell" , align : "center"},
+    { field: "batch", renderHeader:()=><span className="bold"> Batch</span>, width: 100 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator" , align : "center"},
 
-    { field: "department", renderHeader:()=><span className="bold"> Department</span>, width: 250 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+    { field: "department", renderHeader:()=><span className="bold"> Department</span>, width: 250 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
 
-    { field: "subject", renderHeader:()=><span className="bold"> Subject</span>, width: 250 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell"},
+    { field: "subject", renderHeader:()=><span className="bold"> Subject</span>, width: 250 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
 
-    { field: "university_subject_code", renderHeader:()=><span className="bold"> University Subject Code</span>, width: 200 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell" , align : "center"},
+    { field: "university_subject_code", renderHeader:()=><span className="bold"> University Subject Code</span>, width: 200 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator" , align : "center"},
 
-    { field: "course", renderHeader:()=><span className="bold"> Course</span>, width: 100 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell" , align : "center"},
+    { field: "course", renderHeader:()=><span className="bold"> Course</span>, width: 100 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator" , align : "center"},
 
-    { field: "action", renderHeader:()=><span className="bold"> Action</span>, width: 350 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell" , renderCell : (data)=>(<ActionCell actions={data} />) , align : "center"},
+    { field: "take_attendance", renderHeader:()=><span className="bold"> Take Attendance</span>, width: 150 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator" , renderCell : (data)=>(<TakeAttendanceButton />) , align : "center"},
+
+    { field: "view_attendance", renderHeader:()=><span className="bold"> View Attendance</span>, width: 150 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator" , renderCell : (data)=>(<ViewAttendanceButton />) , align : "center"},
+
+    { field: "modify", renderHeader:()=><span className="bold"> Modify</span>, width: 150 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator" , renderCell : (data)=>(<ModifyButton />) , align : "center"},
+
+    { field: "lecture_plan", renderHeader:()=><span className="bold"> Lecture Plan</span>, width: 150 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator" , renderCell : (data)=>(<LecturePlanButton />) , align : "center"},
 
   ]
 
@@ -84,6 +91,7 @@ function Home() {
         <AccordionDetails sx={{display:"flex" , flexDirection:"column"}}>
         <div className="table_wrapper" >
               <DataGrid 
+              disableSelectionOnClick
                 columns={columns}
                 pageSize={5}
                 rows={rows}
@@ -93,8 +101,13 @@ function Home() {
                   NoRowsOverlay: CustomNoRowsOverlay,
                   // Footer:()=>null
                 }}
+                sx={{
+                  '& .hideRightSeparator > .MuiDataGrid-columnSeparator': {
+                    display: 'none',
+                  },
+                }}
                 
-                sx={{boxShadow:"0 0 10px grey"}}
+                
               />
             </div>
         </AccordionDetails>
@@ -107,47 +120,33 @@ function Home() {
 
 
 const TakeAttendanceButton = props=>{
+  const navigate = useNavigate();
+  
   return (
-    <Button size="small" variant="contained" color="success" style={{width : "150px"}}  >Take Attendance</Button>
+    <Button size="small" onClick={()=>navigate("takeAttendance")} variant="contained" color="success"   >Take</Button>
   );
 }
 const ViewAttendanceButton = props=>{
+  const navigate = useNavigate();
+  
   return (
-    <Button size="small" variant="contained" color = "error" style={{width : "150px"}}  > View Attendance</Button>
+    <Button size="small"variant="contained" color = "error"   > View</Button>
   );
 }
 const ModifyButton = props=>{
+  const navigate = useNavigate();
+  
   return (
-    <Button size="small" variant="contained" color = "warning" style={{width : "150px"}}  >Modify</Button>
+    <Button size="small" variant="contained" color = "warning"   >Modify</Button>
   );
 }
 const LecturePlanButton = props=>{
+  const navigate = useNavigate();
+  
   return (
-    <Button size="small" variant="contained" color = "info" style={{width : "150px"}}  >Lecture Plan</Button>
+    <Button size="small" variant="contained" color = "info"   >Action</Button>
   );
 }
 
 
-const ActionCell=props=>{
-  const [list , set_list]= useState([]);
-
-  const buttonMap  = {
-    "take attendance" : <TakeAttendanceButton key ={0} /> , 
-    "view attendance" : <ViewAttendanceButton key ={1} /> , 
-    "modify" : <ModifyButton key ={2} /> , 
-    "lecture plan" : <LecturePlanButton key ={3} /> ,
-  }
-
-  useEffect(()=>{
-    set_list(props.actions.value);
-  }, [props.actions])
-  return (
-    <div className="button_group">
-
-      {list.map( item=>buttonMap[item])}
-
-    </div>
-    
-  );
-}
 export default Home;

@@ -226,6 +226,10 @@ export const SubjectCoordinator_onlineExam = React.lazy(() =>
   import("../containers/Staff/SubjectCoordinator/OnlineExam/Home")
 );
 
+export const SubjectCoordinator_takeAttendance = React.lazy(()=>
+  import("../containers/Staff/SubjectCoordinator/Academics/Attendance/takeAttendance.jsx")
+);
+
 //Year Coordinator-----------------------------------------------------------------------------------//
 
 export const MasterStudentLogin = React.lazy(() =>
