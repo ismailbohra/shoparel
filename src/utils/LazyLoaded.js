@@ -261,3 +261,8 @@ export const Feedback_StudentExitFeedback = React.lazy(() =>
     "../containers/Staff/YearCoordinator/Feedbacks/StudentExitFeedback/Home"
   )
 );
+
+// messaging service---------------------------------------------------------------------------------------//
+export const Messaging = React.lazy(() =>
+  import("../containers/Staff/Messaging/index")
+);

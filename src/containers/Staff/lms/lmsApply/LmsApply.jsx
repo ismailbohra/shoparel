@@ -164,6 +164,14 @@ const LmsApply = (props) => {
       };
       array.push(data);
     });
+    otherResponsibiliyFaculty.forEach((element) => {
+      const data = {
+        assign_faculty_id: element.assign_faculty_id,
+        faculty_date: element.faculty_date,
+        other_responsibility: element.other_responsibility,
+      };
+      array.push(data);
+    });
     leave.assignFaculty = array;
     props.leaveApplyReq(leave, successCB);
   }
@@ -312,8 +320,8 @@ const LmsApply = (props) => {
                 handleClassRemoveotherResponsibilities
               )}
               <div className="container mt-4">
-                <div class="row justify-content-between">
-                  <div class="col-4">
+                <div className="row justify-content-between">
+                  <div className="col-4">
                     <Button
                       variant="contained"
                       color="primary"
@@ -324,10 +332,10 @@ const LmsApply = (props) => {
                       back
                     </Button>
                   </div>
-                  <div class="col-4">
+                  <div className="col-4">
                     <div className="container">
-                      <div class="row justify-content-end">
-                        <div class="col-4">
+                      <div className="row justify-content-end">
+                        <div className="col-4">
                           {" "}
                           <Button
                             variant="contained"

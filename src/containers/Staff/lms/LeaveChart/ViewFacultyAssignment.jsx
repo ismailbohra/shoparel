@@ -77,7 +77,7 @@ function ViewFacultyAssignment(props) {
                 ? facultyAssignmentData.map((element, index) => {
                     if (!element.other_responsibility) {
                       return (
-                        <tr key={element.applyId}>
+                        <tr key={element.id}>
                           <th scope="row">{index + 1}</th>
                           <td>{element?.faculty_date}</td>
                           <td>
@@ -86,7 +86,7 @@ function ViewFacultyAssignment(props) {
                               if (facultyList.length > 0) {
                                 data = facultyList.find(
                                   (faculty) =>
-                                    faculty.staffId == element.staffId
+                                    faculty.staffId == element.assign_faculty_id
                                 );
                                 return `${data?.firstName} ${data?.lastName}`;
                               } else {
@@ -187,7 +187,7 @@ function ViewFacultyAssignment(props) {
                 ? facultyAssignmentData.map((element, index) => {
                     if (element.other_responsibility) {
                       return (
-                        <tr key={element.applyId}>
+                        <tr>
                           <th scope="row">{index + 1}</th>
                           <td>{element?.faculty_date}</td>
                           <td>
@@ -196,7 +196,7 @@ function ViewFacultyAssignment(props) {
                               if (facultyList.length > 0) {
                                 data = facultyList.find(
                                   (faculty) =>
-                                    faculty.staffId == element.staffId
+                                    faculty.staffId == element.assign_faculty_id
                                 );
                                 return `${data?.firstName} ${data?.lastName}`;
                               } else {

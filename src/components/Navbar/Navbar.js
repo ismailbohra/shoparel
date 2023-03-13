@@ -26,6 +26,7 @@ import AdminDrawerList from "./admin/Admin";
 import HodDrawerList from "./HOD/Hod";
 import SubjectCoordiantorDrawerList from "./Subject Coordinator/subjectCo";
 import YearCoordiantorDrawerList from "./YearCordinator/yearCordinator";
+import MessageDrawerList from "./messaging";
 
 const drawerWidth = 280;
 
@@ -312,6 +313,7 @@ const AppbarAndNAvabar = (props) => {
         <Divider />
         {props.User.userType === "STUDENT" ? <StudentDrawerList /> : null}
         {props.User.userType === "STAFF" ? <LmsDrawerList /> : null}
+        {props.User.userType === "STAFF" ? <MessageDrawerList /> : null}
         {props.User.userType === "STAFF" ? (
           <>
             {" "}

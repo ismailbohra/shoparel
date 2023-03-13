@@ -7,6 +7,7 @@ import { LeaveTypeSagas } from "../shared/leaveType/saga";
 import { LectureTypeSagas } from "../shared/lectureType/saga";
 import { TimeSlotSagas } from "../shared/timeSlot/saga";
 import { lmsSagas } from "../staff/LMS/lmsSaga";
+import { MessageSaga } from "../staff/Messaging/saga";
 
 export function* watchSagas() {
   yield all([
@@ -18,5 +19,6 @@ export function* watchSagas() {
     LectureTypeSagas(),
     TimeSlotSagas(),
     lmsSagas(),
+    MessageSaga(),
   ]);
 }

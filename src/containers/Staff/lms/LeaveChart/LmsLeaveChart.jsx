@@ -60,7 +60,7 @@ function LmsLeaveChart(props) {
                   .replace(/\//g, "-");
 
                 return (
-                  <tr key={element.applyId}>
+                  <tr key={element.id}>
                     <th scope="row">{index + 1}</th>
                     <td>{formattedDate}</td>
                     <td>{element.leave_type}</td>
