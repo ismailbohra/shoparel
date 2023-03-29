@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   LmsReportList: [],
   FacultyAssignmentList: [],
   HodApprovalLeaveList: [],
+  Staff:[],
+  StaffByRoles: [],
 };
 const setFacultyAssignmen = (state, action) => {
   return {
@@ -55,6 +57,22 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         HodApprovalLeaveList: value,
       };
+      case types.DUTY_ASSINGNMENT_RES:
+        // const value = state.Staff.filter(
+        //   (item) => item.applyId !== action.payload.applyId
+        // );
+        return {
+          ...state,
+          Staff: action.payload.data.results
+        };
+
+        case types.STAFF_BY_ROLES_RES:
+        return {
+          ...state,
+          StaffByRoles: action.payload.data.results
+        };
+        
+      
     default:
       return state;
   }

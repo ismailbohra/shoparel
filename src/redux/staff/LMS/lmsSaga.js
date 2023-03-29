@@ -130,6 +130,53 @@ export function* facultyAssignmentUpdateSaga(action) {
   }
 }
 
+export function* DutyAssignmentSaga(action) {
+  try {
+    const response = yield call(API.DutyAssignmentApi, action.payload);
+    console.log(response)
+    yield put(ACTIONS.dutyRes(response));
+    
+  } catch (err) {
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    );
+  }
+}
+
+export function* dutyAssingedsaga(action) {
+  try {
+    const response = yield call(API.dutyAssingedApi, action.payload);
+    yield put(ACTIONS.duty_Assinged_role_res(response));
+    
+  } catch (err) {
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    );
+  }
+}
+
+export function* staffByRolessaga(action) {
+  try{
+    const response = yield call(API.staffByRolesApi, action.payload);
+    yield put(ACTIONS.staff_by_roles_res(response));
+  } catch(err) {
+    dispatchToasterError(
+      err?.response?.data.message || MSG.internalServerError
+    );
+  }
+}
+
+export function* unassignRolesaga(action) {
+  try{
+    const response = yield call(API.unassignRoleApi, action.payload);
+    yield put(ACTIONS.unassign_role_res(response));
+  } catch(err) {
+    dispatchToasterError(
+      err?.response?.data.message || MSG.internalServerError
+    );
+  }
+}
+
 export function* lmsSagas() {
   yield all([
     takeLatest(TYPES.LEAVE_APPLY_REQ, leaveApplySaga),
@@ -146,5 +193,9 @@ export function* lmsSagas() {
       TYPES.FACULTY_ASSIGNMENT_APPROVE_REQ,
       facultyAssignmentApproveSaga
     ),
+    takeLatest(TYPES.DUTY_ASSINGNMENT_REQ, DutyAssignmentSaga),
+    takeLatest(TYPES.DUTY_ASSINGNED_REQ, dutyAssingedsaga),
+    takeLatest(TYPES.STAFF_BY_ROLES_REQ , staffByRolessaga),
+    takeLatest(TYPES.UNASSIGN_ROLE_REQ , unassignRolesaga),
   ]);
 }

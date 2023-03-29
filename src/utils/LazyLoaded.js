@@ -262,7 +262,23 @@ export const Feedback_StudentExitFeedback = React.lazy(() =>
   )
 );
 
-// messaging service---------------------------------------------------------------------------------------//
-export const Messaging = React.lazy(() =>
-  import("../containers/Staff/Messaging/index")
+// misc -----------------------------------------------------------------------------------
+
+export const Misc_AddStudent = React.lazy(()=>
+    import("../containers/Staff/misc/AddStudent/Home")
+);
+export const Misc_DutyAssignement = React.lazy(()=>
+    import("../containers/Staff/misc/DutyAssignment/Home")
+    );
+export const Misc_RefferedStudent = React.lazy(()=>
+        import("../containers/Staff/misc/RefferedStudents/Home")
+    );
+export const Misc_ViewStudent = React.lazy(()=>
+    import("../containers/Staff/misc/ViewStudnets/Home")
+);
+export const Misc_VerifyStudent = React.lazy(()=>
+    import("../containers/Staff/misc/VerifyStudnets/Home")
+);
+export const Misc_RejectedStudent = React.lazy(()=>
+    import("../containers/Staff/misc/RejectedStudnets/Home")
 );

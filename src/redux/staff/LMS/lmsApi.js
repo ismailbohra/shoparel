@@ -77,3 +77,40 @@ export const LeaveUpdateHodApprovalApi = async (userData) => {
     successMessage: "leave get",
   });
 };
+
+export const DutyAssignmentApi = async (userData) => {
+  const url = userData?.department
+    ? `/staff?department=${userData.department}`
+    : `/staff?department=0`;
+  return await axiosInstance(
+    "get",
+    url,
+    {},
+    {
+      server: microServices.STAFF,
+      successMessage: "leave get",
+    }
+  );
+};
+
+
+export const dutyAssingedApi = async (payload) => {
+  return await axiosInstance("post", "/admin/assignRole", payload, {
+    server: microServices.TEST,
+    successMessage: "success",
+  });
+};
+
+export const staffByRolesApi = async (payload) => {
+  return await axiosInstance("post", "/admin/getStaffByRole", payload, {
+    server: microServices.Test,
+    successMessage: "sucess",
+  });
+};
+
+export const unassignRoleApi = async (payload) => {
+  return await axiosInstance("post", "/admin/unassignRole", payload, {
+    server: microServices.TEST,
+    successMessage: "success",
+  });
+};

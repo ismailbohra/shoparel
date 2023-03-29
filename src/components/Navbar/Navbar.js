@@ -26,9 +26,10 @@ import AdminDrawerList from "./admin/Admin";
 import HodDrawerList from "./HOD/Hod";
 import SubjectCoordiantorDrawerList from "./Subject Coordinator/subjectCo";
 import YearCoordiantorDrawerList from "./YearCordinator/yearCordinator";
-import MessageDrawerList from "./messaging";
+import Misc from "./Misc/misc";
 
-const drawerWidth = 280;
+
+const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -313,7 +314,6 @@ const AppbarAndNAvabar = (props) => {
         <Divider />
         {props.User.userType === "STUDENT" ? <StudentDrawerList /> : null}
         {props.User.userType === "STAFF" ? <LmsDrawerList /> : null}
-        {props.User.userType === "STAFF" ? <MessageDrawerList /> : null}
         {props.User.userType === "STAFF" ? (
           <>
             {" "}
@@ -377,6 +377,22 @@ const AppbarAndNAvabar = (props) => {
               Year Co-ordinator
             </Divider>
             <YearCoordiantorDrawerList />{" "}
+          </>
+        ) : null}
+        {(props.User.userType === "STAFF"  &&  props.User.data.Roles.find(item=>item.roleId == 7) ) ? (
+          <>
+            {" "}
+            <Divider
+              textAlign="left"
+              style={{
+                color: "#F2B33F",
+                marginLeft: -10,
+                marginTop: 10,
+              }}
+            >
+              Miscillineous
+            </Divider>
+            <Misc />{" "}
           </>
         ) : null}
       </Drawer>

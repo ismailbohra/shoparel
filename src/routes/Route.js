@@ -10,6 +10,7 @@ import {
   studentRoutes,
   subjectCoordinatorRoutes,
   yearCoordiantorRoutes,
+  miscRoutes,
 } from "./roles";
 import Auth from "../utils/Auth";
 import { USER_TYPES } from "../utils/Enum";
@@ -35,6 +36,23 @@ const Routes = () => {
         <Route path="/login" element={<UserLogin />} />
         {isAuth ? (
           <Route path="cms/" element={<AppbarAndNAvabar />}>
+
+            {userType === USER_TYPES.STAFF && 
+              miscRoutes.map(routes=>(
+                <Route key = {routes.path}
+                path = {`misc/${routes.path}`}
+                element = {
+                  <Suspense fallback = {<Loader/>}>
+                    <PrivateRoute>{<routes.component />}</PrivateRoute>
+                  </Suspense>
+                }
+                >
+
+                </Route>
+              ))
+            
+            } 
+
             {userType === USER_TYPES.STUDENT &&
               studentRoutes.map((route) => (
                 <Route

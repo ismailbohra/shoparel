@@ -109,3 +109,65 @@ export const hodApproveRes = (values) => {
     payload: values,
   };
 };
+
+
+// duty
+
+export const dutyReq = (values) => {
+  return {
+    type: types.DUTY_ASSINGNMENT_REQ,
+    payload: values,
+  };
+};
+
+export const dutyRes = (values) => {
+  return {
+    type: types.DUTY_ASSINGNMENT_RES,
+    payload: values,
+  };
+};
+
+// DUTY ASSIGNED
+
+export const duty_Assinged_role_req = (values) => {
+  return {
+    type: types.DUTY_ASSINGNED_REQ,
+    payload: values,
+  };
+};
+
+export const duty_Assinged_role_res = (values) => {
+  return {
+    type: types.DUTY_ASSINGNED_RES,
+    payload: values,
+  };
+};
+
+
+export const staff_by_roles_req = (values) => {
+  return {
+    type: types.STAFF_BY_ROLES_REQ,
+    payload: values,
+  };
+};
+
+export const staff_by_roles_res = (values) => {
+  return {
+    type: types.STAFF_BY_ROLES_RES,
+    payload: values,
+  };
+};
+
+export const unassign_role_req = (values) => {
+  return {
+    type: types.UNASSIGN_ROLE_REQ,
+    payload: values,
+  };
+};
+
+export const unassign_role_res = (values) => {
+  return {
+    type: types.UNASSIGN_ROLE_RES,
+    payload: values,
+  };
+};
