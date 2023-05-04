@@ -2,6 +2,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import { Card } from "react-bootstrap";
 import { CustomNoRowsOverlay } from "../../../Student/ChoiceFilling/ChoiceFilling";
+import { theme } from "../../../../App";
 
 const columns =[
     { field: 'Id', headerClassName : "cell hideRightSeparator",headerAlign:"center", width: 120,cellClassName : "cell",align : "center" },
@@ -21,7 +22,7 @@ const Home=props=>{
 
     <Card style={{display:"flex"}}>
         <Card.Header>
-          <h4 style={{ color: "red" }} className="pannel_heading">
+          <h4 style={{ color: theme.palette.status.danger }} className="pannel_heading">
             List of Refered Students for certificate:
           </h4>
           </Card.Header>

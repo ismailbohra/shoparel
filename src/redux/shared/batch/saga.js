@@ -22,6 +22,15 @@ export function* getAllBatchSaga(action) {
   }
 }
 
+export function* getStateListSaga(action){
+  try{
+    // const response = yield call(API.)
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+
 export function* BatchSagas() {
   yield all([takeLatest(TYPES.BATCH_GET_REQ, getBatchSaga)]);
   yield all([takeLatest(TYPES.ALL_BATCH_GET_REQ, getAllBatchSaga)]);

@@ -7,10 +7,11 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { DataGrid } from "@mui/x-data-grid";
-import {  FormControl, styled } from "@mui/material";
+import { Checkbox, FormControl, styled } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import { theme } from "../../../App";
 
 const ChoiceFilling = () => {
   const [value, setValue] = useState(0);
@@ -21,22 +22,85 @@ const ChoiceFilling = () => {
   });
   const [selected_rows, set_selected_rows] = useState([]);
 
+  useEffect(() => console.log(selected_rows), [selected_rows]);
+
   const columns = [
-    { field: "id", renderHeader:()=><span className="bold"> S.No</span>, width: 50, align:"center" , sortable: true , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+    {
+      field: "check",
+      renderHeader: () => <span> Check </span>,
+      width: 100,
+      align: "center",
+      sortable: true,
+      headerAlign: "center",
+      cellClassName: "cell",
+      headerClassName: "headercell hideRightSeparator",
+      renderCell: (data) => (
+        <Checkbox
+          onChange={(event) => {
+            if (event.target.checked)
+              set_selected_rows([...selected_rows, data.row]);
+            else {
+              set_selected_rows(
+                selected_rows.filter((value) => value !== data.row)
+              );
+            }
+          }}
+        />
+      ),
+    },
+    {
+      field: "id",
+      renderHeader: () => <span> S.No</span>,
+      width: 80,
+      align: "center",
+      sortable: true,
+      headerAlign: "center",
+      cellClassName: "cell",
+      headerClassName: "headercell hideRightSeparator",
+    },
     {
       field: "subject_code",
-      renderHeader:()=><span className="bold"> University Subject Code</span>,
-      width: 200 , headerAlign:"center"
-    , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
-    { field: "subject_name", renderHeader:()=><span className="bold"> Subject Name</span>, width: 200 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
-    { field: "type", renderHeader:()=><span className="bold"> Type</span>, align:"center", width: 50  , headerAlign:"center", cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
-    { field: "credit", renderHeader:()=><span className="bold"> Credit</span>, align:"center" , width: 60 , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+      renderHeader: () => <span> University Subject Code</span>,
+      width: 200,
+      headerAlign: "center",
+      cellClassName: "cell",
+      headerClassName: "headercell hideRightSeparator",
+    },
+    {
+      field: "subject_name",
+      renderHeader: () => <span> Subject Name</span>,
+      width: 200,
+      headerAlign: "center",
+      cellClassName: "cell",
+      headerClassName: "headercell hideRightSeparator",
+    },
+    {
+      field: "type",
+      renderHeader: () => <span> Type</span>,
+      align: "center",
+      width: 60,
+      headerAlign: "center",
+      cellClassName: "cell",
+      headerClassName: "headercell hideRightSeparator",
+    },
+    {
+      field: "credit",
+      renderHeader: () => <span> Credit</span>,
+      align: "center",
+      width: 60,
+      headerAlign: "center",
+      cellClassName: "cell",
+      headerClassName: "headercell hideRightSeparator",
+    },
     {
       field: "select_batch",
-      renderHeader:()=><span className="bold"> Select Batch</span>,
+      renderHeader: () => <span> Select Batch</span>,
       width: 200,
-      renderCell: BatchcSelect, headerAlign:"center"
-    , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+      renderCell: BatchcSelect,
+      headerAlign: "center",
+      cellClassName: "cell",
+      headerClassName: "headercell hideRightSeparator",
+    },
   ];
 
   const change_batch = (id, batch) => {
@@ -109,7 +173,7 @@ const ChoiceFilling = () => {
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider", color: "#3a5998" }}>
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Current Semester" sx={{ color: "#3a5998" }} />
+            <Tab label="Current Semester" />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -130,37 +194,27 @@ const ChoiceFilling = () => {
               {" "}
               Total Credit : {credit_data.total}{" "}
             </label>
-            <label style={{ color: "red" }}>Core Subjects:</label>
+            <label style={{ color: theme.palette.status.danger }}>Core Subjects:</label>
             <div className="choice_table">
               <DataGrid
-              disableSelectionOnClick
-                checkboxSelection
+              autoHeight
+                disableSelectionOnClick
                 columns={columns}
                 pageSize={5}
                 rows={rows}
                 components={{
                   NoRowsOverlay: CustomNoRowsOverlay,
-                  // Footer:()=>null
+                  Footer:()=>null
                 }}
-                onSelectionModelChange={(new_model) => {
-                  set_selected_rows(new_model);
-                  console.log(new_model);
-                }}
-
-                sx = {{
-                  '& .hideRightSeparator > .MuiDataGrid-columnSeparator': {
-                    display: 'none',
+                sx={{
+                  "& .MuiDataGrid-columnSeparator": {
+                    display: "none",
                   },
                 }}
-                
               />
             </div>
 
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "#3a5998", alignSelf: "center" ,
-            }}
-            >
+            <Button variant="contained" sx={{ alignSelf: "center" }}>
               Submit
             </Button>
           </div>
@@ -191,7 +245,7 @@ function BatchcSelect(props) {
           id="batch_select"
           value={batch}
           onChange={handleChange}
-          sx = {{ backgroundColor : "white"}}
+          sx={{ backgroundColor: "white" }}
         >
           {props.row.batches.map((item, index) => (
             <MenuItem key={index} value={item}>
@@ -229,7 +283,6 @@ const StyledGridOverlay = styled("div")(({ theme }) => ({
 }));
 
 export function CustomNoRowsOverlay() {
-
   return (
     <StyledGridOverlay>
       <svg

@@ -21,3 +21,10 @@ export const getAllBatchApi = async () => {
     }
   );
 };
+
+export const getStateListApi = async () => {
+  return await axiosInstance(
+    "get",
+    
+  )
+}

@@ -21,6 +21,14 @@ export function dispatchToasterHide() {
   store.dispatch(hideToasterAction());
 }
 
+export function purifyObject(obj){
+  for ( let i of Object.keys(obj)){
+    if (typeof obj[i] === 'object') purifyObject(obj[i]);
+    if (obj[i] ===  null || obj[i] === "" || obj[i] ==={} ) delete obj[i];
+  }
+  return obj;
+}
+
 // export function signOut() {
 //   store.dispatch(logout());
 // }

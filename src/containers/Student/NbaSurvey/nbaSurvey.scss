@@ -1,3 +1,4 @@
+$cell-border-color : 1px solid rgba(0, 0, 0, 0.644);
 %flex-column-container{
     display: flex;
     flex-direction: column;
@@ -15,9 +16,30 @@ div.nba_survey{
     font-weight: 600;
 }
 
-%cell_border{
-    border: 1px solid grey;
+@mixin header_cell_border{
+    border-right: $cell-border-color!important;
+    border-top: $cell-border-color!important;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.644)!important;
+    font-weight: 600;   
+    box-sizing: border-box;
+    &:first-child{
+        border-left: $cell-border-color!important;
+  }
 }
+@mixin cell_border{
+    border-right: $cell-border-color!important;
+    border-bottom: $cell-border-color!important;
+
+    &:first-child{
+        border-left: $cell-border-color!important;
+    }
+}
+
+
 .cell{
-    @extend %cell_border;
+    @include cell_border();
+}
+
+.headercell{
+    @include header_cell_border();
 }

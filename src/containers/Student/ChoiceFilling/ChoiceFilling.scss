@@ -1,3 +1,5 @@
+@use "../NbaSurvey/nbaSurvey.scss" as *;
+
 div.ChoiceFilling {
   display: flex;
   flex-direction: column;
@@ -34,5 +36,9 @@ label.bold , span.bold{
   font-weight: 600;
 }
 .cell{
-  border: 1px solid rgb(85, 85, 85);
+  @include cell_border();
+}
+
+.headercell{
+  @include header_cell_border();
 }

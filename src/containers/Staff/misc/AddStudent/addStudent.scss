@@ -1,0 +1,178 @@
+@use '../../../Student/NbaSurvey/nbaSurvey.scss';
+
+$mid : 750px;
+$lg : 1150px;
+
+div.formHolder{
+    @extend %flex-column-container;
+    gap : 20px;
+    height: inherit;
+    margin: 30px auto;
+}
+
+div.basic_information{
+    display: flex;
+    flex-direction: column;
+    gap : 20px;
+    width:  100%;
+    margin: 30px auto;
+    padding: 20px;
+
+    div.form_elements{
+        display: grid;
+        width: 100%;
+        gap : 20px;
+        max-width: $lg;
+        align-items: start;
+        justify-content: space-around;
+        grid-template-columns: 300px ;
+
+        @media (min-width : $mid ){
+            grid-template-columns: repeat(2 , 300px);
+        }
+        @media (min-width : $lg ){
+            grid-template-columns: repeat(3 , 300px);
+        }
+
+    }
+    div.form_elements>*{
+        flex-basis: 45%;
+        max-width: 300px;
+        @media (max-width : 500px) {
+            flex-basis: 95%;
+        }
+    }
+}
+
+div.personal_information{
+    display: flex;
+    flex-direction: column;
+    gap : 20px;
+    width:  100%;
+    margin: 30px auto;
+    padding: 20px;
+    
+    div.form_elements{
+        display: grid;
+        width: 100%;
+        gap : 20px;
+        max-width: $lg;
+        justify-content: space-around;
+        align-items: start;
+        grid-template-columns: 300px ;
+        
+        @media (min-width : $mid ){
+            grid-template-columns: repeat(2 , 300px);
+        }
+        @media (min-width : $lg ){
+            grid-template-columns: repeat(3 , 300px);
+        }
+        
+        .divider{
+            grid-column: 1 / span 1;
+    
+            @media (min-width : $mid ){
+                grid-column: 1 / span 2;
+            }
+            @media (min-width : $lg ){
+                grid-column: 1 / span 3;
+        }
+    }
+    
+    div.address_field{
+        display: flex;
+        width: 100%;
+        padding: 20px;
+        gap : 10px;
+        flex-direction: column;
+        justify-content: center;
+        margin: 20px auto;
+        grid-column: 1 / span 1;
+
+        @media (min-width : $mid ){
+            grid-column: 1 / span 2;
+    }
+        @media (min-width : $lg ){
+            grid-column: 1 / span 3;
+    }
+
+
+        div.address_inputs{
+            min-width: 100%;
+            display: grid;
+            justify-content: space-around;
+            align-items: start;
+            row-gap : 20px;
+            column-gap: 10px;
+            grid-template-columns: 300px ;
+
+            @media (min-width : $mid ){
+                grid-template-columns: repeat(2 , 300px);
+            }
+            @media (min-width : $lg ){
+                grid-template-columns: repeat(3 , 300px);
+            }
+        }
+
+
+        }
+    }
+
+    .checkAddress{
+        grid-column: 1 / span 1;
+
+        @media (min-width : $mid ){
+            grid-column: 1 / span 2;
+    }
+        @media (min-width : $lg ){
+            grid-column: 1 / span 3;
+    }
+
+    }
+}
+
+div.academic_information{
+    display: flex;
+    flex-direction: column;
+    gap : 20px;
+    width:  100%;
+    margin: 30px auto;
+    padding: 20px;
+
+    div.form_elements{
+        display: grid;
+        width: 100%;
+        gap : 20px;
+        max-width: $lg;
+        align-items: start;
+        justify-content: space-around;
+        grid-template-columns: 300px ;
+
+        @media (min-width : $mid ){
+            grid-template-columns: repeat(2 , 300px);
+        }
+        @media (min-width : $lg ){
+            grid-template-columns: repeat(3 , 300px);
+        }
+
+        
+    }
+    .academics{
+        display: flex;
+        width: 100%;
+        padding: 20px;
+        gap : 10px;
+        flex-direction: column;
+        justify-content: center;
+        margin: 20px auto;
+        grid-column: 1 / span 1;
+
+        @media (min-width : $mid ){
+            grid-column: 1 / span 2;
+    }
+        @media (min-width : $lg ){
+            grid-column: 1 / span 3;
+    }
+
+    }
+}

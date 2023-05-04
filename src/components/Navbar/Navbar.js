@@ -28,7 +28,6 @@ import SubjectCoordiantorDrawerList from "./Subject Coordinator/subjectCo";
 import YearCoordiantorDrawerList from "./YearCordinator/yearCordinator";
 import Misc from "./Misc/misc";
 
-
 const drawerWidth = 300;
 
 const openedMixin = (theme) => ({

@@ -27,3 +27,16 @@ export const getAllBatchRes = (values) => {
     payload: values,
   };
 };
+
+export const getStateListReq = ()=>{
+  return {
+    type: types.ALL_STATES_LIST_REQ,
+  }
+}
+
+export const getStateListRes = values=>{
+  return {
+    type: types.ALL_STATES_LIST_RES,
+    payload : values
+  }
+}

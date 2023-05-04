@@ -38,7 +38,6 @@ export const StaffRoutes = [
     path: "facultyAssignment",
     component: LazyComponent.FacultyAssignment,
   },
-  
   // {
   //   exact: false,
   //   path: "containers",

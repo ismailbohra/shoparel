@@ -70,7 +70,6 @@ export const LeaveGetHodApprovalApi = async (userData) => {
 };
 
 export const LeaveUpdateHodApprovalApi = async (userData) => {
-  console.log(userData);
   const url = `/hodApproval`;
   return await axiosInstance("put", url, userData, {
     server: microServices.LEAVE,
@@ -78,6 +77,37 @@ export const LeaveUpdateHodApprovalApi = async (userData) => {
   });
 };
 
+
+
+export const AddStudentApi = async (userData) => {
+  const url = `/student`;
+  return await axiosInstance("post" , url , userData , {
+    server: microServices.TEST,
+    successMessage: "Student Added Sussefully",
+  })
+}
+
+export const GetCoursesApi = async ()=>{
+  const url = `/master/courses`;
+  return await axiosInstance("get" , url , {} ,{
+    server: microServices.TEST,
+    successMessage: "Courses fetched",
+  })
+}
+export const academicSessionApi = async ()=>{
+  const url = `/academicSession`;
+  return await axiosInstance("get" , url , {} ,{
+    server: microServices.TEST,
+    successMessage: "Courses fetched",
+  })
+}
+export const studentSessionApi = async ()=>{
+  const url = `/studentSession`;
+  return await axiosInstance("get" , url , {} ,{
+    server: microServices.TEST,
+    successMessage: "Courses fetched",
+  })
+}
 export const DutyAssignmentApi = async (userData) => {
   const url = userData?.department
     ? `/staff?department=${userData.department}`

@@ -6,3 +6,4 @@ export const internalServerError = "Internal Server Error";
 export const approved = "Approved";
 export const reject = "Rejected";
 export const facultyUpdated = "Faculty Updated";
+export const studentAdded = "Student Added Successfully";

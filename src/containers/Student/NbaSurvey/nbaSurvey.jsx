@@ -15,17 +15,17 @@ function NBASurvey() {
   }
 
   const columns = [
-    {field : "id" , renderHeader :()=><span className="bold"> S.No </span> , width:120 ,
-     type:"number", align:"center" , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+    {field : "id" , renderHeader :()=><span> S.No </span> , width:120 ,
+     type:"number", align:"center" , headerAlign:"center" , cellClassName : "cell" , headerClassName : "headercell hideRightSeparator"},
 
-    {field : "batch_id" , renderHeader :()=><span className="bold"> Batch Id </span> , width:120 ,
-     align:"center" , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+    {field : "batch_id" , renderHeader :()=><span> Batch Id </span> , width:120 ,
+     align:"center" , headerAlign:"center" , cellClassName : "cell" , headerClassName : "headercell hideRightSeparator"},
      
-    {field : "subject_name" , renderHeader :()=><span className="bold"> Subject Name </span> , width:500 ,
-     headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+    {field : "subject_name" , renderHeader :()=><span> Subject Name </span> , width:500 ,
+     headerAlign:"center" , cellClassName : "cell" , headerClassName : "headercell hideRightSeparator"},
 
-    {field : "status" , renderHeader :()=><span className="bold"> Status </span> , width:120 ,
-     renderCell : sumbiter , headerAlign:"center" , cellClassName : "cell" , headerClassName : "cell hideRightSeparator"},
+    {field : "status" , renderHeader :()=><span> Status </span> , width:120 ,
+     renderCell : sumbiter , headerAlign:"center" , cellClassName : "cell" , headerClassName : "headercell hideRightSeparator"},
   ]
 
   const [rows , set_rows] = useState([
@@ -83,11 +83,12 @@ function NBASurvey() {
       </Card.Header>
       <Card.Body>
     <Box sx ={{
-      display : "flex",width: "100%" ,height : "480px",
+      display : "flex",width: "100%",
       minWidth : "200px", justifyContent : "center"
 
     }}>
     <DataGrid 
+    autoHeight
     disableSelectionOnClick
       columns={columns}
       rows={rows}
@@ -98,8 +99,7 @@ function NBASurvey() {
       sx = {{maxWidth: "862px" ,
       '& .hideRightSeparator > .MuiDataGrid-columnSeparator': {
         display: 'none',
-      },
-            
+      },     
     }}
     />
     </Box>

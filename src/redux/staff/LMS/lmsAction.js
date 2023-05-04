@@ -1,3 +1,4 @@
+import { purifyObject } from "../../../utils/Shared";
 import * as types from "./lmsType";
 
 export const leaveApplyReq = (values, successCallback) => {
@@ -110,6 +111,55 @@ export const hodApproveRes = (values) => {
   };
 };
 
+export const addStudentReq = values => {
+  values = purifyObject(values)
+  console.log(values)
+  return {
+    type: types.ADD_STUDENT_REQ,
+    payload: values,
+  }
+}
+
+export const addStudentRes = values => {
+  return {
+    type: types.ADD_STUDENT_RES,
+    payload: values,
+  }
+}
+
+export const coursesReq = () => {
+  return {
+    type: types.COURSES_REQ,
+  }
+}
+export const coursesRes = values => {
+  return {
+    type: types.COURSES_RES,
+    payload: values,
+  }
+}
+export const academicSessionReq = () => {
+  return {
+    type: types.ACADEMIC_SESSION_REQ,
+  }
+}
+export const academicSessionRes = values => {
+  return {
+    type: types.ACADEMIC_SESSION_RES,
+    payload: values,
+  }
+}
+export const studentSessionReq = () => {
+  return {
+    type: types.STUDENT_SESSION_REQ,
+  }
+}
+export const studentSessionRes = values => {
+  return {
+    type: types.STUDENT_SESSION_RES,
+    payload: values,
+  }
+}
 
 // duty
 

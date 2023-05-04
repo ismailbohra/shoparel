@@ -21,7 +21,7 @@ function Home() {
   const [SemesterId, setSemesterId] =React.useState([]);
   const [Tools, setTools] =React.useState([]);
   const [ViewEvent, setViewEvent] =React.useState([]);
-
+  const names = [];
 
   const handleChange = (event) => {
     const {

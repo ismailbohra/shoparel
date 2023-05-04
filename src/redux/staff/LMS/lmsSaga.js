@@ -130,6 +130,53 @@ export function* facultyAssignmentUpdateSaga(action) {
   }
 }
 
+
+export function* AddStudentSaga(action){
+  try{
+    const response = yield call(API.AddStudentApi , action.payload);
+    yield console.log(response);
+    yield dispatchToasterSuccess(MSG.studentAdded);
+  }
+  catch(err){
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    )
+  }
+}
+export function* GetCoursesSaga(){
+  try{
+    const response = yield call(API.GetCoursesApi );
+    yield put(ACTIONS.coursesRes(response.data));
+  }
+  catch(err){
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    )
+  }
+}
+export function* academicSessionSaga(){
+  try{
+    const response = yield call(API.academicSessionApi );
+    yield put(ACTIONS.academicSessionRes(response.data));
+  }
+  catch(err){
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    )
+  }
+}
+export function* studentSessionSaga(){
+  try{
+    const response = yield call(API.studentSessionApi );
+    yield put(ACTIONS.studentSessionRes(response.data));
+  }
+  catch(err){
+    dispatchToasterError(
+      err?.response?.data?.message || MSG.internalServerError
+    )
+  }
+}
+
 export function* DutyAssignmentSaga(action) {
   try {
     const response = yield call(API.DutyAssignmentApi, action.payload);
@@ -193,6 +240,10 @@ export function* lmsSagas() {
       TYPES.FACULTY_ASSIGNMENT_APPROVE_REQ,
       facultyAssignmentApproveSaga
     ),
+    takeLatest(TYPES.ADD_STUDENT_REQ , AddStudentSaga),
+    takeLatest(TYPES.COURSES_REQ , GetCoursesSaga),
+    takeLatest(TYPES.ACADEMIC_SESSION_REQ , academicSessionSaga),
+    takeLatest(TYPES.STUDENT_SESSION_REQ , studentSessionSaga),
     takeLatest(TYPES.DUTY_ASSINGNMENT_REQ, DutyAssignmentSaga),
     takeLatest(TYPES.DUTY_ASSINGNED_REQ, dutyAssingedsaga),
     takeLatest(TYPES.STAFF_BY_ROLES_REQ , staffByRolessaga),

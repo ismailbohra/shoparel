@@ -15,7 +15,7 @@ const microServicesURLs = {
   MASTER: `${config.apiGateway.MASTERS}`,
   STAFF: `${config.apiGateway.STAFF}`,
   STUDENT: `${config.apiGateway.STUDENT}`,
-  MESSAGE: `${config.apiGateway.MESSAGE}`,
+  STATE: `${config.apiGateway.STATE}`
 };
 
 const clients = {};
