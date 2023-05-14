@@ -77,9 +77,5 @@ export function* UserSagas() {
     takeLatest(TYPES.SET_NEW_USER_REQ, addNewUserSaga),
     takeLatest(TYPES.USER_LOGIN_EMAIL_REQ, userEmailLoginSaga),
     takeLatest(TYPES.CHANGE_PASSWORD, changePasswordSaga),
-    // takeLatest(TYPES.GET_USER_LIST_REQ, getUserSaga),
-    // takeLatest(TYPES.DELETE_USER_REQ, deleteUserSaga),
-    // takeLatest(TYPES.GET_NEW_USER_REQ, getNewUserSaga),
-    // takeLatest(TYPES.UPDATE_USER_REQ, updateUserSaga),
   ]);
 }

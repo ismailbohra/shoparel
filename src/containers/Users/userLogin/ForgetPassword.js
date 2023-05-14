@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { MdOutlineArrowDropDown } from "react-icons/md";
-import "./UserLogin.scss";
+import { Form, Formik } from 'formik';
+import React, { useState } from 'react';
 import {
+  Button,
   Col,
   Container,
-  Row,
-  Button,
-  Modal,
-  FormSelect,
-  Tabs,
-  Tab,
-} from "react-bootstrap";
-import { Form, Formik } from "formik";
-import { INPUT_TYPES } from "../../../components/constants";
-import Input from "../../../components/Input";
-import { setUserForgrtPassword } from "../../../utils/validations";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import { userRegisterReq } from "../../../store/shared/users/UserAction";
-import UserLoginMail from "./UserLoginMail";
-import UserLoginOTP from "./UserLoginOTP";
+  Row
+} from 'react-bootstrap';
+import { MdOutlineArrowDropDown } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import Input from '../../../components/Input';
+import { INPUT_TYPES } from '../../../constants';
+import { setUserForgrtPassword } from '../../../utils/validations';
+import './UserLogin.scss';
 
 const ForgetPassword = (props) => {
   const [accountSetupForm, setAccountSetupForm] = useState({
-    userEmail: "",
+    userEmail: '',
   });
   const forgetPassword = (values) => {
     console.log(values);
@@ -49,11 +39,11 @@ const ForgetPassword = (props) => {
         <Col lg={8} className="p-0 h-auto d-flex  flex-column">
           <div className="loginReg w-100 d-flex justify-content-end pt-lg-3 pt-2 pe-4">
             <div className="loginRegSpace">
-              <Link to={"/login"} className="link me-3">
+              <Link to={'/login'} className="link me-3">
                 Login
                 <MdOutlineArrowDropDown />
               </Link>
-              <Link to={"/register"} className="link me-3">
+              <Link to={'/register'} className="link me-3">
                 Register
                 <MdOutlineArrowDropDown />
               </Link>
@@ -98,11 +88,11 @@ const ForgetPassword = (props) => {
                             >
                               <Input
                                 error={touched.userEmail && errors.userEmail}
-                                id={"userEmail"}
+                                id={'userEmail'}
                                 inputClass={
                                   touched.userEmail && errors.userEmail
-                                    ? "is-invalid"
-                                    : ""
+                                    ? 'is-invalid'
+                                    : ''
                                 }
                                 inputType={INPUT_TYPES.email}
                                 name="userEmail"

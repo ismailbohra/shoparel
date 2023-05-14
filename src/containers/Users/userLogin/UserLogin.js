@@ -18,14 +18,6 @@ import UserLoginMail from './UserLoginMail';
 const UserLogin = (props) => {
   const [key, setKey] = useState('home');
 
-  // const [accountSetupForm, setAccountSetupForm] = useState({
-  //   userEmail: '',
-  //   userPassword: '',
-  // });
-  // const registerUser = (values) => {
-  //   // console.log(values);
-  //   props.userRegisterReq(values);
-  // };
   return (
     <Container fluid className="h-auto user-login">
       <Row className="">
@@ -67,19 +59,7 @@ const UserLogin = (props) => {
                 </h1>
               </Col>
               <Col sm={9} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
-                <Tabs
-                  id="controlled-tab-example"
-                  activeKey={key}
-                  onSelect={(k) => setKey(k)}
-                  className="logintab mb-3"
-                >
-                  <Tab eventKey="home" title="LOGIN WITH EMAIL">
-                    <Col lg={12}>
-                      <UserLoginMail />
-                    </Col>
-                  </Tab>
-                  
-                </Tabs>
+                <UserLoginMail/>
               </Col>
             </Row>
           </Container>

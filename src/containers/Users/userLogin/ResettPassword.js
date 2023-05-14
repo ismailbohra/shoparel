@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { MdOutlineArrowDropDown } from "react-icons/md";
-import "./UserLogin.scss";
+import { Form, Formik } from 'formik';
+import React, { useState } from 'react';
 import {
+  Button,
   Col,
   Container,
-  Row,
-  Button,
-  Modal,
-  FormSelect,
-  Tabs,
-  Tab,
-} from "react-bootstrap";
-import { Form, Formik } from "formik";
-import { INPUT_TYPES } from "../../../components/constants";
-import Input from "../../../components/Input";
-import { setResetPasswordValidation } from "../../../utils/validations";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import { userRegisterReq } from "../../../store/shared/users/UserAction";
-import UserLoginMail from "./UserLoginMail";
-import UserLoginOTP from "./UserLoginOTP";
+  Row
+} from 'react-bootstrap';
+import { MdOutlineArrowDropDown } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import Input from '../../../components/Input';
+import { INPUT_TYPES } from '../../../constants';
+import { setResetPasswordValidation } from '../../../utils/validations';
+import './UserLogin.scss';
 
 const ResetPassword = (props) => {
   const [accountSetupForm, setAccountSetupForm] = useState({
-    newPassword: "",
-    confirmPassword: "",
+    newPassword: '',
+    confirmPassword: '',
   });
   const resetPassword = (values) => {
     console.log(values);
@@ -50,11 +40,11 @@ const ResetPassword = (props) => {
         <Col lg={8} className="p-0 h-auto d-flex  flex-column">
           <div className="loginReg w-100 d-flex justify-content-end pt-lg-3 pt-2 pe-4">
             <div className="loginRegSpace">
-              <Link to={"/industryreg"} className="link me-3">
+              <Link to={'/industryreg'} className="link me-3">
                 Login
                 <MdOutlineArrowDropDown />
               </Link>
-              <Link to={"/userlist"} className="link me-3">
+              <Link to={'/userlist'} className="link me-3">
                 Register
                 <MdOutlineArrowDropDown />
               </Link>
@@ -101,11 +91,11 @@ const ResetPassword = (props) => {
                                 error={
                                   touched.newPassword && errors.newPassword
                                 }
-                                id={"newPassword"}
+                                id={'newPassword'}
                                 inputClass={
                                   touched.newPassword && errors.newPassword
-                                    ? "is-invalid"
-                                    : ""
+                                    ? 'is-invalid'
+                                    : ''
                                 }
                                 inputType={INPUT_TYPES.password}
                                 name="newPassword"
@@ -128,12 +118,12 @@ const ResetPassword = (props) => {
                                   touched.confirmPassword &&
                                   errors.confirmPassword
                                 }
-                                id={"confirmPassword"}
+                                id={'confirmPassword'}
                                 inputClass={
                                   touched.confirmPassword &&
                                   errors.confirmPassword
-                                    ? "is-invalid"
-                                    : ""
+                                    ? 'is-invalid'
+                                    : ''
                                 }
                                 inputType={INPUT_TYPES.password}
                                 name="confirmPassword"
