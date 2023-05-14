@@ -1,2 +1,0 @@
-export const LEAVE_TYPE_GET_REQ = "LEAVE_TYPE_GET_REQ";
-export const LEAVE_TYPE_GET_RES = "LEAVE_TYPE_GET_RES";

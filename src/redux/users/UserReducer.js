@@ -1,4 +1,4 @@
-import { STUDENT_LOGIN_EMAIL_RESP, STAFF_LOGIN_EMAIL_RESP } from "./UserType";
+import { STUDENT_LOGIN_EMAIL_RESP, STAFF_LOGIN_EMAIL_RESP, USER_LOGIN_EMAIL_RESP } from "./UserType";
 
 const INITIAL_STATE = {
   userProfile: {
@@ -27,9 +27,7 @@ const setUser = (state, action) => {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case STUDENT_LOGIN_EMAIL_RESP:
-      return setUser(state, action);
-    case STAFF_LOGIN_EMAIL_RESP:
+    case USER_LOGIN_EMAIL_RESP:
       return setUser(state, action);
     default:
       return state;

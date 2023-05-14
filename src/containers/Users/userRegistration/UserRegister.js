@@ -11,13 +11,14 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import { Form, Formik } from "formik";
-import { INPUT_TYPES } from "../../../components/constants";
+import { INPUT_TYPES } from "../../../constants";
 import Input from "../../../components/Input";
 import { setUserValidation } from "../../../utils/validations";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import { userRegisterReq } from "../../../store/shared/users/UserAction";
+import { userRegisterReq } from "../../../redux/users/UserAction";
+
 
 const UserRegister = (props) => {
   const [show, setShow] = useState(true);
