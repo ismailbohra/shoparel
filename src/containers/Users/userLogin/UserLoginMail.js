@@ -30,7 +30,7 @@ const UserLoginMail = (props) => {
   };
   const successCB = () => {
     console.log('successCB');
-    navigate('/dashboard');
+    navigate('/dashboard/Home');
   };
   return (
     <Formik

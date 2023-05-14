@@ -7,6 +7,7 @@ function Home() {
   const toggleDrawer=()=>{
     setdrawer(!drawer)
   }
+  
   return (
     <>
      <Navbar drawer={toggleDrawer}/>

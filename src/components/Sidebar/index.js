@@ -36,7 +36,7 @@ export default function TemporaryDrawer(props) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Home', 'Products', 'Order', 'Profile'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={()=>{gotopage(text)}}>
               <ListItemIcon>

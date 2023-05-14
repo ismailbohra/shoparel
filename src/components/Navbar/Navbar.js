@@ -15,6 +15,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { setSearchValueAction } from '../../redux/Navbar/Action';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,7 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar(props) {
+const PrimarySearchAppBar=(props)=> {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -79,6 +84,11 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const navigate=useNavigate()
+  const handleLogOut=()=>{
+    localStorage.clear()
+    navigate('/login')
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -99,6 +109,7 @@ export default function PrimarySearchAppBar(props) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogOut}>Log out</MenuItem>
     </Menu>
   );
 
@@ -153,7 +164,12 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
     </Menu>
   );
-
+  const [Value, setValue] = React.useState('')
+  React.useEffect(() => {
+    props.setSearchValue({value:Value},()=>{})
+  }, [Value])
+  
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -174,15 +190,17 @@ export default function PrimarySearchAppBar(props) {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            SHOPAAREL
           </Typography>
-          <Search>
+          <Search sx={{flexGrow:1}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e)=>{setValue(e.target.value)}}
+              value={Value}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
@@ -232,3 +250,16 @@ export default function PrimarySearchAppBar(props) {
     </Box>
   );
 }
+const mapStateToProps = (state) => ({
+  // studentList: state.User.studentList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setSearchValue: bindActionCreators(setSearchValueAction, dispatch),
+});
+
+PrimarySearchAppBar.propTypes = {
+  setSearchValue: PropTypes.func,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrimarySearchAppBar);

@@ -1,7 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { connect } from 'react-redux';
 
-function setting() {
-  return <div>setting</div>;
+const Setting=(props)=> {
+  const searchvalue = useSelector((state) => state.SearchBox.searchValue);
+  return (
+    <>
+    {searchvalue}
+    <h3>setting</h3>
+    </>
+  );
 }
 
-export default setting;
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Setting);

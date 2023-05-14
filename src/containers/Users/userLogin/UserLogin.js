@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Col,
   Container,
@@ -9,14 +9,23 @@ import {
 } from 'react-bootstrap';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { userRegisterReq } from '../../../redux/users/UserAction';
 import './UserLogin.scss';
 import UserLoginMail from './UserLoginMail';
+import Auth from '../../../utils/Auth';
 
 const UserLogin = (props) => {
   const [key, setKey] = useState('home');
+  // const navigate=useNavigate()
+  // const Authenticated=Auth.isAuth()
+  // useEffect(() => {
+  //   if (Authenticated) {
+  //     navigate('dashboard')
+  //   }
+  // }, [])
+  
 
   return (
     <Container fluid className="h-auto user-login">
