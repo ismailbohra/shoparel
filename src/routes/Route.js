@@ -10,15 +10,15 @@ import UserRegister from "../containers/Users/userRegistration/UserRegister";
 import ForgetPassword from "../containers/Users/userLogin/ForgetPassword";
 import ResetPassword from "../containers/Users/userLogin/ResettPassword";
 import Home from "../containers/Home";
+import  Setting  from "../containers/setting/setting";
 
 const Routes = () => {
-  let userType = Auth.getRoles();
+  let role = Auth.getRoles();
   const isAuth = Auth.isAuth();
   const location = useLocation();
   useEffect(() => {
-    userType = Auth.getRoles();
+    role = Auth.getRoles();
   }, [location]);
-
   return (
     <>
       <ReactRouterRoutes>
@@ -28,21 +28,16 @@ const Routes = () => {
         <Route path="/forgetPassword" element={<ForgetPassword />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
         {
-          isAuth?<Route path="/dashboard" element={<Home/>} />:null
+          isAuth?<Route path="/dashboard" element={<Home/>} >
+            <Route path="Inbox" element={<Setting/>}/>
+          </Route>:null
         }
 
-        <Route path="*" element={<BadRequest />} />
+        {/* <Route path="*" element={<UserLogin />} /> */}
       </ReactRouterRoutes>
     </>
   );
 };
 
-Routes.propTypes = {
-  userType: PropTypes.string,
-};
-
-Routes.defaultProps = {
-  userType: USER_TYPES.USER,
-};
 
 export default Routes;

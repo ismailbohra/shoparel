@@ -1,9 +1,17 @@
-import React from "react";
-import moment from "moment";
+import React, { useState } from "react";
+import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/Navbar/Navbar"
+import { Outlet } from "react-router-dom";
 function Home() {
+  const [drawer, setdrawer] = useState(false)
+  const toggleDrawer=()=>{
+    setdrawer(!drawer)
+  }
   return (
     <>
-      <div>house</div>;<div>Home</div>;<div>Home</div>;<div>Home</div>;
+     <Navbar drawer={toggleDrawer}/>
+     <Sidebar drawer={drawer} onDrawerChange={toggleDrawer}/>
+     <Outlet/>
     </>
   );
 }
