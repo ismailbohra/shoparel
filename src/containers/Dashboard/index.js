@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar/Navbar"
+import Navbar from "../../components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
 function Home() {
-  const [drawer, setdrawer] = useState(false)
-  const toggleDrawer=()=>{
-    setdrawer(!drawer)
-  }
-  
+  const [drawer, setdrawer] = useState(true);
+  const toggleDrawer = () => {
+    setdrawer(!drawer);
+  };
+
   return (
     <>
-     <Navbar drawer={toggleDrawer}/>
-     <Sidebar drawer={drawer} onDrawerChange={toggleDrawer}/>
-     <Outlet/>
+      <Navbar drawer={toggleDrawer} drawervalue={drawer} />
+      <Box sx={{ marginLeft: drawer?{ xs: "0px", sm: "240px" }:null ,marginTop:'80px'}}>
+        <Outlet />
+      </Box>
     </>
   );
 }
