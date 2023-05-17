@@ -3,7 +3,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import { Box } from "@mui/material";
 function Home() {
-  const [drawer, setdrawer] = useState(true);
+  const isMobile = window.innerWidth <= 768;
+  const [drawer, setdrawer] = useState(!isMobile);
   const toggleDrawer = () => {
     setdrawer(!drawer);
   };

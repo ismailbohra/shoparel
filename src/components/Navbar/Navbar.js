@@ -110,6 +110,9 @@ const PrimarySearchAppBar = (props) => {
     navigate("/login");
   };
   const gotopage=(text)=>{
+    if (window.innerWidth<=786) {
+      props.drawer()
+    }
     navigate(text)
   }
 
