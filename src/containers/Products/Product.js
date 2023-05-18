@@ -17,12 +17,18 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Product() {
+
+  const handleShowMoreClick=()=>{
+    
+  }
+
+
   return (
     <Box sx={{ flexGrow: 1 ,marginTop:5,margin:3}}>
       <Grid container spacing={{ xs: 2, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {Array.from(Array(10)).map((_, index) => (
           <Grid item xs={2} sm={2} md={3} key={index}>
-            <Item><ProductCard/></Item>
+            <Item onClick={handleShowMoreClick}><ProductCard/></Item>
           </Grid>
         ))}
       </Grid>

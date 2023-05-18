@@ -237,6 +237,7 @@ const PrimarySearchAppBar = (props) => {
                 setValue(e.target.value);
               }}
               value={Value}
+              sx={{width:'100%'}}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

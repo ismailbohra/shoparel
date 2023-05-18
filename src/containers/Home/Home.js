@@ -2,11 +2,15 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import * as React from "react";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import {BsClipboardData} from "react-icons/bs"
 import { BsClipboardCheck } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import Typography from '@mui/material/Typography';
+import Accepted from "./Accepted/Accepted";
+import Pending from "./Pending/Pending";
+import All from "./All/All";
+import Dispatched from "./Dispatched/Dispatched";
 
 
 function TabPanel(props) {
@@ -46,46 +50,48 @@ export default function ColorTabs() {
         indicatorColor="secondary"
         aria-label="secondary tabs example"
         centered
-        variant={isMobile ? "scrollable" : null}
-        scrollButtons={isMobile ? "auto" : null}
+        variant={isMobile ? "scrollable" : "fullWidth"}
+        scrollButtons="auto"
       >
         <Tab
           value={0}
+          label="All"
+          sx={{ fontSize: "15px", flexGrow: 1 }}
+          icon={<BsClipboardData size={size} />}
+        />
+        <Tab
+          value={1}
           label="pending"
           sx={{ fontSize: "15px", flexGrow: 1 }}
           icon={<MdPendingActions size={size} />}
         />
         <Tab
-          value={1}
+          value={2}
           label="accepted"
           sx={{ fontSize: "15px", flexGrow: 1 }}
           icon={<BsClipboardCheck size={size} />}
         />
         <Tab
-          value={2}
+          value={3}
           label="dispatched"
           sx={{ fontSize: "15px", flexGrow: 1 }}
           icon={<TbTruckDelivery size={size} />}
         />
-        <Tab
-          value={3}
-          label="received"
-          sx={{ fontSize: "15px", flexGrow: 1 }}
-          icon={<AiOutlineCheckCircle size={size} />}
-        />
+        
       </Tabs>
       <TabPanel value={value} index={0} >
-        pending
+        <All/>
       </TabPanel>
       <TabPanel value={value} index={1} >
-        accepted
+        <Pending/>
       </TabPanel>
       <TabPanel value={value} index={2} >
-        dispatched
+      <Accepted/>
       </TabPanel>
       <TabPanel value={value} index={3} >
-        received
+        <Dispatched/>
       </TabPanel>
+      
     </Box>
   );
 }
