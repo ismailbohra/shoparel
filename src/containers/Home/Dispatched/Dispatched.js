@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import TabularData from "../../../components/Table";
 
 import { rows } from "../../../components/Table/demoData";
+import PaymentColumn from "../../../components/Table/PaymentColumn";
+import { StatusColumn } from "../../../components/Table/StatusColumn";
 
 function sortDates(v1, v2) {
   
@@ -42,6 +44,9 @@ function sortDates(v1, v2) {
       headerAlign: "center",
       align: "center",
       flex: null,
+      renderCell: (cellValues) => {
+        return StatusColumn(cellValues);
+      },
     },
     {
       field: "paymentVerify",
@@ -50,6 +55,9 @@ function sortDates(v1, v2) {
       headerAlign: "center",
       align: "center",
       flex: null,
+      renderCell: (cellValues) => {
+        return PaymentColumn(cellValues);
+      },
     },
     {
       field: "orderid",

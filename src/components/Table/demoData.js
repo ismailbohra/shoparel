@@ -21,7 +21,7 @@ export const rows = [
     orderId: "p2jidlvy",
     Date: "1/26/2023",
     status: "Accepted",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "John",
@@ -29,7 +29,7 @@ export const rows = [
     orderId: "q5v0m2bh",
     Date: "9/30/2022",
     status: "Dispatched",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Ava",
@@ -61,7 +61,7 @@ export const rows = [
     orderId: "pv81rlbo",
     Date: "1/4/2023",
     status: "Accepted",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "William",
@@ -77,7 +77,7 @@ export const rows = [
     orderId: "kcn5lhjk",
     Date: "5/4/2023",
     status: "Pending",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Isabella",
@@ -85,7 +85,7 @@ export const rows = [
     orderId: "vfqqyxkn",
     Date: "12/27/2022",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Sophia",
@@ -101,7 +101,7 @@ export const rows = [
     orderId: "73r9dmt4",
     Date: "5/18/2022",
     status: "Dispatched",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Liam",
@@ -109,7 +109,7 @@ export const rows = [
     orderId: "ah8kyovp",
     Date: "6/8/2022",
     status: "Pending",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Noah",
@@ -149,7 +149,7 @@ export const rows = [
     orderId: "fczmcjkd",
     Date: "4/14/2022",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "William",
@@ -221,7 +221,7 @@ export const rows = [
     orderId: "9akz76ak",
     Date: "12/10/2022",
     status: "Pending",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Sophia",
@@ -245,7 +245,7 @@ export const rows = [
     orderId: "jcuyxdf8",
     Date: "8/6/2022",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Roxie",
@@ -253,7 +253,7 @@ export const rows = [
     orderId: "phnjvcx5",
     Date: "4/9/2022",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Oliver",
@@ -269,7 +269,7 @@ export const rows = [
     orderId: "ho5jspp5",
     Date: "4/4/2022",
     status: "Pending",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Sophia",
@@ -277,7 +277,7 @@ export const rows = [
     orderId: "65lk8422",
     Date: "9/17/2022",
     status: "Dispatched",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "William",
@@ -285,7 +285,7 @@ export const rows = [
     orderId: "01b54muq",
     Date: "2/22/2023",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Liam",
@@ -309,7 +309,7 @@ export const rows = [
     orderId: "keexo9ez",
     Date: "9/8/2022",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Sophia",
@@ -317,7 +317,7 @@ export const rows = [
     orderId: "c3xpvsc9",
     Date: "8/15/2022",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Ava",
@@ -357,7 +357,7 @@ export const rows = [
     orderId: "8e6kgynd",
     Date: "12/15/2022",
     status: "Dispatched",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Liam",
@@ -365,7 +365,7 @@ export const rows = [
     orderId: "9mjm328t",
     Date: "5/25/2022",
     status: "Dispatched",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Noah",
@@ -373,7 +373,7 @@ export const rows = [
     orderId: "eo59eu6z",
     Date: "4/29/2023",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "Oliver",
@@ -381,7 +381,7 @@ export const rows = [
     orderId: "nmsr0az1",
     Date: "12/15/2022",
     status: "reject",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
   {
     User: "John",
@@ -397,6 +397,6 @@ export const rows = [
     orderId: "7ce281nm",
     Date: "1/12/2022",
     status: "Dispatched",
-    paymentVerify: "verified",
+    paymentVerify: "Received",
   },
 ];

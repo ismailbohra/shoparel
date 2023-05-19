@@ -3,6 +3,10 @@ import React from "react";
 import { connect } from "react-redux";
 import TabularData from "../../../components/Table";
 import { rows } from "../../../components/Table/demoData";
+import Chip from "@mui/material/Chip";
+import { BsCheck2 } from "react-icons/bs";
+import { StatusColumn, renderCell } from "../../../components/Table/StatusColumn";
+import PaymentColumn from "../../../components/Table/PaymentColumn";
 
 function sortDates(v1, v2) {
   const date1 = new Date(v1);
@@ -38,6 +42,9 @@ const columns = [
     headerAlign: "center",
     align: "center",
     flex: 1,
+    renderCell: (cellValues) => {
+      return StatusColumn(cellValues);
+    },
   },
   {
     field: "paymentVerify",
@@ -46,6 +53,9 @@ const columns = [
     headerAlign: "center",
     align: "center",
     flex: 1,
+    renderCell: (cellValues) => {
+      return PaymentColumn(cellValues);
+    },
   },
   {
     field: "orderid",

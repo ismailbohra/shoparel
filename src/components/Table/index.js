@@ -16,7 +16,6 @@ export default function DataTable(props) {
     }
     return col;
   });
-  console.log(newColumns)
   const searchString = useSelector((state) => state.SearchBox.searchValue);
 
   const filteredObjects = rows.filter((obj) =>
@@ -27,7 +26,9 @@ export default function DataTable(props) {
       return false;
     })
   );
-
+  const handleClick=(row)=>{
+    console.log(row)
+  }
   return (
     <div style={{ height: height, width: "100%" }}>
       <DataGrid
@@ -43,6 +44,7 @@ export default function DataTable(props) {
         }}
         pageSizeOptions={[5, 10]}
         // checkboxSelection
+        onRowClick={handleClick}
       />
     </div>
   );
