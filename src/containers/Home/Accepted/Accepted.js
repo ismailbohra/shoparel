@@ -14,14 +14,14 @@ function sortDates(v1, v2) {
 
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "User", headerName: "User", width: 130, flex: {xs:null,md:1} },
+  { field: "id", headerName: "ID", width: 70, },
+  { field: "User", headerName: "User", width: 130, flex: null },
   {
     field: "Date",
     headerName: "Date",
     align: "center",
     headerAlign: "center",
-    flex: {xs:null,md:1},
+    flex: null,
     sortComparator: (v1, v2) => sortDates(v1, v2)
   },
   {
@@ -31,7 +31,7 @@ const columns = [
     width: 130,
     headerAlign: "center",
     align: "center",
-    flex: {xs:null,md:1},
+    flex: null,
   },
   {
     field: "status",
@@ -39,7 +39,7 @@ const columns = [
     width: 130,
     headerAlign: "center",
     align: "center",
-    flex: {xs:null,md:1},
+    flex: null,
   },
   {
     field: "paymentVerify",
@@ -47,7 +47,7 @@ const columns = [
     width: 130,
     headerAlign: "center",
     align: "center",
-    flex: {xs:null,md:1},
+    flex: null,
   },
   {
     field: "orderid",
@@ -58,7 +58,7 @@ const columns = [
     valueGetter: (params) => `${params.row.orderId || ""}`,
     headerAlign: "center",
     align: "center",
-    flex: {xs:null,md:1},
+    flex: null,
   },
 ];
 

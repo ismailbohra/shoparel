@@ -2,28 +2,25 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import TabularData from "../../../components/Table";
-import {rows} from '../../../components/Table/demoData'
+import { rows } from "../../../components/Table/demoData";
 
 function sortDates(v1, v2) {
-  
-    const date1 = new Date(v1);
-    const date2 = new Date(v2);
-  
-      return date2 - date1; 
-    
-  }
-  
-  
+  const date1 = new Date(v1);
+  const date2 = new Date(v2);
+
+  return date2 - date1;
+}
+
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "User", headerName: "User", width: 130, flex: {xs:null,md:1} },
+  { field: "User", headerName: "User", width: 130, flex: 1 },
   {
     field: "Date",
     headerName: "Date",
     align: "center",
     headerAlign: "center",
-    flex: {xs:null,md:1},
-    sortComparator: (v1, v2) => sortDates(v1, v2)
+    flex: 1,
+    sortComparator: (v1, v2) => sortDates(v1, v2),
   },
   {
     field: "Amount",
@@ -32,7 +29,7 @@ const columns = [
     width: 130,
     headerAlign: "center",
     align: "center",
-    flex: {xs:null,md:1},
+    flex: 1,
   },
   {
     field: "status",
@@ -40,7 +37,7 @@ const columns = [
     width: 130,
     headerAlign: "center",
     align: "center",
-    flex: {xs:null,md:1},
+    flex: 1,
   },
   {
     field: "paymentVerify",
@@ -48,7 +45,7 @@ const columns = [
     width: 130,
     headerAlign: "center",
     align: "center",
-    flex: {xs:null,md:1},
+    flex: 1,
   },
   {
     field: "orderid",
@@ -59,11 +56,9 @@ const columns = [
     valueGetter: (params) => `${params.row.orderId || ""}`,
     headerAlign: "center",
     align: "center",
-    flex: {xs:null,md:1},
+    flex: 1,
   },
 ];
-
-
 
 export const All = (props) => {
   return (
