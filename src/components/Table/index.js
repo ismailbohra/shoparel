@@ -1,6 +1,7 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function DataTable(props) {
   const { rows, columns, height } = props;
@@ -26,9 +27,10 @@ export default function DataTable(props) {
       return false;
     })
   );
-  const handleClick=(row)=>{
-    console.log(row)
-  }
+  const navigate = useNavigate();
+  const handleClick = (element) => {
+    navigate("../Order", { state: { row: element.row } });
+  };
   return (
     <div style={{ height: height, width: "100%" }}>
       <DataGrid

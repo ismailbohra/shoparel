@@ -6,3 +6,6 @@ export const Login = React.lazy(() =>
 export const Setting = React.lazy(() =>
   import("../containers/setting/setting")
 );
+export const Order = React.lazy(() =>
+  import("../containers/Order/Order")
+);

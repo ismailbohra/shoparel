@@ -13,6 +13,7 @@ import Dashboard from "../containers/Dashboard";
 import  Setting  from "../containers/setting/setting";
 import Product from "../containers/Products/Product";
 import Home from "../containers/Home/Home";
+import Order from "../containers/Order/Order";
 
 const Routes = () => {
   let role = Auth.getRoles();
@@ -33,7 +34,7 @@ const Routes = () => {
           isAuth?<Route path="/dashboard" element={<Dashboard/>} >
             <Route path="Home" element={<Home/>}/>
             <Route path="Products" element={<Product/>}/>
-            <Route path="Orders" element={<Setting/>}/>
+            <Route path="Order" element={<Order/>}/>
             <Route path="Profile" element={<Setting/>}/>
           </Route>:null
         }
