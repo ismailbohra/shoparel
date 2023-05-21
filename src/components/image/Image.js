@@ -6,9 +6,9 @@ function Image(props) {
     <CardMedia
           component="img"
           height={props.height}
-          width={props.width}
           image={props.url}
           alt="image"
+          sx={{maxWidth:props.width,objectFit:'fill',border:1,borderRadius:props.borderRadius,border:props.border}}
         />
   )
 }

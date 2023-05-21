@@ -34,7 +34,7 @@ const Android12Switch = styled(Switch)(({ theme }) => ({
     backgroundColor: "white", // Set the background color of the switch thumb to black
   },
   "& .MuiButtonBase-root.Mui-checked + .MuiSwitch-track": {
-    backgroundColor: "black", // Set the background color of the switch track when checked to #22367f
+    backgroundColor: "darkBlue", // Set the background color of the switch track when checked to #22367f
   },
 }));
 

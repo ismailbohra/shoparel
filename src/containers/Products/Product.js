@@ -7,6 +7,7 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { useNavigate } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -17,9 +18,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Product() {
-
+  const navigate=useNavigate()
   const handleShowMoreClick=()=>{
-    
+    navigate('../ProductDetails',{ state: { row: "ismail" } })
   }
 
 

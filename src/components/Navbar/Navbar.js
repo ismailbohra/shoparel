@@ -224,7 +224,7 @@ const PrimarySearchAppBar = (props) => {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            SHOPAAREL
+            BOHRA TRADERS
           </Typography>
           <Search sx={{ flexGrow: 1 }}>
             <SearchIconWrapper>
@@ -315,7 +315,7 @@ const PrimarySearchAppBar = (props) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Home", "Products", "Order", "Profile"].map((text, index) => (
+          {["Home", "Products", "Profile"].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton
                 onClick={() => {
