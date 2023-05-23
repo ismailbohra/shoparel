@@ -26,10 +26,12 @@ import Typography from "@mui/material/Typography";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import * as React from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { setSearchValueAction } from "../../redux/Navbar/Action";
+import {FaShoppingCart} from 'react-icons/fa'
+import { clearCartAction } from "../../redux/Order/Action";
 
 const drawerWidth = 240;
 const Search = styled("div")(({ theme }) => ({
@@ -81,6 +83,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const PrimarySearchAppBar = (props) => {
+  const cart =  useSelector((state) => state.Cart.productList);
+
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -107,6 +111,7 @@ const PrimarySearchAppBar = (props) => {
   const navigate = useNavigate();
   const handleLogOut = () => {
     localStorage.clear();
+    props.clearCart()
     navigate("/login");
   };
   const gotopage=(text)=>{
@@ -115,7 +120,10 @@ const PrimarySearchAppBar = (props) => {
     }
     navigate(text)
   }
-
+  const handleGoToOrder=()=>{
+    console.log('dfdfsd')
+    navigate('Order')
+  }
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -156,13 +164,13 @@ const PrimarySearchAppBar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
+      <MenuItem onClick={handleGoToOrder}>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit" >
+          <Badge badgeContent={cart.length} color="error">
+            <FaShoppingCart size={20} />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Cart</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -194,10 +202,7 @@ const PrimarySearchAppBar = (props) => {
   React.useEffect(() => {
     props.setSearchValue({ value: Value }, () => {});
   }, [Value]);
-  const [open, setOpen] = React.useState(false);
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+ 
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -246,9 +251,10 @@ const PrimarySearchAppBar = (props) => {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              onClick={handleGoToOrder}
             >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+              <Badge badgeContent={cart.length} color="error">
+                <FaShoppingCart size={20}/>
               </Badge>
             </IconButton>
             <IconButton
@@ -355,6 +361,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setSearchValue: bindActionCreators(setSearchValueAction, dispatch),
+  clearCart:bindActionCreators(clearCartAction,dispatch)
 });
 
 PrimarySearchAppBar.propTypes = {

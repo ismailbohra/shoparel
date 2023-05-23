@@ -15,6 +15,7 @@ import { userRegisterReq } from '../../../redux/users/UserAction';
 import './UserLogin.scss';
 import UserLoginMail from './UserLoginMail';
 import Auth from '../../../utils/Auth';
+import { clearCartAction } from '../../../redux/Order/Action';
 
 const UserLogin = (props) => {
   const [key, setKey] = useState('home');
@@ -25,6 +26,7 @@ const UserLogin = (props) => {
   //     navigate('dashboard')
   //   }
   // }, [])
+  
   
 
   return (

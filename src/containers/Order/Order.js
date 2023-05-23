@@ -11,8 +11,8 @@ import ProductForm from "./ProductForm";
 
 
 export const Order = (props) => {
-  const { state } = useLocation();
-  const { row } = state;
+  // const { state } = useLocation();
+  // const { row } = state;
   return (
     <>
     

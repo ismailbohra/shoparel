@@ -13,153 +13,37 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import Image from "../../components/image/Image";
-import imgurl from "../../assets/images/cosmeticimage.png";
+import imgurl from "../../assets/images/lorealshampoo.png";
+import ColorStack from "../../components/ColorStack/ColorStack";
+import { useLocation } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { addToCartAction } from "../../redux/Order/Action";
 export const ProductDetails = (props) => {
-  const product = {
-    productImageUrl: imgurl,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec    odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla    quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent    mauris. Fusce nec tellus sed augue semper porta. Mauris massa.    Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad    litora torquent per conubia nostra, per inceptos himenaeos.    Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.    Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem    at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut    ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel,    suscipit quis, luctus non, massa. Fusce ac turpis quis ligula    lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel,    tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit.    Class aptent taciti sociosqu ad litora torquent per conubia nostra,    per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non    tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante    quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc    feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin    quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit.",
-    price: "999",
-    mrp:'1199',
-    name: "Loreal Shampoo powder talc ipsfdsfsafsfds fdsfsdf sdfasf dfsdfasd",
-    category: "solid",
-    productType: "pencil",
-    quantity: ["60 ml", "100 ml", "500 ml"],
-    productColors: [
-      {
-        hexValue: "#b72227",
-        colourName: "Bee's Knees",
-      },
-      {
-        hexValue: "#BB656B",
-        colourName: "Brain Freeze",
-      },
-      {
-        hexValue: "#8E4140",
-        colourName: "Drip",
-      },
-      {
-        hexValue: "#A12A33",
-        colourName: "On a Stick",
-      },
-      {
-        hexValue: "#904550",
-        colourName: "Ice Cube",
-      },
-      {
-        hexValue: "#452222",
-        colourName: "Lolly",
-      },
-      {
-        hexValue: "#7C3F35",
-        colourName: "Candyfloss",
-      },
-      {
-        hexValue: "#b72227",
-        colourName: "Bee's Knees",
-      },
-      {
-        hexValue: "#BB656B",
-        colourName: "Brain Freeze",
-      },
-      {
-        hexValue: "#8E4140",
-        colourName: "Drip",
-      },
-      {
-        hexValue: "#A12A33",
-        colourName: "On a Stick",
-      },
-      {
-        hexValue: "#904550",
-        colourName: "Ice Cube",
-      },
-      {
-        hexValue: "#452222",
-        colourName: "Lolly",
-      },
-      {
-        hexValue: "#7C3F35",
-        colourName: "Candyfloss",
-      },
-      {
-        hexValue: "#b72227",
-        colourName: "Bee's Knees",
-      },
-      {
-        hexValue: "#BB656B",
-        colourName: "Brain Freeze",
-      },
-      {
-        hexValue: "#8E4140",
-        colourName: "Drip",
-      },
-      {
-        hexValue: "#A12A33",
-        colourName: "On a Stick",
-      },
-      {
-        hexValue: "#904550",
-        colourName: "Ice Cube",
-      },
-      {
-        hexValue: "#452222",
-        colourName: "Lolly",
-      },
-      {
-        hexValue: "#7C3F35",
-        colourName: "Candyfloss",
-      },
-      {
-        hexValue: "#A12A33",
-        colourName: "On a Stick",
-      },
-      {
-        hexValue: "#904550",
-        colourName: "Ice Cube",
-      },
-      {
-        hexValue: "#452222",
-        colourName: "Lolly",
-      },
-      {
-        hexValue: "#7C3F35",
-        colourName: "Candyfloss",
-      },
-      {
-        hexValue: "#A12A33",
-        colourName: "On a Stick",
-      },
-      {
-        hexValue: "#904550",
-        colourName: "Ice Cube",
-      },
-      {
-        hexValue: "#452222",
-        colourName: "Lolly",
-      },
-      {
-        hexValue: "#7C3F35",
-        colourName: "Candyfloss",
-      },
-    ],
-  };
+  const { state } = useLocation();
+  const { element } = state;
+  const product = element;
   const [selectedColor, setSelectedColor] = useState(0);
-  const handleSelectColor = (index) => {
+  const [selectedColorValue, setSelectedColorValue] = useState(product?.product_colors?.[0]?.colourName || null);
+
+  const handleSelectColor = (index, element) => {
     setSelectedColor(index);
+    setSelectedColorValue(element.productColors);
   };
 
-//   const [initialIndex, setinitialIndex] = useState(false);
-//   const [lastIndex, setlastIndex] = useState(false);
-//   const [currentIndex, setCurrentIndex] = useState(5)
-//   let color=[]
-//   const handlePreviousColor=()=>{
-//     color=product.productColors.slice(currentIndex-5,currentIndex,currentIndex)
-//   }
-//   const handleNextColor=()=>{
-//     color=product.productColors.slice(currentIndex,currentIndex+5)
-//   }
-  
+  const [quantity, setQuantity] = useState(1);
+  const handleAddToCart = () => {
+    const temp = {
+      productId:product.id,
+      quantity:quantity,
+      color:selectedColorValue,
+      price:product.price,
+      name:product.name,
+      image_link:product.image_link
+    };
+    props.addToCartReq(temp);
+  };
+  const [flagForProccedTocheckoutButton, setFlagForProccedTocheckoutButton] =
+    useState(false);
   return (
     <Grid container>
       <Grid item xs={12} md={5} p={3}>
@@ -169,7 +53,7 @@ export const ProductDetails = (props) => {
           direction={"column"}
         >
           <Image
-            url={product.productImageUrl}
+            url={product.image_link}
             height={400}
             width={400}
             borderRadius={5}
@@ -182,65 +66,66 @@ export const ProductDetails = (props) => {
           <Typography pt={1} sx={{ color: "grey" }}>
             {product.category} {product.productType}
           </Typography>
-          <Typography sx={{fontWeight:'#1A2027',fontSize:'25px'}}>
-          ₹ {product.price}
+          <Typography sx={{ fontWeight: "#1A2027", fontSize: "25px" }}>
+            ₹ {product.price}
           </Typography>
-          {product.productColors.length > 0 && (
+          {product.product_colors > 0 && (
             <>
               <Typography pt={1} sx={{ fontSize: "20px" }}>
                 Select Color
               </Typography>
               <Stack direction={"row"} m={1} flexWrap={"wrap"}>
-                {/* {initialIndex && <Avatar onClick={handlePreviousColor} src={imgurl} sx={{ margin: 0.5 }} />} */}
-                {product.productColors.map((element, index) => {
-                  return (
-                    <Tooltip title={element.colourName}>
-                      <Avatar
-                        key={index}
-                        sx={{
-                          bgcolor: element.hexValue,
-                          margin: 0.5,
-                          border: index == selectedColor ? 4 : null,
-                          borderColor: index == selectedColor ? "black" : null,
-                          boxShadow: index == selectedColor ? 5 : null,
-                        }}
-                        m={0.5}
-                        onClick={() => {
-                          handleSelectColor(index);
-                        }}
-                      >
-                        &nbsp;
-                      </Avatar>
-                    </Tooltip>
-                  );
-                })}
-                {/* {lastIndex && <Avatar onClick={handleNextColor} src={imgurl} sx={{ margin: 0.5 }} />} */}
+                <ColorStack
+                  colorList={product.product_colors}
+                  selectedColor={selectedColor}
+                  handleSelectColor={handleSelectColor}
+                  numbers={5}
+                />
               </Stack>
             </>
           )}
-          <Typography pt={1} sx={{ fontSize: "20px" }}>
-            Select Quantity
-          </Typography>
-          <TextField
-            id="quantity"
-            name=""
-            select
-            // value={formik.values.mode}
-            // onChange={formik.handleChange}
-            sx={{ width: "6rem", marginTop: 1,marginBottom:1 }}
-            size="small"
-          >
-            {product.quantity.map((element, index) => {
-              return (
-                <MenuItem value={element} key={index} defaultValue={element}>
-                  {element}
-                </MenuItem>
-              );
-            })}
-          </TextField>
-          <Button variant="contained" sx={{width:200}}>
-            Add to Cart
-          </Button>
+          <Grid container direction={"row"} spacing={1} alignItems={"center"}>
+            <Grid item xs={6} lg={2}>
+              <TextField
+                id="quantity"
+                name="quantity"
+                label="Quantity"
+                value={quantity}
+                onChange={(e) => {
+                  setQuantity(e.target.value);
+                }}
+                sx={{ margin: 1 }}
+                size="small"
+              />
+            </Grid>
+            <Grid item xs={6} lg={4}>
+              <Button
+                // size=""
+                onClick={handleAddToCart}
+                variant="contained"
+                // sx={{ width: 200, height: 40, marginTop: 5 }}
+              >
+                Add to Cart
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid item xs={6} lg={6} >
+            <Button
+              // size="small"
+              variant="contained"
+              sx={{
+                backgroundColor: "green",
+                ":hover": {
+                  bgcolor: "green",
+                  color: "white",
+                },
+                margin: 1,
+                width:'67%'
+              }}
+            >
+              checkout
+            </Button>
+          </Grid>
         </Stack>
       </Grid>
       <Grid item xs={12}>
@@ -261,6 +146,8 @@ ProductDetails.propTypes = {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+  addToCartReq: bindActionCreators(addToCartAction, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

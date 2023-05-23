@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import ProductCard from '../../components/Product Card/ProductCard'
 
@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
+import * as list from '../../assets/DemoData/product'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -17,19 +18,26 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function Product() {
-  const navigate=useNavigate()
-  const handleShowMoreClick=()=>{
-    navigate('../ProductDetails',{ state: { row: "ismail" } })
-  }
+const Product = () => {
+  const navigate = useNavigate();
 
+  const handleShowMoreClick = (product) => {
+    navigate('../ProductDetails', { state: { element: product } });
+  };
+
+  const [productList, setProductList] = useState(list.productList);
 
   return (
     <Box sx={{ flexGrow: 1 ,marginTop:5,margin:3}}>
       <Grid container spacing={{ xs: 2, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {Array.from(Array(10)).map((_, index) => (
-          <Grid item xs={2} sm={2} md={3} key={index}>
-            <Item onClick={handleShowMoreClick}><ProductCard/></Item>
+        {productList.map((element, index) => (
+          <Grid item xs={12} sm={4} md={3} lg={3} key={index}>
+            <Item sx={{ height: '100%' }}>
+              <ProductCard
+                handleShowMoreClick={handleShowMoreClick}
+                element={element}
+              />
+            </Item>
           </Grid>
         ))}
       </Grid>
