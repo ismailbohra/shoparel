@@ -17,7 +17,7 @@ import imgurl from "../../assets/images/lorealshampoo.png";
 import ColorStack from "../../components/ColorStack/ColorStack";
 import { useLocation } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { addToCartAction } from "../../redux/Order/Action";
+import { addToCartAction } from "../../redux/Cart/Action";
 export const ProductDetails = (props) => {
   const { state } = useLocation();
   const { element } = state;
@@ -69,7 +69,7 @@ export const ProductDetails = (props) => {
           <Typography sx={{ fontWeight: "#1A2027", fontSize: "25px" }}>
             ₹ {product.price}
           </Typography>
-          {product.product_colors > 0 && (
+          {product.product_colors && (
             <>
               <Typography pt={1} sx={{ fontSize: "20px" }}>
                 Select Color

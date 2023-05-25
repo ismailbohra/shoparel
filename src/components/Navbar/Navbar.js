@@ -31,7 +31,7 @@ import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { setSearchValueAction } from "../../redux/Navbar/Action";
 import {FaShoppingCart} from 'react-icons/fa'
-import { clearCartAction } from "../../redux/Order/Action";
+import { clearCartAction } from "../../redux/Cart/Action";
 
 const drawerWidth = 240;
 const Search = styled("div")(({ theme }) => ({

@@ -31,7 +31,7 @@ const Product = () => {
     <Box sx={{ flexGrow: 1 ,marginTop:5,margin:3}}>
       <Grid container spacing={{ xs: 2, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {productList.map((element, index) => (
-          <Grid item xs={12} sm={4} md={3} lg={3} key={index}>
+          <Grid item xs={12} sm={4} md={12/4} key={index}>
             <Item sx={{ height: '100%' }}>
               <ProductCard
                 handleShowMoreClick={handleShowMoreClick}

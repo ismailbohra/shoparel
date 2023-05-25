@@ -15,7 +15,7 @@ import image from "../../assets/images/iesblurr.jpg";
 import PropTypes from "prop-types";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addToCartAction } from "../../redux/Order/Action";
+import { addToCartAction } from "../../redux/Cart/Action";
 import ColorStack from "../ColorStack/ColorStack";
 import { useState } from "react";
 
@@ -41,15 +41,16 @@ export const ProductCard = (props) => {
   };
 
   return (
-    <Card sx={{flexGrow:1}} elevation={0}>
+    <Card elevation={0}>
       <CardActionArea
         onClick={() => {
           props.handleShowMoreClick(product);
         }}
+        sx={{height:'100%',width:'100%'}}
       >
         <CardMedia
           component="img"
-          height="200"
+          height="150"
           image={product.image_link}
           alt="product image"
           sx={{objectFit:'fill'}}
@@ -76,7 +77,7 @@ export const ProductCard = (props) => {
               display: "-webkit-box",
               overflow: "hidden",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 3,
+              WebkitLineClamp: 2,
             }}
           >
             {product.description}

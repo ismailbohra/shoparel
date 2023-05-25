@@ -11,7 +11,10 @@ const axiosClient = (baseUrl, config) =>
 
 const microServicesURLs = {
   TIKIT_TEST: `${config.apiGateway.TEST}`,
-  USER:`${config.apiGateway.USER}`
+  USER: `${config.apiGateway.USER}`,
+  PRODUCT: `${config.apiGateway.PRODUCT}`,
+  ORDER: `${config.apiGateway.ORDER}`,
+  ADMIN: `${config.apiGateway.ADMIN}`,
 };
 
 const clients = {};

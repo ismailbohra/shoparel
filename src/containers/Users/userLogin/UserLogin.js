@@ -15,7 +15,7 @@ import { userRegisterReq } from '../../../redux/users/UserAction';
 import './UserLogin.scss';
 import UserLoginMail from './UserLoginMail';
 import Auth from '../../../utils/Auth';
-import { clearCartAction } from '../../../redux/Order/Action';
+import { clearCartAction } from '../../../redux/Cart/Action';
 
 const UserLogin = (props) => {
   const [key, setKey] = useState('home');

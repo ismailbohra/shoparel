@@ -5,7 +5,7 @@ import { connect, useSelector } from "react-redux";
 import Image from "../../components/image/Image";
 import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import { bindActionCreators } from "redux";
-import { addToCartAction } from "../../redux/Order/Action";
+import { addToCartAction } from "../../redux/Cart/Action";
 
 
 
