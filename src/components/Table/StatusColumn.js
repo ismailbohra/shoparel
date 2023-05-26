@@ -7,16 +7,16 @@ import { RiInformationLine } from 'react-icons/ri';
 
 export const StatusColumn = (cellValues) => {
   const color = {
-    Pending: "#808080",
-    Accepted: "blue",
-    Dispatched: "#00FF00",
-    reject: "red",
+    PENDING: "#808080",
+    ACCEPTED: "blue",
+    DISPATCHED: "#00FF00",
+    REJECT: "red",
   };
   const icons = {
-    Pending: <AiOutlineClockCircle style={{color:color["Pending"]}}/>,
-    Accepted: <RiInformationLine style={{color:color["Accepted"]} }/>,
-    Dispatched: <BsCheck2 style={{color:color["Dispatched"]}}/>,
-    reject: <MdReportProblem style={{color:color["reject"]}}/>,
+    Pending: <AiOutlineClockCircle style={{color:color["PENDING"]}}/>,
+    Accepted: <RiInformationLine style={{color:color["ACCEPTED"]} }/>,
+    Dispatched: <BsCheck2 style={{color:color["DISPATCHED"]}}/>,
+    reject: <MdReportProblem style={{color:color["REJECT"]}}/>,
   };
 
   return (

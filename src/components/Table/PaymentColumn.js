@@ -1,7 +1,7 @@
 import React from 'react'
 
 function PaymentColumn(cellValues){
-    const color=(cellValues.value=="Pending")?"#008080":"#FFA500"
+    const color=(cellValues.value=="PENDING")?"#008080":"#FFA500"
     return(
       <div style={{color:color}}>
         {cellValues.value}

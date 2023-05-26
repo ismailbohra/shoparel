@@ -1,17 +1,17 @@
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import * as React from "react";
-import {BsClipboardData} from "react-icons/bs"
-import { BsClipboardCheck } from "react-icons/bs";
+import Typography from "@mui/material/Typography";
+import { BsClipboardCheck, BsClipboardData } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
-import Typography from '@mui/material/Typography';
 import Accepted from "./Accepted/Accepted";
-import Pending from "./Pending/Pending";
 import All from "./All/All";
 import Dispatched from "./Dispatched/Dispatched";
-
+import Pending from "./Pending/Pending";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -33,7 +33,10 @@ function TabPanel(props) {
   );
 }
 
-export default function ColorTabs() {
+
+
+export const Home = (props) => {
+  
   const [value, setValue] = React.useState(0);
   const isMobile = window.innerWidth <= 786;
 
@@ -71,27 +74,36 @@ export default function ColorTabs() {
           sx={{ fontSize: "15px", flexGrow: 1 }}
           icon={<BsClipboardCheck size={size} />}
         />
-        <Tab
+        <Tabs
           value={3}
           label="dispatched"
           sx={{ fontSize: "15px", flexGrow: 1 }}
           icon={<TbTruckDelivery size={size} />}
         />
-        
       </Tabs>
-      <TabPanel value={value} index={0} >
-        <All/>
+      <TabPanel value={value} index={0}>
+        <All />
       </TabPanel>
-      <TabPanel value={value} index={1} >
-        <Pending/>
+      <TabPanel value={value} index={1}>
+        <Pending />
       </TabPanel>
-      <TabPanel value={value} index={2} >
-      <Accepted/>
+      <TabPanel value={value} index={2}>
+        <Accepted />
       </TabPanel>
-      <TabPanel value={value} index={3} >
-        <Dispatched/>
+      <TabPanel value={value} index={3}>
+        <Dispatched />
       </TabPanel>
-      
     </Box>
   );
+
 }
+
+Home.propTypes = {
+  second: PropTypes.func
+}
+
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

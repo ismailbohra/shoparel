@@ -1,12 +1,17 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import TabularData from "../../../components/Table";
 import { rows } from "../../../components/Table/demoData";
 import Chip from "@mui/material/Chip";
 import { BsCheck2 } from "react-icons/bs";
-import { StatusColumn, renderCell } from "../../../components/Table/StatusColumn";
+import {
+  StatusColumn,
+  renderCell,
+} from "../../../components/Table/StatusColumn";
 import PaymentColumn from "../../../components/Table/PaymentColumn";
+import { bindActionCreators } from "redux";
+import { getOrderReqAction } from "../../../redux/Order/OrderAction";
 
 function sortDates(v1, v2) {
   const date1 = new Date(v1);
@@ -71,9 +76,26 @@ const columns = [
 ];
 
 export const All = (props) => {
+  let orders = [];
+  useEffect(() => {
+    props.getOrderReq({}, () => {});
+  }, []);
+  props.orders.forEach((user) => {
+    user.orders.forEach((order) => {
+      const temp = {
+        User: user.firstName,
+        Amount: order.payment.amount,
+        orderId: order.orderId,
+        Date: order.CreatedAt,
+        status: order.status,
+        paymentVerify: order.payment.status,
+      };
+      orders.push(temp)
+    });
+  });
   return (
     <>
-      <TabularData rows={rows} columns={columns} height={550} />
+      <TabularData rows={orders} columns={columns} height={550} />
     </>
   );
 };
@@ -82,8 +104,12 @@ All.propTypes = {
   second: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  orders: state.Order.orders,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+  getOrderReq: bindActionCreators(getOrderReqAction, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(All);
