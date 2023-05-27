@@ -74,7 +74,7 @@ export const Home = (props) => {
           sx={{ fontSize: "15px", flexGrow: 1 }}
           icon={<BsClipboardCheck size={size} />}
         />
-        <Tabs
+        <Tab
           value={3}
           label="dispatched"
           sx={{ fontSize: "15px", flexGrow: 1 }}

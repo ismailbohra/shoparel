@@ -1,16 +1,12 @@
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import TabularData from "../../../components/Table";
-import { rows } from "../../../components/Table/demoData";
-import Chip from "@mui/material/Chip";
-import { BsCheck2 } from "react-icons/bs";
-import {
-  StatusColumn,
-  renderCell,
-} from "../../../components/Table/StatusColumn";
-import PaymentColumn from "../../../components/Table/PaymentColumn";
 import { bindActionCreators } from "redux";
+import TabularData from "../../../components/Table";
+import PaymentColumn from "../../../components/Table/PaymentColumn";
+import {
+  StatusColumn
+} from "../../../components/Table/StatusColumn";
 import { getOrderReqAction } from "../../../redux/Order/OrderAction";
 
 function sortDates(v1, v2) {
@@ -83,7 +79,7 @@ export const All = (props) => {
   props.orders.forEach((user) => {
     user.orders.forEach((order) => {
       const temp = {
-        User: user.firstName,
+        User: `${user.firstName} ${user.lastName}`,
         Amount: order.payment.amount,
         orderId: order.orderId,
         Date: order.CreatedAt,

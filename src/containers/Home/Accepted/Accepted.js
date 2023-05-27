@@ -3,22 +3,18 @@ import React from "react";
 import { connect } from "react-redux";
 import TabularData from "../../../components/Table";
 import PaymentColumn from "../../../components/Table/PaymentColumn";
-import { rows } from '../../../components/Table/demoData';
+import { rows } from "../../../components/Table/demoData";
 import { StatusColumn } from "../../../components/Table/StatusColumn";
 
-
 function sortDates(v1, v2) {
-  
   const date1 = new Date(v1);
   const date2 = new Date(v2);
 
-    return date2 - date1; 
-  
+  return date2 - date1;
 }
 
-
 const columns = [
-  { field: "id", headerName: "ID", width: 70, },
+  { field: "id", headerName: "ID", width: 70 },
   { field: "User", headerName: "User", width: 130, flex: null },
   {
     field: "Date",
@@ -26,7 +22,7 @@ const columns = [
     align: "center",
     headerAlign: "center",
     flex: null,
-    sortComparator: (v1, v2) => sortDates(v1, v2)
+    sortComparator: (v1, v2) => sortDates(v1, v2),
   },
   {
     field: "Amount",
@@ -72,12 +68,24 @@ const columns = [
   },
 ];
 
-
-const datarows = rows.filter((row) => {
-    return row.status === "Accepted";
-  });
-
 export const Accepted = (props) => {
+  let orders = [];
+  props.orders.forEach((user) => {
+    user.orders.forEach((order) => {
+      const temp = {
+        User: `${user.firstName} ${user.lastName}`,
+        Amount: order.payment.amount,
+        orderId: order.orderId,
+        Date: order.CreatedAt,
+        status: order.status,
+        paymentVerify: order.payment.status,
+      };
+      orders.push(temp);
+    });
+  });
+  const datarows = orders.filter((row) => {
+    return row.status === "ACCEPTED";
+  });
   return (
     <>
       <TabularData rows={datarows} columns={columns} height={550} />
@@ -89,7 +97,9 @@ Accepted.propTypes = {
   second: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  orders: state.Order.orders,
+});
 
 const mapDispatchToProps = {};
 
