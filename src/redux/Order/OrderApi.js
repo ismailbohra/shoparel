@@ -1,7 +1,10 @@
 import axiosInstance, { microServices } from "../../network/apis";
 
 export const getOrderApi = async (payload) => {
-  return await axiosInstance("get", "/getOrder", payload,
+  const orderId=(payload.orderId)?`orderId=${payload.orderId}`:''
+  const userId=(payload.userId)?`userId=${payload.userId}`:''
+  const url=`/getOrder?${orderId}&${userId}`
+  return await axiosInstance("get", url, payload,
   {
     server: microServices.ORDER,
     successMessage: "Hello",

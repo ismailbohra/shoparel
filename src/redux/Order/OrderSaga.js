@@ -9,6 +9,9 @@ export function* getOrderSaga(action) {
     const response = yield call(api.getOrderApi, action.payload);
     // Handle success response
     yield put(actions.getOrderRespAction(response));
+    if(action.successCallback){
+      yield call(action.successCallback)
+    }
   } catch (error) {
     // Handle error
     console.log(error);
@@ -18,9 +21,10 @@ export function* getOrderSaga(action) {
 // UPDATE_ORDER_REQ saga
 export function* updateOrderSaga(action) {
   try {
+    console.log('adsp')
     const response = yield call(api.updateOrderApi, action.payload);
     // Handle success response
-    yield put(actions.updateOrderRespAction(response));
+    yield put(actions.updateOrderRespAction(action.payload));
   } catch (error) {
     // Handle error
     console.log(error);

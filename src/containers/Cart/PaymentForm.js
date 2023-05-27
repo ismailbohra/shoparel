@@ -5,9 +5,9 @@ import { default as React } from "react";
 import { connect } from 'react-redux';
 
 export const PaymentForm = (props) => {
-  const order = props.order.find((element) => element.orderId === props.orderId);
+  
   const formik = useFormik({
-    initialValues: order.payment,
+    initialValues: {},
     onSubmit: (values) => {
       console.log(values);
     },

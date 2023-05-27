@@ -1,6 +1,6 @@
 import { Box, Grid, InputLabel } from "@mui/material";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import DeliveryForm from "./DeliveryForm";
@@ -8,36 +8,83 @@ import { Label } from "@mui/icons-material";
 import CustomSwitch from "../../components/Switch/Switch";
 import PaymentForm from "./PaymentForm";
 import ProductForm from "./ProductForm";
-
+import { bindActionCreators } from "redux";
+import { getOrderReqAction } from "../../redux/Order/OrderAction";
+import { getProductByIdReqAction } from "../../redux/Product/ProductAction";
 
 export const Order = (props) => {
-  // const { state } = useLocation();
-  // const { row } = state;
+  const { state } = useLocation();
+  const { row } = state;
+  useEffect(() => {
+    const temp = {
+      orderId: row.orderId,
+    };
+    props.getOrder(temp, () => {});
+  }, []);
+
   return (
     <>
-    
-      <Grid container sx={{ display: 'flex' ,flexDirection:'row',}}>
-        <Grid item xs={12} md={8} lg={8} p={1} sx={{overflow:'auto'}}>
-          <Box sx={{border:1,borderRadius:3, padding: 2 }} >
-              <InputLabel sx={{color: "black",fontSize:'16px',marginBottom:3,fontWeight:'bold'}}>Delivery Information</InputLabel>
-              <DeliveryForm/>
+      <Grid container sx={{ display: "flex", flexDirection: "row" }}>
+        <Grid item xs={12} md={8} lg={8} p={1} sx={{ overflow: "auto" }}>
+          <Box sx={{ border: 1, borderRadius: 3, padding: 2 }}>
+            <InputLabel
+              sx={{
+                color: "black",
+                fontSize: "16px",
+                marginBottom: 3,
+                fontWeight: "bold",
+              }}
+            >
+              Delivery Information
+            </InputLabel>
+            <DeliveryForm orderId={row.orderId} />
           </Box>
-          <Box sx={{display:'flex', padding: 2,flexDirection:'row' }} >
-            <Box sx={{alignItems:'center',display:'flex',flexDirection:'column'}}>
-              <InputLabel sx={{color: "black",fontSize:'16px',marginBottom:3,fontWeight:'bold',marginTop:1}}>Accept Order</InputLabel>
-              </Box>
-              <Box>  
-          <CustomSwitch />
+          <Box sx={{ display: "flex", padding: 2, flexDirection: "row" }}>
+            <Box
+              sx={{
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <InputLabel
+                sx={{
+                  color: "black",
+                  fontSize: "16px",
+                  marginBottom: 3,
+                  fontWeight: "bold",
+                  marginTop: 1,
+                }}
+              >
+                Accept Order
+              </InputLabel>
+            </Box>
+            <Box>
+              <CustomSwitch />
+            </Box>
           </Box>
-          </Box>
-          <Box sx={{border:1,borderRadius:3, padding: 2 }} >
-              <InputLabel sx={{color: "black",fontSize:'16px',marginBottom:3,fontWeight:'bold'}}>Payment Information</InputLabel>
-              <PaymentForm sx={{backgroundColor:'black'}}/>
+          <Box sx={{ border: 1, borderRadius: 3, padding: 2 }}>
+            <InputLabel
+              sx={{
+                color: "black",
+                fontSize: "16px",
+                marginBottom: 3,
+                fontWeight: "bold",
+              }}
+            >
+              Payment Information
+            </InputLabel>
+            <PaymentForm
+              sx={{ backgroundColor: "black" }}
+              orderId={row.orderId}
+            />
           </Box>
         </Grid>
-        <Grid item xs={12} md={4} lg={4}  p={1}>
-          <Box sx={{border:1,borderRadius:3, padding: 2,minHeight:'100%' }}>
-            <ProductForm/>
+        <Grid item xs={12} md={4} lg={4} p={1}>
+          <Box
+            sx={{ border: 1, borderRadius: 3, padding: 2, minHeight: "100%" }}
+          >
+            <ProductForm orderId={row.orderId} />
           </Box>
         </Grid>
       </Grid>
@@ -49,8 +96,13 @@ Order.propTypes = {
   second: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  order: state.Order.allOrder,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+  getOrder: bindActionCreators(getOrderReqAction, dispatch),
+  getProductById: bindActionCreators(getProductByIdReqAction, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

@@ -121,8 +121,7 @@ const PrimarySearchAppBar = (props) => {
     navigate(text)
   }
   const handleGoToOrder=()=>{
-    console.log('dfdfsd')
-    navigate('Order')
+    navigate('Cart')
   }
   const menuId = "primary-search-account-menu";
   const renderMenu = (

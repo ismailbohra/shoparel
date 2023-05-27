@@ -4,6 +4,7 @@ const initialState = {
   orders: [],
   loading: false,
   error: null,
+  allOrder:null
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,16 +23,36 @@ const reducer = (state = initialState, action) => {
 };
 
 const handleGetOrderResponse = (state, action) => {
-  
+  let orders=[]
+  let allOrders=[]
+  action.payload.data.forEach((user) => {
+    user.orders.forEach((order) => {
+      const temp = {
+        User: `${user.firstName} ${user.lastName}`,
+        Amount: order.payment.amount,
+        orderId: order.orderId,
+        Date: order.CreatedAt,
+        status: order.status,
+        paymentVerify: order.payment.status,
+      };
+      orders.push(temp)
+      allOrders.push(order)
+    });
+  });
   return {
     ...state,
-    orders:action.payload.data
+    orders:orders,
+    allOrder:allOrders
   };
 };
 
 const handleUpdateOrderResponse = (state, action) => {
-  // Handle the logic for UPDATE_ORDER_RESP case
-  return state;
+  let temp=[]
+  temp.push(action.payload)
+  return {
+    ...state,
+    allOrder:temp
+  };
 };
 
 const handleCreateOrderResponse = (state, action) => {

@@ -72,26 +72,13 @@ const columns = [
 ];
 
 export const All = (props) => {
-  let orders = [];
   useEffect(() => {
     props.getOrderReq({}, () => {});
   }, []);
-  props.orders.forEach((user) => {
-    user.orders.forEach((order) => {
-      const temp = {
-        User: `${user.firstName} ${user.lastName}`,
-        Amount: order.payment.amount,
-        orderId: order.orderId,
-        Date: order.CreatedAt,
-        status: order.status,
-        paymentVerify: order.payment.status,
-      };
-      orders.push(temp)
-    });
-  });
+  
   return (
     <>
-      <TabularData rows={orders} columns={columns} height={550} />
+      <TabularData rows={props.orders} columns={columns} height={550} />
     </>
   );
 };

@@ -5,83 +5,39 @@ import { connect, useSelector } from "react-redux";
 import Image from "../../components/image/Image";
 import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import { bindActionCreators } from "redux";
-import { addToCartAction, clearCartAction } from "../../redux/Cart/Action";
-import { useEffect } from "react";
-import { getProductByIdReqAction, updateProductReqAction } from "../../redux/Product/ProductAction";
-import { updateOrderReqAction } from "../../redux/Order/OrderAction";
+import { addToCartAction } from "../../redux/Cart/Action";
 
-function incOrderObject(originalOrder, productToUpdate) {
-  const updatedOrder = { ...originalOrder };
 
-  if (
-    updatedOrder &&
-    updatedOrder.productList &&
-    Array.isArray(updatedOrder.productList)
-  ) {
-    const matchedProduct = updatedOrder.productList.find(
-      (product) => product.productId === productToUpdate.productId
-    );
-
-    if (matchedProduct) {
-      matchedProduct.quantity += 1;
-    }
-  }
-
-  return updatedOrder;
-}
-function decOrderObject(originalOrder, productToUpdate) {
-  const updatedOrder = { ...originalOrder };
-
-  if (
-    updatedOrder &&
-    updatedOrder.productList &&
-    Array.isArray(updatedOrder.productList)
-  ) {
-    const matchedProduct = updatedOrder.productList.find(
-      (product) => product.productId === productToUpdate.productId
-    );
-
-    if (matchedProduct) {
-      matchedProduct.quantity -= 1;
-    }
-  }
-
-  return updatedOrder;
-}
 
 export const ProductForm = (props) => {
-  const productList = props.products
-  useEffect(() => {
-    let productIds = [];
-      props.order[0].productList.forEach((element) => {
-        productIds.push(element.productId);
-      });
-      console.log(props.order[0].productList);
-      props.getProductById({ productIds }, () => {});
-  
-  }, [props.order])
-  
+  const productList = useSelector((state) => state.Cart.productList);
+  const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("xs"));
   const handleDecrement = (element) => {
-    const obj=decOrderObject(props.order[0],element,1)
-    props.updateOrder(obj,()=>{})
+    const temp = {
+      productId: element.productId,
+      quantity: -1,
+      color: element.selectedColorValue,
+      price: element.price,
+      name: element.name,
+      image_link: element.image_link,
+    };
+    props.addToCartReq(temp, () => {});
   };
   const handleIncrement = (element) => {
-    const obj=incOrderObject(props.order[0],element,1)
-    props.updateOrder(obj,()=>{})
+    const temp = {
+      productId: element.productId,
+      quantity: +1,
+      color: element.selectedColorValue,
+      price: element.price,
+      name: element.name,
+      image_link: element.image_link,
+    };
+    props.addToCartReq(temp, () => {});
   };
   const handleProductClick = (element) => {
     
   };
-  const handleQuantity=(element)=>{
-    const product=props.order[0].productList.find((ele)=>(ele.productId === element.productId))
-    return product?.quantity
-  }
-  const handleColor=(element)=>{
-    const product=props.order[0].productList.find((ele)=>(ele.productId === element.productId))
-    return product?.color
-  }
 
-  console.log(props.order)
   return (
     <>
       <Box sx={{ height: "550px", overflow: "scroll" }}>
@@ -117,7 +73,7 @@ export const ProductForm = (props) => {
               </Typography>
               {element.color && (
                 <Typography sx={{ fontSize: "12px" }}>
-                  {handleColor(element)}
+                  {element.color}
                 </Typography>
               )}
               <Typography sx={{ fontWeight: "bold" }}>
@@ -144,7 +100,7 @@ export const ProductForm = (props) => {
                     }}
                   />
                 </Box>
-                <Box>{handleQuantity(element)}</Box>
+                <Box>{element.quantity}</Box>
                 <Box>
                   <GrFormSubtract
                     onClick={() => {
@@ -162,7 +118,7 @@ export const ProductForm = (props) => {
           variant="contained"
           color="success"
           sx={{ margin: 1, bgcolor: "green" }}
-          disabled={props.order.length==0}
+          disabled={productList.length==0}
         >
           Confirm Order
         </Button>
@@ -175,14 +131,10 @@ ProductForm.propTypes = {
   second: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  order:state.Order.allOrder,
-  products:state.Product.products
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  getProductById:bindActionCreators(getProductByIdReqAction,dispatch),
-  updateOrder:bindActionCreators(updateOrderReqAction,dispatch)
+  addToCartReq: bindActionCreators(addToCartAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductForm);

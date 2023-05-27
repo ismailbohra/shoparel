@@ -117,7 +117,6 @@ export default (state = INITIAL_STATE, action) => {
     case REMOVE_FROM_CART:
       return removeCart(state, action);
     case CLEAR_CART:
-      console.log("clear cart redu");
       return INITIAL_STATE;
     default:
       return state;

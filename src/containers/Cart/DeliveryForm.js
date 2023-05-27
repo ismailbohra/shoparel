@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 export const DeliveryForm = (props) => {
-  const order = props.order.find((element) => element.orderId === props.orderId);
   const formik = useFormik({
-    initialValues: order.deliveryInformation,
+    initialValues: {},
     onSubmit: (values) => {
       console.log(values);
     },

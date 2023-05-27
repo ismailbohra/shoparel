@@ -17,6 +17,7 @@ export const getOrderRespAction = (response) => {
 };
 
 export const updateOrderReqAction = (values, successCallback) => {
+  console.log('action')
   return {
     type: types.UPDATE_ORDER_REQ,
     payload: values,

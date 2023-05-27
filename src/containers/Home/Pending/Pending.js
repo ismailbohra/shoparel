@@ -68,21 +68,7 @@ const columns = [
 ];
 
 export const Pending = (props) => {
-  let orders = [];
-  props.orders.forEach((user) => {
-    user.orders.forEach((order) => {
-      const temp = {
-        User: `${user.firstName} ${user.lastName}`,
-        Amount: order.payment.amount,
-        orderId: order.orderId,
-        Date: order.CreatedAt,
-        status: order.status,
-        paymentVerify: order.payment.status,
-      };
-      orders.push(temp);
-    });
-  });
-  const Datarows = orders.filter((row) => {
+  const Datarows = props.orders.filter((row) => {
     return row.status === "PENDING";
   });
   return (
