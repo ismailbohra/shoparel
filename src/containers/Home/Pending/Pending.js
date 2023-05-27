@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import TabularData from "../../../components/Table";
-import { rows } from "../../../components/Table/demoData";
 import PaymentColumn from "../../../components/Table/PaymentColumn";
 import { StatusColumn } from "../../../components/Table/StatusColumn";
 

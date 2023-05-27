@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 import TabularData from "../../../components/Table";
 import PaymentColumn from "../../../components/Table/PaymentColumn";
-import { rows } from "../../../components/Table/demoData";
 import { StatusColumn } from "../../../components/Table/StatusColumn";
 
 function sortDates(v1, v2) {
