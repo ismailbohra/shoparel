@@ -7,7 +7,10 @@ import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import { bindActionCreators } from "redux";
 import { addToCartAction, clearCartAction } from "../../redux/Cart/Action";
 import { useEffect } from "react";
-import { getProductByIdReqAction, updateProductReqAction } from "../../redux/Product/ProductAction";
+import {
+  getProductByIdReqAction,
+  updateProductReqAction,
+} from "../../redux/Product/ProductAction";
 import { updateOrderReqAction } from "../../redux/Order/OrderAction";
 
 function incOrderObject(originalOrder, productToUpdate) {
@@ -50,38 +53,59 @@ function decOrderObject(originalOrder, productToUpdate) {
 }
 
 export const ProductForm = (props) => {
-  const productList = props.products
+  const productList = props.products;
   useEffect(() => {
     let productIds = [];
-      props.order[0].productList.forEach((element) => {
-        productIds.push(element.productId);
-      });
-      console.log(props.order[0].productList);
-      props.getProductById({ productIds }, () => {});
-  
-  }, [props.order])
-  
+    props.order[0].productList.forEach((element) => {
+      productIds.push(element.productId);
+    });
+    props.getProductById({ productIds }, () => {});
+  }, [props.order]);
+
   const handleDecrement = (element) => {
-    const obj=decOrderObject(props.order[0],element,1)
-    props.updateOrder(obj,()=>{})
+    const obj = decOrderObject(props.order[0], element, 1);
+    props.updateOrder(obj, () => {});
   };
   const handleIncrement = (element) => {
-    const obj=incOrderObject(props.order[0],element,1)
-    props.updateOrder(obj,()=>{})
+    const obj = incOrderObject(props.order[0], element, 1);
+    props.updateOrder(obj, () => {});
   };
-  const handleProductClick = (element) => {
-    
+  const handleProductClick = (element) => {};
+  const handleQuantity = (element) => {
+    const product = props.order[0].productList.find(
+      (ele) => ele.productId === element.productId
+    );
+    return product?.quantity;
   };
-  const handleQuantity=(element)=>{
-    const product=props.order[0].productList.find((ele)=>(ele.productId === element.productId))
-    return product?.quantity
-  }
-  const handleColor=(element)=>{
-    const product=props.order[0].productList.find((ele)=>(ele.productId === element.productId))
-    return product?.color
-  }
-
-  console.log(props.order)
+  const handleColor = (element) => {
+    const product = props.order[0].productList.find(
+      (ele) => ele.productId === element.productId
+    );
+    return product?.color;
+  };
+  const handlSubmitStatus = () => {
+    props.order[0]["status"] = futureStatus[props.order[0].status].value;
+    props.updateOrder(props.order[0], () => {});
+    props.setActionValue(props.order[0].status);
+  };
+  const futureStatus = {
+    ACCEPTED: {
+      value: "DISPATCHED",
+      label: "Dispatch",
+    },
+    DISPATCHED: {
+      value: "COMPLETE",
+      label: "COMPLETED",
+    },
+    PENDING: {
+      value: "ACCEPTED",
+      label: "Accept",
+    },
+    REJECTED: {
+      value: "ACCEPTED",
+      label: "Accept",
+    },
+  };
   return (
     <>
       <Box sx={{ height: "550px", overflow: "scroll" }}>
@@ -158,14 +182,25 @@ export const ProductForm = (props) => {
         ))}
       </Box>
       <Stack justifyContent={"end"} direction={"column"}>
-        <Button
-          variant="contained"
-          color="success"
-          sx={{ margin: 1, bgcolor: "green" }}
-          disabled={props.order.length==0}
-        >
-          Confirm Order
-        </Button>
+        {props.order[0].status == "DISPATCHED" ? (
+          <Button
+            variant="outlined"
+            color="success"
+            disabled={props.order.length == 0}
+          >
+            {futureStatus[props.order[0].status].label}
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="success"
+            sx={{ margin: 1, bgcolor: "green" }}
+            disabled={props.order.length == 0}
+            onClick={handlSubmitStatus}
+          >
+            {futureStatus[props.order[0].status].label}
+          </Button>
+        )}
       </Stack>
     </>
   );
@@ -176,13 +211,13 @@ ProductForm.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  order:state.Order.allOrder,
-  products:state.Product.products
+  order: state.Order.allOrder,
+  products: state.Product.products,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProductById:bindActionCreators(getProductByIdReqAction,dispatch),
-  updateOrder:bindActionCreators(updateOrderReqAction,dispatch)
+  getProductById: bindActionCreators(getProductByIdReqAction, dispatch),
+  updateOrder: bindActionCreators(updateOrderReqAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductForm);

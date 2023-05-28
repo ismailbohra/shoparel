@@ -23,6 +23,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.name}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -33,6 +34,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.mobile}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -43,6 +45,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.email}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -53,6 +56,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.city}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -63,6 +67,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.state}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -73,6 +78,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.zipCode}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={12}>
@@ -83,6 +89,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.address}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
       </Grid>

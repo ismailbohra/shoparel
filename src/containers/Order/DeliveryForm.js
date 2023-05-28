@@ -1,17 +1,31 @@
-import { Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import { updateOrderReqAction } from "../../redux/Order/OrderAction";
 
 export const DeliveryForm = (props) => {
   const order = props.order.find((element) => element.orderId === props.orderId);
+  const [isFormDirty, setIsFormDirty] = useState(false);
   const formik = useFormik({
     initialValues: order.deliveryInformation,
+    enableReinitialize:true, 
     onSubmit: (values) => {
-      console.log(values);
+      props.order[0]["deliveryInformation"] = values;
+      props.updateOrderReq(props.order[0], () => {});
+      setIsFormDirty(false);
     },
   });
+  useEffect(() => {
+    if (
+      JSON.stringify(formik.values) !== JSON.stringify(order.deliveryInformation) &&
+      !isFormDirty
+    ) {
+      setIsFormDirty(true);
+    }
+  }, [formik.values, isFormDirty, order.deliveryInformation]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -24,6 +38,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.name}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -34,6 +49,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.mobile}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -44,6 +60,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.email}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -54,6 +71,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.city}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -64,6 +82,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.state}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={6}>
@@ -74,6 +93,7 @@ export const DeliveryForm = (props) => {
             value={formik.values.zipCode}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item xs={12}>
@@ -84,7 +104,15 @@ export const DeliveryForm = (props) => {
             value={formik.values.address}
             onChange={formik.handleChange}
             fullWidth
+            size="small"
           />
+        </Grid>
+        <Grid item xs={12}>
+        {isFormDirty && (
+            <Button sx={{ color: "green" }} type="submit">
+              Update
+            </Button>
+          )}
         </Grid>
       </Grid>
     </form>
@@ -99,6 +127,8 @@ const mapStateToProps = (state) => ({
   order:state.Order.allOrder
 })
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = (dispatch)=>({
+  updateOrderReq:bindActionCreators(updateOrderReqAction,dispatch)
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeliveryForm)

@@ -33,25 +33,17 @@ export const Order = (props) => {
     
       <Grid container sx={{ display: 'flex' ,flexDirection:'row',}}>
         <Grid item xs={12} md={8} lg={8} p={1} sx={{overflow:'auto'}}>
-          <Box sx={{border:1,borderRadius:3, padding: 2 }} >
+          <Box sx={{border:1,borderRadius:3, padding: 2,height:'59%' }} >
               <InputLabel sx={{color: "black",fontSize:'16px',marginBottom:3,fontWeight:'bold'}}>Delivery Information</InputLabel>
               <DeliveryForm />
           </Box>
-          <Box sx={{display:'flex', padding: 2,flexDirection:'row' }} >
-            <Box sx={{alignItems:'center',display:'flex',flexDirection:'column'}}>
-              <InputLabel sx={{color: "black",fontSize:'18px',marginBottom:1,fontWeight:'bold',marginTop:1,marginInlineEnd:3}}>Action</InputLabel>
-            </Box>
-            <Box>  
-               <RowRadioButtonsGroup radioList={radioList}/>
-            </Box>
-          </Box>
-          <Box sx={{border:1,borderRadius:3, padding: 2 }} >
+          <Box sx={{border:1,borderRadius:3, padding: 2 ,height:'40%',marginTop:0.5}} >
               <InputLabel sx={{color: "black",fontSize:'16px',marginBottom:3,fontWeight:'bold'}}>Payment Information</InputLabel>
               <PaymentForm sx={{backgroundColor:'black'}} />
           </Box>
         </Grid>
         <Grid item xs={12} md={4} lg={4}  p={1}>
-          <Box sx={{border:1,borderRadius:3, padding: 2,minHeight:'100%' }}>
+          <Box sx={{border:1,borderRadius:3, padding: 2, }}>
             <ProductForm />
           </Box>
         </Grid>
