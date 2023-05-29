@@ -1,11 +1,11 @@
-import { Box, Typography, Stack, Button, useMediaQuery } from "@mui/material";
+import { Box, Typography, Stack, Button, useMediaQuery, Link } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect, useSelector } from "react-redux";
 import Image from "../../components/image/Image";
 import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import { bindActionCreators } from "redux";
-import { addToCartAction } from "../../redux/Cart/Action";
+import { addToCartAction, clearCartAction } from "../../redux/Cart/Action";
 
 
 
@@ -41,6 +41,7 @@ export const ProductForm = (props) => {
   return (
     <>
       <Box sx={{ height: "550px", overflow: "scroll" }}>
+        <Link style={{ textDecoration: "none" ,textAlign:'end',display:'block'}} onClick={()=>{props.clearCart()}}>clear</Link>
         {productList.map((element, index) => (
           <Box
             onClick={() => {
@@ -119,6 +120,7 @@ export const ProductForm = (props) => {
           color="success"
           sx={{ margin: 1, bgcolor: "green" }}
           disabled={productList.length==0}
+          onClick={props.onSubmit}
         >
           Confirm Order
         </Button>
@@ -135,6 +137,7 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   addToCartReq: bindActionCreators(addToCartAction, dispatch),
+  clearCart:bindActionCreators(clearCartAction,dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductForm);

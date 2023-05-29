@@ -5,23 +5,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 export const DeliveryForm = (props) => {
-  const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+  
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form >
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField
             id="name"
             name="name"
             label="Name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
+            value={props.delivery.name}
+            onChange={props.inputEvent}
             fullWidth
             size="small"
           />
@@ -31,8 +26,8 @@ export const DeliveryForm = (props) => {
             id="mobile"
             name="mobile"
             label="Mobile Number"
-            value={formik.values.mobile}
-            onChange={formik.handleChange}
+            value={props.delivery.mobile}
+            onChange={props.inputEvent}
             fullWidth
             size="small"
           />
@@ -42,8 +37,8 @@ export const DeliveryForm = (props) => {
             id="email"
             name="email"
             label="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
+            value={props.delivery.email}
+            onChange={props.inputEvent}
             fullWidth
             size="small"
           />
@@ -53,8 +48,8 @@ export const DeliveryForm = (props) => {
             id="city"
             name="city"
             label="City"
-            value={formik.values.city}
-            onChange={formik.handleChange}
+            value={props.delivery.city}
+            onChange={props.inputEvent}
             fullWidth
             size="small"
           />
@@ -64,8 +59,8 @@ export const DeliveryForm = (props) => {
             id="state"
             name="state"
             label="State"
-            value={formik.values.state}
-            onChange={formik.handleChange}
+            value={props.delivery.state}
+            onChange={props.inputEvent}
             fullWidth
             size="small"
           />
@@ -75,8 +70,8 @@ export const DeliveryForm = (props) => {
             id="zipCode"
             name="zipCode"
             label="Zip Code"
-            value={formik.values.zipCode}
-            onChange={formik.handleChange}
+            value={props.delivery.zipCode}
+            onChange={props.inputEvent}
             fullWidth
             size="small"
           />
@@ -86,8 +81,19 @@ export const DeliveryForm = (props) => {
             id="address"
             name="address"
             label="Address"
-            value={formik.values.address}
-            onChange={formik.handleChange}
+            value={props.delivery.address}
+            onChange={props.inputEvent}
+            fullWidth
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            id="remark"
+            name="rem"
+            label="Additional"
+            value={props.delivery.remark}
+            onChange={props.inputEvent}
             fullWidth
             size="small"
           />

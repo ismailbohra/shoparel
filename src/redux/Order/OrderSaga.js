@@ -35,7 +35,9 @@ export function* updateOrderSaga(action) {
 export function* createOrderSaga(action) {
   try {
     const response = yield call(api.createOrderApi, action.payload);
-    // Handle success response
+    if(action.successCallback){
+      call(action.successCallback)
+    }
     yield put(actions.createOrderRespAction(response));
   } catch (error) {
     // Handle error

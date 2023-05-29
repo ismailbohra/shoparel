@@ -13,6 +13,9 @@ const Auth = {
     token.refreshToken = localStorage.getItem("refreshToken");
     return token;
   },
+  getData() {
+    return JSON.parse(localStorage.getItem("userData"));
+  },
   signIn(payload) {
     const { token, tokenExpiringAt } = payload;
     console.log(payload);

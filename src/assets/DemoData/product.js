@@ -1,6 +1,6 @@
 export const productList = [
   {
-    id: 1048,
+    id: 'e4ae7cbf-73eb-468f-983a-fb6bffd7bd3c',
     brand: "colourpop",
     name: "Lippie Pencil",
     price: "5.0",
@@ -162,7 +162,7 @@ export const productList = [
     ],
   },
   {
-    id: 1047,
+    id: 'e4ae7cbf-73eb-468f-983a-fb6bffd7bd3c',
     brand: "colourpop",
     name: "Blotted Lip",
     price: "5.5",
@@ -217,7 +217,7 @@ export const productList = [
     // ],
   },
   {
-    id: 1046,
+    id: 'e4ae7cbf-73eb-468f-983a-fb6bffd7bd3c',
     brand: "colourpop",
     name: "Lippie Stix",
     price: "5.5",
@@ -427,7 +427,7 @@ export const productList = [
     ],
   },
   {
-    id: 1048,
+    id: 'e4ae7cbf-73eb-468f-983a-fb6bffd7bd3c',
     brand: "colourpop",
     name: "Lippie Pencil",
     price: "5.0",
@@ -589,7 +589,7 @@ export const productList = [
     ],
   },
   {
-    id: 1047,
+    id: 'e4ae7cbf-73eb-468f-983a-fb6bffd7bd3c',
     brand: "colourpop",
     name: "Blotted Lip",
     price: "5.5",
@@ -644,7 +644,7 @@ export const productList = [
     // ],
   },
   {
-    id: 1046,
+    id: 'e4ae7cbf-73eb-468f-983a-fb6bffd7bd3c',
     brand: "colourpop",
     name: "Lippie Stix",
     price: "5.5",

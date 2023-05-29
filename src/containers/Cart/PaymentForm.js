@@ -1,78 +1,69 @@
-import { Button, Grid, MenuItem, TextField } from "@mui/material";
+import {
+  Grid,
+  InputLabel,
+  Link,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useFormik } from "formik";
-import PropTypes from 'prop-types';
-import { default as React } from "react";
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import { default as React, useState } from "react";
+import { connect } from "react-redux";
+import PaymentDialog from "../../components/Dialog/PaymentDialog";
+import { Button } from "react-bootstrap";
 
 export const PaymentForm = (props) => {
-  
-  const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+  const [dialogOpen, setDialogOpen] = useState(false);
 
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Grid container spacing={2} style={{ display: "flex", alignItems: "center" }}>
-        <Grid item xs={6}>
-          <TextField
-            id="mode"
-            name="mode"
-            label="Mode"
-            select
-            value={formik.values.mode}
-            onChange={formik.handleChange}
-            fullWidth
-          >
-            <MenuItem value="cash">Cash</MenuItem>
-            <MenuItem value="online">Online</MenuItem>
-            <MenuItem value="cheque">Cheque</MenuItem>
-          </TextField>
+    <>
+      <form>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography>
+              Please Pay the Amount of{" "}
+              <span style={{ fontWeight: "bold" }}>
+                ₹ {props.totalamt}
+              </span>{" "}
+              via online at +91 8741900521 orr By Account Transfer to Account
+              No. 316401963112899 IFSC Code BARB0CHHOTI
+            </Typography>
+          </Grid>
+          <Grid item xs={6} alignItems={"end"}>
+            <Link
+              style={{ textDecoration: "none" }}
+              sx={{ color: "green" }}
+              onClick={() => {
+                setDialogOpen(true);
+              }}
+            >
+              Click For Verification
+            </Link>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id="amount"
-            name="amount"
-            label="Amount"
-            value={formik.values.amount}
-            onChange={formik.handleChange}
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id="status"
-            name="status"
-            label="Status"
-            value={formik.values.status}
-            onChange={formik.handleChange}
-            fullWidth
-            select
-          >
-           <MenuItem value="PENDING">Pending</MenuItem>
-            <MenuItem value="VERIFIED">Received</MenuItem> 
-          </TextField>
-        </Grid>
-        <Grid item xs={6} style={{ textAlign: "end" }}>
-          <Button size="small" variant="contained" color="primary" type="submit">
-            Update
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+      </form>
+      <PaymentDialog
+        open={dialogOpen}
+        onClose={handleCloseDialog}
+        payment={props.payment}
+        inputEvent={props.inputEvent}
+      />
+    </>
   );
-}
+};
 
 PaymentForm.propTypes = {
-  second: PropTypes.func
-}
+  second: PropTypes.func,
+};
 
 const mapStateToProps = (state) => ({
-  order:state.Order.allOrder
-})
+  order: state.Order.allOrder,
+});
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentForm)
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentForm);
