@@ -9,13 +9,14 @@ import { bindActionCreators } from "redux";
 import { showToasterAction } from "../../redux/Toaster/ToasterAction";
 import { createOrderReqAction } from "../../redux/Order/OrderAction";
 import Auth from "../../utils/Auth";
+import { useNavigate } from "react-router-dom";
+import { clearCartAction } from "../../redux/Cart/Action";
 
 export const Order = (props) => {
   const [payment, setPayment] = useState({});
   const [delivery, setDelivery] = useState({});
   const handlePaymentInput = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setPayment((e) => ({
       ...e,
       [name]: value,
@@ -28,6 +29,7 @@ export const Order = (props) => {
       [name]: value,
     }));
   };
+  const navigate=useNavigate()
   const [totalAmount, settotalAmount] = useState(0);
   useEffect(() => {
     var total = 0;
@@ -50,8 +52,12 @@ export const Order = (props) => {
           productList: props.productList,
         },
       };
-      props.orderReq(temp,()=>{props.toaster("Order Placed Succesfully", "success");})
+      props.orderReq(temp,()=>{
+        console.log('success')
+        props.toaster("Order Placed Succesfully", "success");})
       console.log(temp)
+      props.clearCart()
+      navigate('../Products')
     } else {
       props.toaster("Verify The Payment", "error");
     }
@@ -121,6 +127,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   toaster: bindActionCreators(showToasterAction, dispatch),
   orderReq: bindActionCreators(createOrderReqAction, dispatch),
+  clearCart:bindActionCreators(clearCartAction,dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

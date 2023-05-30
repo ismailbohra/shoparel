@@ -9,6 +9,9 @@ export function* getProductSaga(action) {
     const response = yield call(api.getProductApi, action.payload);
     // Handle success response
     yield put(actions.getProductRespAction(response));
+    if (action.successCallback) {
+      call (action.successCallback)
+    }
   } catch (error) {
     // Handle error
     console.log(error);

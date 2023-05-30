@@ -36,7 +36,7 @@ export function* createOrderSaga(action) {
   try {
     const response = yield call(api.createOrderApi, action.payload);
     if(action.successCallback){
-      call(action.successCallback)
+     yield call(action.successCallback)
     }
     yield put(actions.createOrderRespAction(response));
   } catch (error) {

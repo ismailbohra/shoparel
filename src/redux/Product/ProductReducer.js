@@ -27,20 +27,9 @@ const reducer = (state = initialState, action) => {
 
 const handleGetProductResponse = (state, action) => {
   let products = [];
-  let allProducts = [];
-  action.payload.data.forEach((product) => {
-    // Customize the mapping logic based on your product structure
-    const temp = {
-      // Map the properties from the product object
-      // Example: name: product.name
-    };
-    products.push(temp);
-    allProducts.push(product);
-  });
   return {
     ...state,
-    products: products,
-    allProducts: allProducts,
+    products: action.payload.data,
   };
 };
 
@@ -59,10 +48,10 @@ const handleDeleteProductResponse = (state, action) => {
   return state;
 };
 const handleGetProductByIdProductResponse = (state, action) => {
-  const temp=[...action.payload.data]
+  const temp = [...action.payload.data];
   return {
     ...state,
-    products:temp
+    products: temp,
   };
 };
 

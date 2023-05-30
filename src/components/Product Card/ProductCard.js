@@ -22,15 +22,15 @@ import { useState } from "react";
 export const ProductCard = (props) => {
   const product = props.element;
   const [selectedColor, setSelectedColor] = useState(0);
-  const [selectedColorValue, setSelectedColorValue] = useState(product?.product_colors?.[0]?.colourName || null);
+  const [selectedColorValue, setSelectedColorValue] = useState(product?.product_colors?.[0]?.colour_name || null);
   const [quantity, setQuantity] = useState(1);
   const handleSelectColor = (index, element) => {
     setSelectedColor(index);
-    setSelectedColorValue(element.colourName);
+    setSelectedColorValue(element.colour_name);
   };
   const handleAddToCart = (product) => {
     const temp = {
-      productId: product.id,
+      productId: product.productId,
       quantity: quantity,
       color: selectedColorValue,
       price: product.price,

@@ -23,7 +23,7 @@ export const ProductDetails = (props) => {
   const { element } = state;
   const product = element;
   const [selectedColor, setSelectedColor] = useState(0);
-  const [selectedColorValue, setSelectedColorValue] = useState(product?.product_colors?.[0]?.colourName || null);
+  const [selectedColorValue, setSelectedColorValue] = useState(product?.product_colors?.[0]?.colour_name || null);
 
   const handleSelectColor = (index, element) => {
     setSelectedColor(index);
@@ -33,7 +33,7 @@ export const ProductDetails = (props) => {
   const [quantity, setQuantity] = useState(1);
   const handleAddToCart = () => {
     const temp = {
-      productId:product.id,
+      productId:product.productId,
       quantity:quantity,
       color:selectedColorValue,
       price:product.price,

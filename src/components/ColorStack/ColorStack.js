@@ -41,10 +41,10 @@ const ColorStack = (props) => {
       {initial && <MdOutlineArrowLeft onClick={handlePrevious} size={30} style={{ margin: noOfColorDisplay }} />}
       {tempcolor.map((element, index) => {
         return (
-          <Tooltip title={element.colourName} key={index}>
+          <Tooltip title={element.colour_name} key={index}>
             <Avatar
               sx={{
-                bgcolor: element.hexValue,
+                bgcolor: element.hex_value,
                 margin: 0.5,
                 border: index === props.selectedColor ? 3 : null,
                 borderColor: index === props.selectedColor ? "black" : null,

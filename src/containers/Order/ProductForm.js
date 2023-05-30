@@ -106,6 +106,8 @@ export const ProductForm = (props) => {
       label: "Accept",
     },
   };
+  console.log(props.order[0].productList)
+
   return (
     <>
       <Box sx={{ height: "550px", overflow: "scroll" }}>
