@@ -41,7 +41,7 @@ const Add = (props) => {
   };
   const navigate=useNavigate()
   const uploadImage=()=>{
-    const imageRef = ref(storage, `${Date.now().toString()}`);
+    const imageRef = ref(storage, product.name || `${Date.now().toString()}`);
     uploadBytes(imageRef, productImgForReq)
       .then(() => {
         getDownloadURL(imageRef)

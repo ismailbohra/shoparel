@@ -21,7 +21,7 @@ const Index = (props) => {
     props.deleteProductReq({productId:value},()=>{dispatchToasterSuccess("Deleted Successfully","success")})
   }
   const handleUpdate=(value)=>{
-    console.log(value)
+    navigate('../Update',{state:{productId:value}})
   }
   const columns = [
     {

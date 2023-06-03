@@ -22,7 +22,7 @@ function incOrderObject(originalOrder, productToUpdate) {
     Array.isArray(updatedOrder.productList)
   ) {
     const matchedProduct = updatedOrder.productList.find(
-      (product) => product.productId === productToUpdate.productId
+      (product) => product._id === productToUpdate._id
     );
 
     if (matchedProduct) {
@@ -41,7 +41,7 @@ function decOrderObject(originalOrder, productToUpdate) {
     Array.isArray(updatedOrder.productList)
   ) {
     const matchedProduct = updatedOrder.productList.find(
-      (product) => product.productId === productToUpdate.productId
+      (product) => product._id === productToUpdate._id
     );
 
     if (matchedProduct) {
@@ -64,10 +64,14 @@ export const ProductForm = (props) => {
 
   const handleDecrement = (element) => {
     const obj = decOrderObject(props.order[0], element, 1);
+    obj.payment.amount=parseInt(obj.payment.amount)-parseInt(element.price)
+    obj.payment.remaining=parseInt(obj.payment.remaining)-parseInt(element.price)
     props.updateOrder(obj, () => {});
   };
   const handleIncrement = (element) => {
     const obj = incOrderObject(props.order[0], element, 1);
+    obj.payment.amount=parseInt(obj.payment.amount)+parseInt(element.price)
+    obj.payment.remaining=parseInt(obj.payment.remaining)+parseInt(element.price)
     props.updateOrder(obj, () => {});
   };
   const handleProductClick = (element) => {};
@@ -106,12 +110,27 @@ export const ProductForm = (props) => {
       label: "Accept",
     },
   };
-  console.log(props.order[0].productList)
+  const list=[]
+  if (productList.length>0) {
+    props.order[0].productList.forEach(element => {
+      const index=productList.findIndex((e)=>e.productId==element.productId)
+      const temp={
+        image_link:productList[index]?.image_link,
+        name:productList[index]?.name,
+        color:element.color,
+        price:productList[index]?.price,
+        quantity:element.quantity,
+        productId:productList[index]?.productId,
+        _id:element?._id
+      }
+      list.push(temp)
+    });
+  }
 
   return (
     <>
       <Box sx={{ height: "550px", overflow: "scroll" }}>
-        {productList.map((element, index) => (
+        {list.map((element, index) => (
           <Box
             onClick={() => {
               handleProductClick(element);
@@ -143,7 +162,7 @@ export const ProductForm = (props) => {
               </Typography>
               {element.color && (
                 <Typography sx={{ fontSize: "12px" }}>
-                  {handleColor(element)}
+                  {element.color}
                 </Typography>
               )}
               <Typography sx={{ fontWeight: "bold" }}>
@@ -170,7 +189,7 @@ export const ProductForm = (props) => {
                     }}
                   />
                 </Box>
-                <Box>{handleQuantity(element)}</Box>
+                <Box>{element.quantity}</Box>
                 <Box>
                   <GrFormSubtract
                     onClick={() => {
