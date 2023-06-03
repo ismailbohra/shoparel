@@ -44,9 +44,9 @@ export const PaymentForm = (props) => {
             id="mode"
             name="mode"
             label="Mode"
-            // select
+            select
             value={formik.values.mode}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           >
@@ -61,9 +61,9 @@ export const PaymentForm = (props) => {
             name="status"
             label="Status"
             value={formik.values.status}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
-            // select
+            select
             size="small"
           >
             <MenuItem value="PENDING">Pending</MenuItem>
@@ -77,7 +77,7 @@ export const PaymentForm = (props) => {
             name="amount"
             label="Total Amount"
             value={formik.values.amount}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
@@ -88,18 +88,18 @@ export const PaymentForm = (props) => {
             name="remaining"
             label="Remaining Amount"
             value={formik.values.remaining}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
         </Grid>
-        {/* <Grid item xs={6}>
+        <Grid item xs={6}>
           <TextField
             id="paid"
             name="paid"
             label="Paid Amount"
             value={formik.values.paid}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
@@ -110,7 +110,7 @@ export const PaymentForm = (props) => {
               Update
             </Button>
           )}
-        </Grid> */}
+        </Grid>
       </Grid>
     </form>
   );

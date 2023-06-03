@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TabularData from "../../../components/Table";
 import PaymentColumn from "../../../components/Table/PaymentColumn";
-import {
-  StatusColumn
-} from "../../../components/Table/StatusColumn";
+import { StatusColumn } from "../../../components/Table/StatusColumn";
 import { getOrderReqAction } from "../../../redux/Order/OrderAction";
+import Auth from "../../../utils/Auth";
 
 function sortDates(v1, v2) {
   const date1 = new Date(v1);
@@ -73,9 +72,12 @@ const columns = [
 
 export const All = (props) => {
   useEffect(() => {
-    props.getOrderReq({}, () => {});
+    if (Auth.getRoles().some((obj) => obj.user_type == "admin")) {
+      props.getOrderReq({}, () => {});
+    } else {
+      props.getOrderReq({userId:Auth.getData().userId}, () => {});
+    }
   }, []);
-  
   return (
     <>
       <TabularData rows={props.orders} columns={columns} height={550} />

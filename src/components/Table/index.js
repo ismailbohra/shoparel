@@ -2,6 +2,7 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Auth from "../../utils/Auth";
 
 export default function DataTable(props) {
   const { rows, columns, height } = props;
@@ -29,7 +30,11 @@ export default function DataTable(props) {
   );
   const navigate = useNavigate();
   const handleClick = (element) => {
+    if(Auth.getRoles().some(obj=> obj.user_type == "admin")){
+      navigate("../Admin", { state: { row: element.row } });  
+    }else{
     navigate("../Order", { state: { row: element.row } });
+    }
   };
   return (
     <div style={{ height: height, width: "100%" }}>

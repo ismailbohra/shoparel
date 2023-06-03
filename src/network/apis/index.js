@@ -46,7 +46,7 @@ export default (method, uri, data = {}, configs = {}) => {
   const {
     successMessage = null,
     // server = microServices.GLOBAL_ADMIN_URL,
-    server = microServices.STAFF,
+    server = microServices.TEST,
     headers = {},
     params = {},
     responseType = "json",
@@ -67,9 +67,14 @@ export default (method, uri, data = {}, configs = {}) => {
     axiosConfig.successMessage = successMessage;
   }
 
+  if (method === "delete") {
+    axiosConfig.data = data; // Set the data in the request body
+    return clients[server][method](uri, axiosConfig);
+  }
+
   return clients[server][method](
     uri,
-    method === "delete" ? axiosConfig : data,
+    data,
     axiosConfig
   );
 };

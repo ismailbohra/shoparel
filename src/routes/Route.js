@@ -16,6 +16,9 @@ import Home from "../containers/Home/Home";
 import Order from "../containers/Order/Order";
 import ProductDetails from "../containers/Products/ProductDetails";
 import Cart from "../containers/Cart/Order"
+import AddProduct from "../containers/AddProduct";
+import Order2 from "../containers/Admin/Order"
+import Add from "../containers/AddProduct/Add";
 
 const Routes = () => {
   let role = Auth.getRoles();
@@ -37,9 +40,12 @@ const Routes = () => {
             <Route path="Home" element={<Home/>}/>
             <Route path="Products" element={<Product/>}/>
             <Route path="Order" element={<Order/>}/>
+            <Route path="Admin" element={<Order2/>}/>
             <Route path="Profile" element={<Setting/>}/>
             <Route path="ProductDetails" element={<ProductDetails/>}/>
             <Route path="Cart" element={<Cart/>}/>
+            <Route path="AddProduct" element={<AddProduct/>}/>
+            <Route path="Add" element={<Add/>}/>
           </Route>:null
         }
 

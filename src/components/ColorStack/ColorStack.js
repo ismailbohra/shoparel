@@ -34,11 +34,11 @@ const ColorStack = (props) => {
     const temp = colorList.slice(currentIndex, currentIndex + noOfColorDisplay);
     setTempcolor(temp);
   }, [currentIndex, colorList]);
-
+  const Image_size= props.size || 30
 
   return (
     <>
-      {initial && <MdOutlineArrowLeft onClick={handlePrevious} size={30} style={{ margin: noOfColorDisplay }} />}
+      {initial && <MdOutlineArrowLeft onClick={handlePrevious} size={Image_size} style={{ margin: noOfColorDisplay }} />}
       {tempcolor.map((element, index) => {
         return (
           <Tooltip title={element.colour_name} key={index}>
@@ -49,8 +49,8 @@ const ColorStack = (props) => {
                 border: index === props.selectedColor ? 3 : null,
                 borderColor: index === props.selectedColor ? "black" : null,
                 boxShadow: index === props.selectedColor ? 5 : null,
-                width:30,
-                height:30
+                width:Image_size,
+                height:Image_size
               }}
               m={0.5}
               onClick={() => {
@@ -62,7 +62,7 @@ const ColorStack = (props) => {
           </Tooltip>
         );
       })}
-      {last && <MdOutlineArrowRight onClick={handleNext} size={30} style={{ margin: 5 }} />}
+      {last && <MdOutlineArrowRight onClick={handleNext} size={Image_size} style={{ margin: 5 }} />}
     </>
   );
 };

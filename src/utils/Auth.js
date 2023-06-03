@@ -37,7 +37,7 @@ const Auth = {
   },
   getRoles() {
     const user = JSON.parse(localStorage.getItem("userData"));
-    return user?.role || "";
+    return user?.role || [];
   },
   getLanguage() {
     const user =

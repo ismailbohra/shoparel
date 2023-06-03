@@ -32,6 +32,7 @@ import { bindActionCreators } from "redux";
 import { setSearchValueAction } from "../../redux/Navbar/Action";
 import {FaShoppingCart} from 'react-icons/fa'
 import { clearCartAction } from "../../redux/Cart/Action";
+import Auth from "../../utils/Auth";
 
 const drawerWidth = 240;
 const Search = styled("div")(({ theme }) => ({
@@ -202,7 +203,10 @@ const PrimarySearchAppBar = (props) => {
     props.setSearchValue({ value: Value }, () => {});
   }, [Value]);
  
-
+  const SidebarList=["Home", "Products", "Profile"]
+  const AdminSidebarList=["Home", "Products", "Profile","AddProduct"]
+  
+ 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -244,7 +248,9 @@ const PrimarySearchAppBar = (props) => {
               sx={{width:'100%'}}
             />
           </Search>
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 1 }}>
+            {(Auth.getRoles().some((obj) => obj.user_type == "admin"))?"Admin":" "}
+          </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
@@ -320,7 +326,20 @@ const PrimarySearchAppBar = (props) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Home", "Products", "Profile"].map((text, index) => (
+          {(Auth.getRoles().some((obj) => obj.user_type == "admin"))?AdminSidebarList.map((text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton
+                onClick={() => {
+                  gotopage(text);
+                }}
+              >
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          )):SidebarList.map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton
                 onClick={() => {

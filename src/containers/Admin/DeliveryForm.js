@@ -36,7 +36,7 @@ export const DeliveryForm = (props) => {
             name="name"
             label="Name"
             value={formik.values.name}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
@@ -47,7 +47,7 @@ export const DeliveryForm = (props) => {
             name="mobile"
             label="Mobile Number"
             value={formik.values.mobile}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
@@ -58,7 +58,7 @@ export const DeliveryForm = (props) => {
             name="email"
             label="Email"
             value={formik.values.email}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
@@ -69,7 +69,7 @@ export const DeliveryForm = (props) => {
             name="city"
             label="City"
             value={formik.values.city}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
@@ -80,7 +80,7 @@ export const DeliveryForm = (props) => {
             name="state"
             label="State"
             value={formik.values.state}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
@@ -91,7 +91,7 @@ export const DeliveryForm = (props) => {
             name="zipCode"
             label="Zip Code"
             value={formik.values.zipCode}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />
@@ -102,7 +102,7 @@ export const DeliveryForm = (props) => {
             name="address"
             label="Address"
             value={formik.values.address}
-            // onChange={formik.handleChange}
+            onChange={formik.handleChange}
             fullWidth
             size="small"
           />

@@ -1,4 +1,6 @@
+import axios from "axios";
 import axiosInstance, { microServices } from "../../network/apis";
+import Auth from "../../utils/Auth";
 
 export const getProductApi = async (payload) => {
   let url = "/getProduct";

@@ -45,14 +45,14 @@ export const Order = (props) => {
   const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
 
   const handleAction = (e) => {
-    // setAction(!action);
-    // setActionValue(e.target.value);
+    setAction(!action);
+    setActionValue(e.target.value);
 
-    // if (e.target.value === "REJECTED") {
-    //   setReviewDialogOpen(true);
-    // } else {
-    //   setReviewDialogOpen(false);
-    // }
+    if (e.target.value === "REJECTED") {
+      setReviewDialogOpen(true);
+    } else {
+      setReviewDialogOpen(false);
+    }
   };
 
   const handleUpdateAction = () => {
@@ -103,7 +103,7 @@ export const Order = (props) => {
                   marginInlineEnd: 2,
                 }}
               >
-                Status
+                Action
               </InputLabel>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -112,13 +112,13 @@ export const Order = (props) => {
                 defaultValue={actionValue}
                 radioList={radioList}
               />
-              {/* {action && (
+              {action && (
                 <Grid item style={{ textAlign: "end", marginTop: 5, flexGrow: 1 }}>
                   <Button sx={{ color: "green" }} onClick={handleUpdateAction}>
                     Update
                   </Button>
                 </Grid>
-              )} */}
+              )}
             </Box>
           </Box>
 

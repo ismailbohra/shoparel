@@ -107,7 +107,6 @@ export const ProductForm = (props) => {
     },
   };
   console.log(props.order[0].productList)
-  console.log(productList)
 
   return (
     <>
@@ -164,21 +163,21 @@ export const ProductForm = (props) => {
                 pl={1}
                 spacing={0.5}
               >
-                {/* <Box>
+                <Box>
                   <GrFormAdd
                     onClick={() => {
                       handleIncrement(element);
                     }}
                   />
-                </Box> */}
+                </Box>
                 <Box>{handleQuantity(element)}</Box>
-                {/* <Box>
+                <Box>
                   <GrFormSubtract
                     onClick={() => {
                       handleDecrement(element);
                     }}
                   />
-                </Box> */}
+                </Box>
               </Stack>
             </Stack>
           </Box>
@@ -195,13 +194,13 @@ export const ProductForm = (props) => {
           </Button>
         ) : (
           <Button
-            variant="outlined"
+            variant="contained"
             color="success"
-            sx={{ margin: 1 }}
+            sx={{ margin: 1, bgcolor: "green" }}
             disabled={props.order.length == 0}
-            // onClick={handlSubmitStatus}
+            onClick={handlSubmitStatus}
           >
-            {props.order[0].status}
+            {futureStatus[props.order[0].status].label}
           </Button>
         )}
       </Stack>

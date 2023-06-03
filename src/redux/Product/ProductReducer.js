@@ -39,13 +39,18 @@ const handleUpdateProductResponse = (state, action) => {
 };
 
 const handleCreateProductResponse = (state, action) => {
-  // Handle the logic for CREATE_PRODUCT_RESP case
+  // Handle the logic for CREATE_PRODUC
   return state;
 };
 
 const handleDeleteProductResponse = (state, action) => {
-  // Handle the logic for DELETE_PRODUCT_RESP case
-  return state;
+  console.log(state,action)
+  const allProducts = state.products.filter((e)=>e.productId!=action.payload.data)
+  console.log(allProducts)
+  return {
+    ...state,
+    products:allProducts
+  };
 };
 const handleGetProductByIdProductResponse = (state, action) => {
   const temp = [...action.payload.data];

@@ -39,7 +39,6 @@ export const ProductCard = (props) => {
     };
     props.addToCartReq(temp, () => {});
   };
-
   return (
     <Card elevation={0}>
       <CardActionArea
