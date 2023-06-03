@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import "./user.scss";
 import {
@@ -26,7 +26,6 @@ const UserRegister = (props) => {
   const handleClose = () => setShow(false);
 
   const [accountSetupForm, setAccountSetupForm] = useState({
-    userType: "",
     firstName: "",
     lastName: "",
     mobileNo: "",
@@ -40,9 +39,10 @@ const UserRegister = (props) => {
     delete values.confirmPassword;
     props.userRegisterReq(values, successCallback);
   };
+  const navigate=useNavigate()
   const successCallback = () => {
     console.log("callBack Called");
-    Navigate("/login");
+    navigate("/login");
   };
   return (
     <Container fluid className="h-auto">
@@ -92,31 +92,7 @@ const UserRegister = (props) => {
                   return (
                     <Form>
                       <Row>
-                        <Col sm={12} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
-                          <FormSelect
-                            name="userType"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.userType}
-                            className={
-                              touched.userType && errors.userType
-                                ? "is-invalid form-control"
-                                : "form-control form-select"
-                            }
-                            aria-label="Default select example"
-                          >
-                            <option key="blankChoice" hidden>
-                              Please Select User Type
-                            </option>
-                            <option value="INDUSTRY">I am Industry</option>
-                            <option value="AGENT">I am Agent</option>
-                          </FormSelect>
-                          {touched.userType && errors.userType ? (
-                            <div className="error-message">
-                              {errors.userType}
-                            </div>
-                          ) : null}
-                        </Col>
+                        
                         <Col sm={6} xs={12} className="mb-2 mb-sm-3 mb-lg-4">
                           <Input
                             error={touched.firstName && errors.firstName}

@@ -1,8 +1,8 @@
 import axiosInstance, { microServices } from "../../network/apis";
 
 export const postUserApi = async (payload) => {
-  return await axiosInstance("post", "/register", payload, {
-    server: microServices.TIKIT_TEST,
+  return await axiosInstance("post", "/registerUser", payload, {
+    server: microServices.USER,
     successMessage: "Hello",
   });
 };
@@ -18,14 +18,14 @@ export const loginUserEmailApi = async (payload) => {
 // update password student
 export const changeStudentPassword = async (payload) => {
   return await axiosInstance("put", "student/changePassword", payload, {
-    server: microServices.TIKIT_TEST,
+    server: microServices.USER,
   });
 };
 
 // update password staff
 export const changeStaffPassword = async (payload) => {
   return await axiosInstance("put", "staff/changePassword", payload, {
-    server: microServices.TIKIT_TEST,
+    server: microServices.USER,
   });
 };
 // export const getUserApi = async (config) => {
@@ -39,7 +39,7 @@ export const changeStaffPassword = async (payload) => {
 export const getNewUserApi = async (userData) => {
   // console.log(userData);
   return await axiosInstance("post", "/users", userData, {
-    server: microServices.TIKIT_TEST,
+    server: microServices.USER,
     successMessage: "Hello",
   });
 };
@@ -54,7 +54,7 @@ export const getNewUserApi = async (userData) => {
 export const deleteUserApi = async (id) => {
   console.log("deleteUserApi", id);
   return await axiosInstance("delete", `/users/${id}`, id, {
-    server: microServices.TIKIT_TEST,
+    server: microServices.USER,
     successMessage: "Hello",
   });
 };
@@ -70,7 +70,7 @@ export const deleteUserApi = async (id) => {
 
 export const updateUserApi = async (userData) => {
   return await axiosInstance("put", "/users", userData, {
-    server: microServices.TIKIT_TEST,
+    server: microServices.USER,
     successMessage: "Hello",
   });
 };

@@ -263,9 +263,6 @@ export const setUserForgrtPassword = Yup.object().shape({
 });
 
 export const setUserValidation = Yup.object().shape({
-  userType: Yup.string(
-    i18n.t('validationMsg.userType.shouldBeString')
-  ).required(i18n.t('validationMsg.userType.required')),
   firstName: Yup.string(i18n.t('validationMsg.firstName.shouldBeString'))
     .required(i18n.t('validationMsg.firstName.required'))
     .max(50, i18n.t('validationMsg.firstName.max'))

@@ -10,7 +10,7 @@ export function* getProductSaga(action) {
     const response = yield call(api.getProductApi, action.payload);
     yield put(actions.getProductRespAction(response));
     if (action.successCallback) {
-      call (action.successCallback)
+     yield call (action.successCallback)
     }
   } catch (error) {
     // Handle error
@@ -34,8 +34,9 @@ export function* updateProductSaga(action) {
     const response = yield call(api.updateProductApi, action.payload);
     // Handle success response
     yield put(actions.updateProductRespAction(response));
+    dispatchToasterSuccess("Updated Successfully","success")
     if (action.successCallback) {
-      call (action.successCallback)
+     yield call (action.successCallback)
     }
   } catch (error) {
     // Handle error
@@ -50,7 +51,7 @@ export function* createProductSaga(action) {
     dispatchToasterSuccess("Product Added","success")
     yield put(actions.createProductRespAction(response));
     if (action.successCallback) {
-      call (action.successCallback)
+     yield call (action.successCallback)
     }
   } catch (error) {
     // Handle error
@@ -65,7 +66,7 @@ export function* deleteProductSaga(action) {
     // Handle success response
     yield put(actions.deleteProductRespAction(response));
     if (action.successCallback) {
-      call (action.successCallback)
+     yield call (action.successCallback)
     }
   } catch (error) {
     // Handle error

@@ -19,7 +19,7 @@ export function* addNewUserSaga(action) {
     }
     // callfunction
     dispatchToasterSuccess(MSG.createUserdSuccess);
-    yield put(ACTIONS.userRegisterRes(response));
+    // yield put(ACTIONS.userRegisterRes(response));
     // yield call(action.successcb);
   } catch (err) {
     dispatchToasterError(err?.response?.data?.message || MSG.createUserdFaild);
