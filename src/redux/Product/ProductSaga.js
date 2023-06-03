@@ -2,12 +2,12 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import * as type from "./ProductType";
 import * as actions from "./ProductAction";
 import * as api from "./ProductApi";
+import { dispatchToasterSuccess } from "../../utils/Shared";
 
 // GET_PRODUCT_REQ saga
 export function* getProductSaga(action) {
   try {
     const response = yield call(api.getProductApi, action.payload);
-    // Handle success response
     yield put(actions.getProductRespAction(response));
     if (action.successCallback) {
       call (action.successCallback)
@@ -34,6 +34,9 @@ export function* updateProductSaga(action) {
     const response = yield call(api.updateProductApi, action.payload);
     // Handle success response
     yield put(actions.updateProductRespAction(response));
+    if (action.successCallback) {
+      call (action.successCallback)
+    }
   } catch (error) {
     // Handle error
     console.log(error);
@@ -44,8 +47,11 @@ export function* updateProductSaga(action) {
 export function* createProductSaga(action) {
   try {
     const response = yield call(api.createProductApi, action.payload);
-    // Handle success response
+    dispatchToasterSuccess("Product Added","success")
     yield put(actions.createProductRespAction(response));
+    if (action.successCallback) {
+      call (action.successCallback)
+    }
   } catch (error) {
     // Handle error
     console.log(error);
@@ -58,6 +64,9 @@ export function* deleteProductSaga(action) {
     const response = yield call(api.deleteProductApi, action.payload);
     // Handle success response
     yield put(actions.deleteProductRespAction(response));
+    if (action.successCallback) {
+      call (action.successCallback)
+    }
   } catch (error) {
     // Handle error
     console.log(error);
