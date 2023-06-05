@@ -9,6 +9,20 @@ export const userRegisterReq = (values, successCallback) => {
   };
 };
 
+export const userGetListReq = (values, successCallback) => {
+  console.log("We are in action get", values);
+  return {
+    type: types.GET_USER_LIST_REQ,
+    payload: values,
+    successCallback,
+  };
+};
+export const userGetListRes = (value) => {
+  return {
+    type: types.GET_USER_LIST_RESP,
+    payload:value
+  };
+};
 export const userRegisterRes = (value) => {
   console.log("user action resp", value);
   return {
@@ -42,5 +56,19 @@ export const changePassword = (values, loaderCallback, successCallback) => {
     payload: values,
     loaderCallback,
     successCallback,
+  };
+};
+export const userUpdateReq = (values, successCallback) => {
+  console.log("We are in action get", values);
+  return {
+    type: types.UPDATE_USER_REQ,
+    payload: values,
+    successCallback,
+  };
+};
+export const userUpdateResp = (value) => {
+  return {
+    type: types.UPDATE_USER_RESP,
+    payload:value
   };
 };

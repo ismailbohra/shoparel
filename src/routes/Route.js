@@ -20,6 +20,7 @@ import AddProduct from "../containers/AddProduct";
 import Order2 from "../containers/Admin/Order"
 import Add from "../containers/AddProduct/Add";
 import Update from "../containers/AddProduct/Update";
+import Verification from "../containers/Verification";
 
 const Routes = () => {
   let role = Auth.getRoles();
@@ -48,6 +49,7 @@ const Routes = () => {
             <Route path="AddProduct" element={<AddProduct/>}/>
             <Route path="Add" element={<Add/>}/>
             <Route path="Update" element={<Update/>}/>
+            <Route path="Verify" element={<Verification/>}/>
           </Route>:null
         }
 

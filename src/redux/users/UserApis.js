@@ -36,9 +36,9 @@ export const changeStaffPassword = async (payload) => {
 //     });
 // };
 
-export const getNewUserApi = async (userData) => {
-  // console.log(userData);
-  return await axiosInstance("post", "/users", userData, {
+export const getUserListApi = async (userData) => {
+
+  return await axiosInstance("get", "/getUser", {}, {
     server: microServices.USER,
     successMessage: "Hello",
   });
@@ -69,7 +69,7 @@ export const deleteUserApi = async (id) => {
 // };
 
 export const updateUserApi = async (userData) => {
-  return await axiosInstance("put", "/users", userData, {
+  return await axiosInstance("put", "/userUpdate", userData, {
     server: microServices.USER,
     successMessage: "Hello",
   });

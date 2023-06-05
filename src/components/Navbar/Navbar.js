@@ -204,7 +204,7 @@ const PrimarySearchAppBar = (props) => {
   }, [Value]);
  
   const SidebarList=["Home", "Products", "Profile"]
-  const AdminSidebarList=["Home", "Products", "Profile","AddProduct"]
+  const AdminSidebarList=["Home", "Products", "Profile","AddProduct","Verify"]
   
  
   return (

@@ -50,6 +50,24 @@ export function* userEmailLoginSaga(action) {
 }
 
 
+export function* getUserListSaga(action) {
+  try {
+    const response = yield call(API.getUserListApi, action.payload);
+    yield put(ACTIONS.userGetListRes(response))
+    if(action.successCallback){
+      yield call(action.successCallback)
+    }
+  } catch (err) {
+    if (err?.response?.data?.message) {
+      dispatchToasterError(err?.response?.data?.message);
+    } else {
+      dispatchToasterError(MSG.internalServerError);
+    }
+    // error handler
+  }
+}
+
+
 
 //CHANGE PASSWORD
 export function* changePasswordSaga(action) {
@@ -77,5 +95,6 @@ export function* UserSagas() {
     takeLatest(TYPES.SET_NEW_USER_REQ, addNewUserSaga),
     takeLatest(TYPES.USER_LOGIN_EMAIL_REQ, userEmailLoginSaga),
     takeLatest(TYPES.CHANGE_PASSWORD, changePasswordSaga),
+    takeLatest(TYPES.GET_USER_LIST_REQ, getUserListSaga),
   ]);
 }
