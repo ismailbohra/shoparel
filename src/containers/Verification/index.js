@@ -188,7 +188,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getUser: bindActionCreators(userGetListReq, dispatch),
-  updateUserReq:bindActionCreators(up)
+  // updateUserReq:bindActionCreators(up)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

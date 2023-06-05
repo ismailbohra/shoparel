@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -24,7 +22,6 @@
     "formik": "^2.2.9",
     "i18next": "^22.4.9",
     "moment": "^2.29.4",
-    "mui-color": "^2.0.0-beta.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-datepicker": "^4.10.0",
