@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/shoparel/static/css/main.1d4f1b12.css",
-    "main.js": "/shoparel/static/js/main.df702b7a.js",
+    "main.js": "/shoparel/static/js/main.4b55b20c.js",
     "static/js/787.0d90c242.chunk.js": "/shoparel/static/js/787.0d90c242.chunk.js",
     "static/media/Rectangle-3.jpg": "/shoparel/static/media/Rectangle-3.fc1efcb0765630e52c24.jpg",
     "static/media/iesblurr.jpg": "/shoparel/static/media/iesblurr.68ca8e2dee0bc0e7d4ff.jpg",
@@ -24,11 +24,11 @@
     "static/media/icomoon.ttf?nqidwq": "/shoparel/static/media/icomoon.79489faa5c0d3d954071.ttf",
     "index.html": "/shoparel/index.html",
     "main.1d4f1b12.css.map": "/shoparel/static/css/main.1d4f1b12.css.map",
-    "main.df702b7a.js.map": "/shoparel/static/js/main.df702b7a.js.map",
+    "main.4b55b20c.js.map": "/shoparel/static/js/main.4b55b20c.js.map",
     "787.0d90c242.chunk.js.map": "/shoparel/static/js/787.0d90c242.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1d4f1b12.css",
-    "static/js/main.df702b7a.js"
+    "static/js/main.4b55b20c.js"
   ]
 }
