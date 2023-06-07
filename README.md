@@ -1,2 +1,2 @@
 # Getting Started with Create React App
-https://ismailbohra.github.io/
+https://ismailbohra.github.io/shoparel
