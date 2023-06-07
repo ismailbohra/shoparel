@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/shoparel/static/css/main.1d4f1b12.css",
+    "main.js": "/shoparel/static/js/main.d4ea61be.js",
+    "static/js/787.0d90c242.chunk.js": "/shoparel/static/js/787.0d90c242.chunk.js",
+    "static/media/Rectangle-3.jpg": "/shoparel/static/media/Rectangle-3.fc1efcb0765630e52c24.jpg",
+    "static/media/iesblurr.jpg": "/shoparel/static/media/iesblurr.68ca8e2dee0bc0e7d4ff.jpg",
+    "static/media/Agenda-Light.svg": "/shoparel/static/media/Agenda-Light.923639aeb05d9a1bd223.svg",
+    "static/media/Agenda-RegularExtraCondensed.svg": "/shoparel/static/media/Agenda-RegularExtraCondensed.3d83ffe7c06725a89b78.svg",
+    "static/media/Agenda-MediumExtraCondensed.svg": "/shoparel/static/media/Agenda-MediumExtraCondensed.85b0f527cda6e5edfaa4.svg",
+    "static/media/Agenda-LightItalic.svg": "/shoparel/static/media/Agenda-LightItalic.0846005cae27333c2a58.svg",
+    "static/media/Agenda-Light.ttf": "/shoparel/static/media/Agenda-Light.f5bc1904263c4a4bf57d.ttf",
+    "static/media/Agenda-LightItalic.ttf": "/shoparel/static/media/Agenda-LightItalic.254d1323acca117fc1cf.ttf",
+    "static/media/Agenda-MediumExtraCondensed.ttf": "/shoparel/static/media/Agenda-MediumExtraCondensed.82b75c9582e0859e906c.ttf",
+    "static/media/icomoon.svg?nqidwq": "/shoparel/static/media/icomoon.2f1b67bc9de983c4b0a1.svg",
+    "static/media/Agenda-Light.woff": "/shoparel/static/media/Agenda-Light.f2aa69ac510c2bbdab4c.woff",
+    "static/media/Agenda-LightItalic.woff": "/shoparel/static/media/Agenda-LightItalic.5e77e517f9cfa4d05af5.woff",
+    "static/media/Agenda-RegularExtraCondensed.ttf": "/shoparel/static/media/Agenda-RegularExtraCondensed.137cac643149a361ea80.ttf",
+    "static/media/Agenda-MediumExtraCondensed.woff": "/shoparel/static/media/Agenda-MediumExtraCondensed.027c38fa7191fea47b34.woff",
+    "static/media/Agenda-RegularExtraCondensed.otf": "/shoparel/static/media/Agenda-RegularExtraCondensed.0619b5ada274608bca77.otf",
+    "static/media/Agenda-RegularExtraCondensed.woff": "/shoparel/static/media/Agenda-RegularExtraCondensed.11c555467e21af023e59.woff",
+    "static/media/icomoon.eot?nqidwq": "/shoparel/static/media/icomoon.d7db81d15c89d005ea56.eot",
+    "static/media/icomoon.woff?nqidwq": "/shoparel/static/media/icomoon.620fe2914d0b65cd041b.woff",
+    "static/media/icomoon.ttf?nqidwq": "/shoparel/static/media/icomoon.79489faa5c0d3d954071.ttf",
+    "index.html": "/shoparel/index.html",
+    "main.1d4f1b12.css.map": "/shoparel/static/css/main.1d4f1b12.css.map",
+    "main.d4ea61be.js.map": "/shoparel/static/js/main.d4ea61be.js.map",
+    "787.0d90c242.chunk.js.map": "/shoparel/static/js/787.0d90c242.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d4f1b12.css",
+    "static/js/main.d4ea61be.js"
+  ]
+}
